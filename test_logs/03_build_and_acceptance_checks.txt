@@ -1,0 +1,36 @@
+[1/5] scientific_comparisons.json exported from ignis-ml/data/revision
+[2/5] synthetic_verification_results.json copied (SYNTHETIC, not NASA data)
+[2b] source_conflicts, brand_copy, science_project_status copied from the closeout kit (kit science JSON == export)
+[3/5] evidence_catalog.json: 48 items {'published_numeric': 15, 'digitized': 23, 'archive_claim': 2, 'derived_comparison': 3, 'proposed_experiment': 1, 'synthetic': 4}
+  PASS Exactly 8 Olson Table 1 records
+  PASS 7 SIBAL and 1 cotton
+  PASS No Table 1 record approved for ML
+  PASS Comparison I-1 vs II-5: +0.03 cm/s, +16.67%, lengths [4, 4] cm
+  PASS Comparison I-1 vs II-5 is descriptive only
+  PASS Comparison III-1 vs II-6: +0.03 cm/s, +13.04%, lengths [5, 5] cm
+  PASS Comparison III-1 vs II-6 is descriptive only
+  PASS Comparison I-1 vs IV-SIBAL: +0.18 cm/s, +100.0%, lengths [4, 8.5] cm
+  PASS Comparison I-1 vs IV-SIBAL is descriptive only
+  PASS Missing factorial cell is 5 cm wide x 30.5 cm full duct height
+  PASS Hypothesis untested, no interaction statistic
+  PASS NASA prediction disabled
+  PASS 23 Figure 10 markers, none counted as runs
+  PASS 2 PSI-99 archive claims, none counted as runs
+  PASS PSI-99 mm/s converts to Table 1 cm/s
+  PASS Synthetic file flags itself as not NASA data
+  PASS Synthetic checks all pass
+  PASS Synthetic file keeps NASA prediction disabled
+  PASS Synthetic refusals all return null
+  PASS PSI-100 vs Olson airflow conflict present
+  PASS III-1 airflow conflict keeps both claims (Olson 25, PSI-100 30) and is unresolved
+  PASS Olson claim in the conflict equals Table 1 III-1 flow_cm_s
+  PASS IV-SIBAL / IV-1 alias present
+  PASS IV alias probable, not confirmed, not counted twice
+  PASS IV alias Olson rate equals Table 1 IV-SIBAL spread_cm_s
+  PASS No conflict approved for ML
+  PASS Brand copy: hero lines as approved
+  PASS Brand copy discloses a rule-based helper
+[4/5] 71 of 71 acceptance checks passed
+seed.js rebuilt: {'meta': 'object', 'sources': 25, 'investigations': 10, 'runs': 6, 'spread_rates': 1, 'findings': 4, 'flags': 4, 'predictions': 0, 'scientific_comparisons': 'object', 'synthetic_verification_results': 'object', 'synthetic_model_benchmark': 'object', 'evidence_catalog': 48, 'build_manifest': 'object', 'source_conflicts': 'object', 'brand_copy': 'object', 'science_project_status': 'object'}
+[5/5] build_manifest.json written, seed.js rebuilt
+seed.js rebuilt: {'meta': 'object', 'sources': 25, 'investigations': 10, 'runs': 6, 'spread_rates': 1, 'findings': 4, 'flags': 4, 'predictions': 0, 'scientific_comparisons': 'object', 'synthetic_verification_results': 'object', 'synthetic_model_benchmark': 'object', 'evidence_catalog': 48, 'build_manifest': 'object', 'source_conflicts': 'object', 'brand_copy': 'object', 'science_project_status': 'object'}

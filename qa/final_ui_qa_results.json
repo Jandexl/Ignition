@@ -1,0 +1,213 @@
+{
+  "base": "http://localhost:8765",
+  "passed": 8,
+  "total": 8,
+  "results": [
+    {
+      "id": "QA01",
+      "title": "Same length, different rate: I-1 vs II-5",
+      "passed": true,
+      "checks": [
+        {
+          "check": "flame length 4 vs 4 cm",
+          "passed": true
+        },
+        {
+          "check": "spread 0.18 vs 0.21 cm/s",
+          "passed": true
+        },
+        {
+          "check": "+0.03 cm/s, +16.67%",
+          "passed": true
+        },
+        {
+          "check": "confounding warning",
+          "passed": true
+        },
+        {
+          "check": "Olson source shown",
+          "passed": true
+        }
+      ],
+      "screenshot": "QA01.png"
+    },
+    {
+      "id": "QA02",
+      "title": "Same length, different rate: III-1 vs II-6",
+      "passed": true,
+      "checks": [
+        {
+          "check": "flame length 5 vs 5 cm",
+          "passed": true
+        },
+        {
+          "check": "spread 0.23 vs 0.26",
+          "passed": true
+        },
+        {
+          "check": "+0.03, +13.04%",
+          "passed": true
+        },
+        {
+          "check": "PSI-100 airflow conflict visible",
+          "passed": true
+        }
+      ],
+      "screenshot": "QA02.png"
+    },
+    {
+      "id": "QA03",
+      "title": "Confinement contrast: I-1 vs IV-SIBAL",
+      "passed": true,
+      "checks": [
+        {
+          "check": "0.18 vs 0.36 cm/s, +100%",
+          "passed": true
+        },
+        {
+          "check": "duct 51 vs 30.5 cm",
+          "passed": true
+        },
+        {
+          "check": "oxygen 21.7 vs 23.1",
+          "passed": true
+        },
+        {
+          "check": "no claim duct alone caused it",
+          "passed": true
+        }
+      ],
+      "screenshot": "QA03.png"
+    },
+    {
+      "id": "QA04",
+      "title": "Missing factorial cell",
+      "passed": true,
+      "checks": [
+        {
+          "check": "narrow 5 cm x shallow 30.5 cm missing",
+          "passed": true
+        },
+        {
+          "check": "existing cells are historical analogs",
+          "passed": true
+        },
+        {
+          "check": "interaction estimate null",
+          "passed": true
+        }
+      ],
+      "screenshot": "QA04_transfer.png"
+    },
+    {
+      "id": "QA05",
+      "title": "PSI-100 source conflict from dataset",
+      "passed": true,
+      "checks": [
+        {
+          "check": "Olson 25 cm/s shown",
+          "passed": true
+        },
+        {
+          "check": "PSI-100 candidate S1 30 cm/s shown",
+          "passed": true
+        },
+        {
+          "check": "both claims separate, unresolved",
+          "passed": true
+        },
+        {
+          "check": "source_conflicts.json loaded",
+          "passed": true
+        },
+        {
+          "check": "no hard-coded value in app.js",
+          "passed": true
+        }
+      ],
+      "screenshot": "QA05.png"
+    },
+    {
+      "id": "QA06",
+      "title": "IV-SIBAL candidate IV-1 alias from dataset",
+      "passed": true,
+      "checks": [
+        {
+          "check": "probable, not confirmed",
+          "passed": true
+        },
+        {
+          "check": "table 0.36 and digitized ~0.368 shown separately",
+          "passed": true
+        },
+        {
+          "check": "not counted as a separate run",
+          "passed": true
+        },
+        {
+          "check": "conflict listed on Data page",
+          "passed": true
+        }
+      ],
+      "screenshot": "QA06.png"
+    },
+    {
+      "id": "QA07",
+      "title": "NASA prediction refusal and synthetic isolation",
+      "passed": true,
+      "checks": [
+        {
+          "check": "VALIDATION_NOT_SUPPORTED shown",
+          "passed": true
+        },
+        {
+          "check": "predicted rate none",
+          "passed": true
+        },
+        {
+          "check": "data prediction_cm_s null",
+          "passed": true
+        },
+        {
+          "check": "synthetic labelled not NASA",
+          "passed": true
+        }
+      ],
+      "screenshot": "QA07_prediction.png"
+    },
+    {
+      "id": "QA08",
+      "title": "Brand, offline assistant and deployed paths",
+      "passed": true,
+      "checks": [
+        {
+          "check": "hero ZERO GUESSING. / ZERO HIDDEN UNCERTAINTY. / 1gnition",
+          "passed": true
+        },
+        {
+          "check": "Ask says offline rule-based, not generative AI",
+          "passed": true
+        },
+        {
+          "check": "all views load after refresh/deep link",
+          "passed": true
+        },
+        {
+          "check": "data from static JSON, not an API",
+          "passed": true
+        },
+        {
+          "check": "no failed requests",
+          "passed": true
+        },
+        {
+          "check": "no console or page errors",
+          "passed": true
+        }
+      ],
+      "screenshot": "QA08_hero.png"
+    }
+  ],
+  "failed_requests": [],
+  "errors": []
+}

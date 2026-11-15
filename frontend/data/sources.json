@@ -1,0 +1,177 @@
+[
+  {
+    "id": "saffire_i_v",
+    "title": "Saffire I–V paper, ICES 2021-266",
+    "url": "https://ntrs.nasa.gov/api/citations/20210011521/downloads/ICES%202021-266%200503-2021%20final.pdf",
+    "type": "paper",
+    "note": "Table 2 (printed p. 8) and Figure 10"
+  },
+  {
+    "id": "saffire_slides",
+    "title": "Saffire: A Novel Approach (NASA slides, NTRS 20180005168)",
+    "url": "https://ntrs.nasa.gov/api/citations/20180005168/downloads/20180005168.pdf",
+    "type": "slides",
+    "note": ""
+  },
+  {
+    "id": "bass_saffire_journal",
+    "title": "Saffire and BASS spread-rate comparison (journal paper, NSF PAR 10313745)",
+    "url": "https://par.nsf.gov/servlets/purl/10313745",
+    "type": "paper",
+    "note": ""
+  },
+  {
+    "id": "brief",
+    "title": "Flame in Freefall challenge statement, NASA Space Apps 2026",
+    "url": "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/",
+    "type": "brief",
+    "note": "24 investigations, about 12 TB, Moon base atmosphere"
+  },
+  {
+    "id": "glenn",
+    "title": "NASA Glenn combustion science overview",
+    "url": "https://www.nasa.gov/glenn/glenn-expertise-space-exploration/physical-sciences-program/combustion-science/",
+    "type": "web",
+    "note": ""
+  },
+  {
+    "id": "fm2",
+    "title": "Flammability of Materials on the Moon (FM2)",
+    "url": "https://www.nasa.gov/glenn/glenn-expertise-space-exploration/physical-sciences-program/combustion-science/flammability-of-materials-on-the-moon-fm2/",
+    "type": "web",
+    "note": "Mission status and dates need checking"
+  },
+  {
+    "id": "apollo1",
+    "title": "Apollo 1, NASA Safety and Mission Assurance",
+    "url": "https://sma.nasa.gov/sma-disciplines/accllp/apollo-1",
+    "type": "web",
+    "note": ""
+  },
+  {
+    "id": "apollo13",
+    "title": "Apollo 13, NASA Safety and Mission Assurance",
+    "url": "https://sma.nasa.gov/sma-disciplines/accllp/apollo-13",
+    "type": "web",
+    "note": ""
+  },
+  {
+    "id": "mir",
+    "title": "Fire aboard Mir, NASA History",
+    "url": "https://www.nasa.gov/history/25-years-ago-fire-aboard-space-station-mir/",
+    "type": "web",
+    "note": ""
+  },
+  {
+    "id": "psi_25",
+    "title": "PSI-25, BASS-II record",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+    "type": "psi",
+    "note": "Record number from team source list, not yet opened"
+  },
+  {
+    "id": "psi_98",
+    "title": "PSI-98, Saffire-I record",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-98",
+    "type": "psi",
+    "note": "Record number from team source list, not yet opened"
+  },
+  {
+    "id": "psi_101",
+    "title": "PSI-101, SAME-R record",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
+    "type": "psi",
+    "note": "Record number from team source list, not yet opened"
+  },
+  {
+    "id": "NASA-ICES-2021-266",
+    "title": "Fire Safety Implications of Preliminary Results from Saffire IV and V Experiments on Large Scale Spacecraft Fires",
+    "url": "https://ntrs.nasa.gov/api/citations/20210011521/downloads/ICES%202021-266%200503-2021%20final.pdf",
+    "type": "Primary published source",
+    "note": "Table 1 (PDF pp. 3-4), Table 2 and Figure 10 (PDF p. 8). Consulted 2026-11-14"
+  },
+  {
+    "id": "NASA-PSI-25",
+    "title": "Burning and Suppression of Solids-II (BASS-II)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+    "type": "NASA PSI dataset; DOI https://doi.org/10.60555/4qc4-de67",
+    "note": "Investigation landing page; Version 4; file inventory. Consulted 2026-11-14"
+  },
+  {
+    "id": "NASA-PSI-98",
+    "title": "Spacecraft Fire Safety Experiment-I (SAFFIRE-I)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-98",
+    "type": "NASA PSI dataset; DOI https://doi.org/10.60555/0t15-1z43",
+    "note": "Investigation landing page; Version 4; file inventory. Consulted 2026-11-14"
+  },
+  {
+    "id": "NASA-2021-21181",
+    "title": "NASA Materials Flammability Update (2021)",
+    "url": "https://ntrs.nasa.gov/api/citations/20210021181/downloads/NASA%20Materials%20Flammability%20Update%20update%209.09.2021%20Final.pdf",
+    "type": "NASA technical presentation",
+    "note": "Flame spread rate graph and series legend. Consulted 2026-11-14"
+  },
+  {
+    "id": "SHARMA-2024",
+    "title": "Effects of Confinement on Opposed-Flow Flame Spread over Cellulose and Polymeric Solids in Microgravity",
+    "url": "https://doi.org/10.1007/s12217-024-10106-y",
+    "type": "Peer-reviewed journal article; Microgravity Science and Technology 36, 20 (2024)",
+    "note": "Abstract and Results/Concluding Remarks; DOI 10.1007/s12217-024-10106-y. Consulted 2026-11-14"
+  },
+  {
+    "id": "NASA-TM-20210011385",
+    "title": "BASS-II Summary Report",
+    "url": "https://ntrs.nasa.gov/citations/20210011385",
+    "type": "NASA technical memorandum",
+    "note": "sections1.2,7.1;Table7.1;Appendix A. Consulted 2026-11-14"
+  },
+  {
+    "id": "NASA-PSI-26",
+    "title": "Burning and Suppression of Solids (BASS)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-26",
+    "type": "NASA PSI live record",
+    "note": "Version4;Experimental Table;SIBAL filter. Consulted 2026-11-14"
+  },
+  {
+    "id": "NASA-PSI-99",
+    "title": "Spacecraft Fire Experiment-II",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99",
+    "type": "NASA PSI live record",
+    "note": "Version5;Experimental Table rows2-5,2-6. Consulted 2026-11-14"
+  },
+  {
+    "id": "NASA-PSI-100",
+    "title": "Spacecraft Fire Experiment-III",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-100",
+    "type": "NASA PSI live record",
+    "note": "Version4;Experimental Table S1/S2. Consulted 2026-11-14"
+  },
+  {
+    "id": "URBAN-2019",
+    "title": "Flame spread: Effects of microgravity and scale",
+    "url": "https://doi.org/10.1016/j.combustflame.2018.10.012",
+    "type": "Journal article abstract",
+    "note": "Abstract via publisher and Edinburgh. Consulted 2026-11-14"
+  },
+  {
+    "id": "ZHAO-2015",
+    "title": "Concurrent Flame Growth Spread and Extinction over Composite Fabric",
+    "url": "https://ntrs.nasa.gov/citations/20150008962",
+    "type": "NASA conference paper",
+    "note": "NTRS abstract. Consulted 2026-11-14"
+  },
+  {
+    "id": "NASA-PSI-CATALOG",
+    "title": "PSI investigations by research area",
+    "url": "https://www.nasa.gov/physical-sciences-informatics-psi/psi-investigations-by-research-area/",
+    "type": "NASA catalog",
+    "note": "Combustion science. Consulted 2026-11-14"
+  },
+  {
+    "id": "OLSON-2023-T1",
+    "title": "Olson et al. (2023), The effect of duct size, sample size, and fuel composition on concurrent flame spread over large cellulose samples in microgravity",
+    "url": "https://discovery.ucl.ac.uk/id/eprint/10164340/1/SIBAL-cotton%20revised%20Sept%20per%20review%20track%20changes%20accepted.pdf",
+    "type": "Accepted manuscript; DOI 10.1016/j.combustflame.2022.112559",
+    "note": "Table 1 (PDF p9), sections 2–5, Figs 8–18. Consulted 2026-11-15"
+  }
+]

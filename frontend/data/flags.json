@@ -1,0 +1,59 @@
+[
+  {
+    "id": "FL1",
+    "severity": "conflict",
+    "title": "Sample width",
+    "detail": "Table 2 lists the large samples as 41 cm wide. The paper's text and the Figure 10 legend say 40 cm. 1gnition shows the table value and this note.",
+    "applies_to": [
+      "I-1",
+      "III-1",
+      "IV-1",
+      "V-2"
+    ],
+    "source_ids": [
+      "saffire_i_v"
+    ]
+  },
+  {
+    "id": "FL2",
+    "severity": "conflict",
+    "title": "Duct height",
+    "detail": "The duct height described in Section II of the paper does not match Table 2. The table value is shown until the team confirms which is right.",
+    "applies_to": [
+      "I-1",
+      "II-5",
+      "II-6",
+      "III-1",
+      "IV-1",
+      "V-2"
+    ],
+    "source_ids": [
+      "saffire_i_v"
+    ]
+  },
+  {
+    "id": "FL3",
+    "severity": "check",
+    "title": "Single read",
+    "detail": "IV-1 and V-2 were read from the table once. The other four runs were checked twice.",
+    "applies_to": [
+      "IV-1",
+      "V-2"
+    ],
+    "source_ids": [
+      "saffire_i_v"
+    ]
+  },
+  {
+    "id": "nominal",
+    "title": "Nominal conditions",
+    "detail": "The comparison uses Table 2 settings. The team audit found differences between nominal values and PSI flight records. Treat an airflow-only contrast as exploratory.",
+    "severity": "check",
+    "applies_to": [
+      "I-1",
+      "II-5",
+      "II-6",
+      "III-1"
+    ]
+  }
+]

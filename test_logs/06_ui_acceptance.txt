@@ -1,0 +1,43 @@
+PASS Compare: default pair is I-1 vs II-5
+PASS Compare: both flame lengths 4 cm
+PASS Compare: rates 0.18 and 0.21 cm/s
+PASS Compare: +0.03 cm/s and +16.67% of I-1
+PASS Compare: width, length, O2 and flight listed as changed
+PASS Compare: conflicts column present
+PASS Compare: warning says causal effect not isolated
+PASS Compare: III-1 vs II-6 shows +13.04% and 5 cm lengths
+PASS Compare: II-6/III airflow conflict flagged
+PASS Compare: I-1 vs IV-SIBAL shows +100% and 4 vs 8.5 cm
+PASS Compare: I-1 vs IV credits no single cause
+PASS Compare: rate toggle hides the length panel
+PASS Compare: length toggle hides the rate panel
+PASS Compare: Urban grid labelled steady flame size
+PASS Transfer: VALIDATION_NOT_SUPPORTED shown
+PASS Transfer: predicted rate is 'none', not 0
+PASS Synthetic: banner says NOT NASA DATA
+PASS Synthetic positive: programmed +0.0800, interval contains 0 = no
+PASS Synthetic zero: programmed +0.0000, interval contains 0 = yes
+PASS Synthetic negative: programmed −0.0800, interval contains 0 = no
+PASS Synthetic height sessions: programmed +0.0800, interval contains 0 = no
+PASS Synthetic: 4 invalid designs refused with null
+PASS Synthetic: benchmark labelled not NASA accuracy
+PASS Design: missing narrow/shallow cell shown
+PASS Design: historical cells flagged confounded
+PASS Design: hypothesis UNTESTED, interaction none
+PASS Design: log-linear model marked not fitted
+PASS Gaps: six gap types
+PASS Gaps: 2x2 design with missing analog
+PASS Gaps: map labelled as the team's indexed dataset
+PASS Source: popover links to Olson 2023 manuscript
+PASS Glossary: a term opens its definition
+PASS Data: tabs Table 1 = 8, Figure 10 = 23, PSI-99 = 2, synthetic = 4
+PASS Data: synthetic tab labelled not NASA
+PASS Scenario: switching habitat changes the evidence ranking
+PASS Scenario: flow direction feeds applicability
+PASS No NaN/undefined/IGNIS/[object Object] in any view
+PASS Phone 390 px: no horizontal overflow
+PASS Missing science JSON: site still loads without page errors
+PASS Missing science JSON: the gap is stated, nothing invented
+PASS No console or page errors during the run
+
+41 of 41 UI acceptance checks passed

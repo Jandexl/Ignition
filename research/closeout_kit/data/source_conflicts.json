@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Source-specific experimental disagreement and candidate alias provenance. Do not resolve by silently choosing a value.",
+  "conflicts": [
+    {
+      "conflict_id": "SAFFIRE_III1_FLOW_PSI100_VS_OLSON",
+      "type": "source_value_disagreement",
+      "subject": "Saffire III-1 / candidate PSI-100 S1",
+      "variable": "concurrent_inlet_airflow",
+      "unit": "cm/s",
+      "claims": [
+        {
+          "source_id": "OLSON-2023-T1",
+          "source_locator": "Table 1, Saffire III-1 row",
+          "url": "https://discovery.ucl.ac.uk/id/eprint/10164340/1/SIBAL-cotton%20revised%20Sept%20per%20review%20track%20changes%20accepted.pdf",
+          "value": 25,
+          "run_identifier": "III-1"
+        },
+        {
+          "source_id": "NASA-PSI-100",
+          "source_locator": "Experiment Table, S1, concurrent flow",
+          "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-100",
+          "value": 30,
+          "run_identifier": "S1"
+        }
+      ],
+      "match_status": "candidate_run_link",
+      "resolution_status": "unresolved",
+      "possible_explanation": "Nominal versus as-run airflow is plausible but not verified by the source audit.",
+      "display_message": "Airflow source conflict: Olson Table 1 lists 25 cm/s for III-1; PSI-100 lists 30 cm/s for candidate S1. Do not silently harmonize.",
+      "eligible_for_causal_matching": false,
+      "approved_for_ml": false
+    },
+    {
+      "conflict_id": "SAFFIRE_IV1_IV_SIBAL_ALIAS",
+      "type": "candidate_record_alias",
+      "subject": "Saffire IV-1 (Urban publication) / IV-SIBAL (Olson publication)",
+      "claims": [
+        {
+          "source_id": "OLSON-2023-T1",
+          "source_locator": "Table 1, IV-SIBAL row",
+          "url": "https://discovery.ucl.ac.uk/id/eprint/10164340/1/SIBAL-cotton%20revised%20Sept%20per%20review%20track%20changes%20accepted.pdf",
+          "record_id": "IV-SIBAL",
+          "spread_rate_cm_s": 0.36
+        },
+        {
+          "source_id": "NASA-ICES-2021-266",
+          "source_locator": "Table 1 / Figure 10 Saffire IV SIBAL series (approximate graph marker)",
+          "url": "https://ntrs.nasa.gov/citations/20210011521",
+          "candidate_record_id": "IV-1",
+          "digitized_rate_approx_cm_s": 0.368
+        }
+      ],
+      "match_status": "probable_not_confirmed",
+      "resolution_status": "candidate_link_open",
+      "possible_explanation": "Campaign, material, approximate airflow and reported rate align, but explicit point-to-run crosswalk has not been verified.",
+      "display_message": "IV-SIBAL \u2194 IV-1 is a probable source crosswalk, not a confirmed identical-run assignment.",
+      "count_as_additional_independent_run": false,
+      "approved_for_ml": false
+    }
+  ]
+}

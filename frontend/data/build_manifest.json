@@ -1,0 +1,36 @@
+{
+  "built_at": "2026-11-15T20:24:19+00:00",
+  "ignis_ml_version": "0.1.0",
+  "inputs": {
+    "ignis-ml/data/revision/ignis_comparability_matrix.csv": "5a3a931dffead7766eef8c442e4d76b267dd06bee53fe95d8edf1d9f91fb9a22",
+    "ignis-ml/data/revision/ignis_comparison_cases.csv": "e7762c91d41e0bc43198f7f2d7c1e0226074162341d8ceb6f68d0d0a5bcb0d25",
+    "ignis-ml/data/revision/ignis_psi99_rate_claims.csv": "c6e5a910996c669aa7f8585148618b2557b1b4caf7cf534cf26411826856d576",
+    "ignis-ml/data/revision/ignis_published_spread_rates.csv": "f9a53d6f200a014285f2a1e18bc5c0e6accfd3a4734897163783fb4b6de68ba9",
+    "ignis-ml/data/revision/ignis_source_manifest.csv": "6e8dac5f07e2aac9d5549d4ae35b5b936caa635799fd2f58e438a2baeb17fd43",
+    "ignis-ml/data/revision/ignis_spread_rates_reviewed.csv": "29412b2d10f8ec8df1660af1cb9692daa36d4687e401e6ce9579252c37fe9cba",
+    "ignis-ml/data/revision/ignis_table1_rates.csv": "40089e8c5b4c8db004b3f0eb2f8dbcddc4a7e69fa7da80c892196bd24ca83279",
+    "ignis-ml/data/revision/ignis_urban_table2_flame_sizes.csv": "0a597ba61a16a527d54ee8e47cb1d39d5efea0a38fb94e4d6f9127841b22d2a2"
+  },
+  "outputs": {
+    "scientific_comparisons.json": "2baff2f855679e6046386f4cf244a245331e13fda35e4e651b2d8eae467a91cd",
+    "synthetic_verification_results.json": "f17184076d72410d567ecaad9d6c5e78d7611ffd9bdf0afecaf653bf2682e7a9",
+    "synthetic_model_benchmark.json": "a21959f6da55659cfbdae8478369cde7afe1064be6fd8b170a45a57f4411e6ce",
+    "evidence_catalog.json": "6997ee4bfb9df9e0baa924e50d50051e64bff90b9a77ebf3366c6c03141c9488",
+    "source_conflicts.json": "8fd6ea45b348d4d95697a09387530e03f02d94f31e8d95b6d41f390a8061bf73",
+    "brand_copy.json": "7e4d7169d301a2f385ba67924ef4bee9b1b23d659fd1dbca7dde9b9f8e480421",
+    "science_project_status.json": "45ac1cd02c1e2be9b711d05578d98bc6dea55e852ae2677ded938d3b2e481315"
+  },
+  "evidence_counts": {
+    "published_numeric": 15,
+    "digitized": 23,
+    "archive_claim": 2,
+    "derived_comparison": 3,
+    "proposed_experiment": 1,
+    "synthetic": 4
+  },
+  "checks_passed": 71,
+  "checks_failed": 0,
+  "prediction_status": "VALIDATION_NOT_SUPPORTED",
+  "prediction_cm_s": null,
+  "note": "Static export. No model was fitted and no NASA prediction was produced."
+}

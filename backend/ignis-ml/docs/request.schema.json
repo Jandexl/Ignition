@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "flow_velocity_cm_s",
+    "oxygen_percent",
+    "pressure_kpa",
+    "material",
+    "flow_direction",
+    "gravity_regime",
+    "combustion_regime"
+  ],
+  "properties": {
+    "flow_velocity_cm_s": {
+      "type": "number",
+      "minimum": 0
+    },
+    "oxygen_percent": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "pressure_kpa": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "sample_width_cm": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "sample_length_cm": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "sample_thickness_mm": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "duct_height_cm": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "material": {
+      "type": "string",
+      "minLength": 1
+    },
+    "flow_direction": {
+      "enum": [
+        "concurrent",
+        "opposed"
+      ]
+    },
+    "gravity_regime": {
+      "type": "string",
+      "minLength": 1
+    },
+    "combustion_regime": {
+      "type": "string",
+      "minLength": 1
+    },
+    "geometry_status": {
+      "enum": [
+        "verified",
+        "synthetic",
+        "unreviewed"
+      ]
+    },
+    "geometry_definition_id": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

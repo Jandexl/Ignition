@@ -1,0 +1,490 @@
+{
+  "project_name": "1gnition",
+  "verification_title": "Synthetic width-by-duct-height factorial software verification",
+  "evidence_class": "SYNTHETIC_SOFTWARE_TEST_ONLY",
+  "is_nasa_data": false,
+  "is_physics_simulation": false,
+  "is_experimental_validation": false,
+  "is_nasa_prediction_validation": false,
+  "sample_generation": {
+    "block_designs": 20,
+    "per_burn_sd_cm_s": 0.012,
+    "shared_block_sd_cm_s": 0.006,
+    "seed": 20261115,
+    "noise_model": "Gaussian independent measurement-level noise and shared block offsets"
+  },
+  "scenarios": [
+    {
+      "scenario": "positive",
+      "synthetic": true,
+      "source": "invented_means_with_seeded_Gaussian_noise_not_NASA",
+      "purpose": "factorial_analysis_software_verification_only",
+      "design": "randomized_complete_blocks",
+      "generated_independent_burns": 80,
+      "generated_independent_blocks_or_sessions": 20,
+      "expected_cell_means_cm_s": [
+        {
+          "width_cm": 5.0,
+          "full_duct_height_cm": 51.0,
+          "mean_cm_s": 0.2
+        },
+        {
+          "width_cm": 5.0,
+          "full_duct_height_cm": 30.5,
+          "mean_cm_s": 0.24
+        },
+        {
+          "width_cm": 40.6,
+          "full_duct_height_cm": 51.0,
+          "mean_cm_s": 0.22
+        },
+        {
+          "width_cm": 40.6,
+          "full_duct_height_cm": 30.5,
+          "mean_cm_s": 0.34
+        }
+      ],
+      "known_interaction_cm_s": 0.08000000000000004,
+      "estimated_interaction_cm_s": 0.07633297386681404,
+      "estimate_minus_truth_cm_s": -0.0036670261331860077,
+      "approx_95pct_interval_cm_s": [
+        0.0685387447111337,
+        0.08412720302249437
+      ],
+      "interval_contains_zero": false,
+      "correct_estimate_direction": true,
+      "analysis": {
+        "status": "ESTIMATED",
+        "interaction_cm_s": 0.07633297386681404,
+        "interval_cm_s": [
+          0.0685387447111337,
+          0.08412720302249437
+        ],
+        "method": "Approximate 95% Student t interval across independent block interaction contrasts",
+        "independent_blocks": 20,
+        "height_contrasts_cm_s": {
+          "narrow": 0.03831578454738751,
+          "wide": 0.11464875841420157
+        },
+        "cell_summaries": [
+          {
+            "width_cm": 5.0,
+            "full_duct_height_cm": 30.5,
+            "mean": 0.23946513863066504,
+            "std": 0.011451902768561482,
+            "count": 20
+          },
+          {
+            "width_cm": 5.0,
+            "full_duct_height_cm": 51.0,
+            "mean": 0.20114935408327747,
+            "std": 0.010773623662015935,
+            "count": 20
+          },
+          {
+            "width_cm": 40.6,
+            "full_duct_height_cm": 30.5,
+            "mean": 0.33728398668325216,
+            "std": 0.0140411853346632,
+            "count": 20
+          },
+          {
+            "width_cm": 40.6,
+            "full_duct_height_cm": 51.0,
+            "mean": 0.2226352282690506,
+            "std": 0.012488919791783347,
+            "count": 20
+          }
+        ],
+        "block_interactions_cm_s": {
+          "SYNTHETIC-positive-block00": 0.07791096059417718,
+          "SYNTHETIC-positive-block01": 0.07127746639820784,
+          "SYNTHETIC-positive-block02": 0.06415697732442446,
+          "SYNTHETIC-positive-block03": 0.08573218038958277,
+          "SYNTHETIC-positive-block04": 0.07220356794379576,
+          "SYNTHETIC-positive-block05": 0.08892099650851379,
+          "SYNTHETIC-positive-block06": 0.06254072073489006,
+          "SYNTHETIC-positive-block07": 0.036634908302376507,
+          "SYNTHETIC-positive-block08": 0.08147103965469879,
+          "SYNTHETIC-positive-block09": 0.07533297370964803,
+          "SYNTHETIC-positive-block10": 0.07936021782342381,
+          "SYNTHETIC-positive-block11": 0.11333382502400902,
+          "SYNTHETIC-positive-block12": 0.05433062405984995,
+          "SYNTHETIC-positive-block13": 0.08386626190934798,
+          "SYNTHETIC-positive-block14": 0.08074763871818144,
+          "SYNTHETIC-positive-block15": 0.09850663558366063,
+          "SYNTHETIC-positive-block16": 0.0912447967429302,
+          "SYNTHETIC-positive-block17": 0.07568286109575453,
+          "SYNTHETIC-positive-block18": 0.07663729372731751,
+          "SYNTHETIC-positive-block19": 0.05676753109149066
+        },
+        "exclusions": []
+      }
+    },
+    {
+      "scenario": "zero",
+      "synthetic": true,
+      "source": "invented_means_with_seeded_Gaussian_noise_not_NASA",
+      "purpose": "factorial_analysis_software_verification_only",
+      "design": "randomized_complete_blocks",
+      "generated_independent_burns": 80,
+      "generated_independent_blocks_or_sessions": 20,
+      "expected_cell_means_cm_s": [
+        {
+          "width_cm": 5.0,
+          "full_duct_height_cm": 51.0,
+          "mean_cm_s": 0.2
+        },
+        {
+          "width_cm": 5.0,
+          "full_duct_height_cm": 30.5,
+          "mean_cm_s": 0.24
+        },
+        {
+          "width_cm": 40.6,
+          "full_duct_height_cm": 51.0,
+          "mean_cm_s": 0.22
+        },
+        {
+          "width_cm": 40.6,
+          "full_duct_height_cm": 30.5,
+          "mean_cm_s": 0.26
+        }
+      ],
+      "known_interaction_cm_s": 2.7755575615628914e-17,
+      "estimated_interaction_cm_s": -0.0007658005582132837,
+      "estimate_minus_truth_cm_s": -0.0007658005582133115,
+      "approx_95pct_interval_cm_s": [
+        -0.009338149657091968,
+        0.007806548540665401
+      ],
+      "interval_contains_zero": true,
+      "correct_estimate_direction": true,
+      "analysis": {
+        "status": "ESTIMATED",
+        "interaction_cm_s": -0.0007658005582132837,
+        "interval_cm_s": [
+          -0.009338149657091968,
+          0.007806548540665401
+        ],
+        "method": "Approximate 95% Student t interval across independent block interaction contrasts",
+        "independent_blocks": 20,
+        "height_contrasts_cm_s": {
+          "narrow": 0.041717004757549726,
+          "wide": 0.04095120419933644
+        },
+        "cell_summaries": [
+          {
+            "width_cm": 5.0,
+            "full_duct_height_cm": 30.5,
+            "mean": 0.24288553750284433,
+            "std": 0.007887980853174754,
+            "count": 20
+          },
+          {
+            "width_cm": 5.0,
+            "full_duct_height_cm": 51.0,
+            "mean": 0.20116853274529461,
+            "std": 0.007965626277549048,
+            "count": 20
+          },
+          {
+            "width_cm": 40.6,
+            "full_duct_height_cm": 30.5,
+            "mean": 0.261662680681857,
+            "std": 0.009658923649252296,
+            "count": 20
+          },
+          {
+            "width_cm": 40.6,
+            "full_duct_height_cm": 51.0,
+            "mean": 0.22071147648252057,
+            "std": 0.01146121876524393,
+            "count": 20
+          }
+        ],
+        "block_interactions_cm_s": {
+          "SYNTHETIC-zero-block00": 0.008180787508117876,
+          "SYNTHETIC-zero-block01": 0.008206568803938497,
+          "SYNTHETIC-zero-block02": 0.02487938756808522,
+          "SYNTHETIC-zero-block03": -0.016751537263391958,
+          "SYNTHETIC-zero-block04": -0.0045287201160458534,
+          "SYNTHETIC-zero-block05": -0.021842997205313963,
+          "SYNTHETIC-zero-block06": 0.017111714844768255,
+          "SYNTHETIC-zero-block07": -0.042126467801069795,
+          "SYNTHETIC-zero-block08": -0.004056842127585308,
+          "SYNTHETIC-zero-block09": 0.0011850735473612206,
+          "SYNTHETIC-zero-block10": -0.007854302110980094,
+          "SYNTHETIC-zero-block11": 0.032281050504700565,
+          "SYNTHETIC-zero-block12": -0.015036493777301568,
+          "SYNTHETIC-zero-block13": -0.009054124627063231,
+          "SYNTHETIC-zero-block14": -0.020398517502533325,
+          "SYNTHETIC-zero-block15": -0.0005230007099066569,
+          "SYNTHETIC-zero-block16": 0.013707481432676943,
+          "SYNTHETIC-zero-block17": 0.01719039084158061,
+          "SYNTHETIC-zero-block18": -0.012929098515064075,
+          "SYNTHETIC-zero-block19": 0.017043635540760965
+        },
+        "exclusions": []
+      }
+    },
+    {
+      "scenario": "negative",
+      "synthetic": true,
+      "source": "invented_means_with_seeded_Gaussian_noise_not_NASA",
+      "purpose": "factorial_analysis_software_verification_only",
+      "design": "randomized_complete_blocks",
+      "generated_independent_burns": 80,
+      "generated_independent_blocks_or_sessions": 20,
+      "expected_cell_means_cm_s": [
+        {
+          "width_cm": 5.0,
+          "full_duct_height_cm": 51.0,
+          "mean_cm_s": 0.2
+        },
+        {
+          "width_cm": 5.0,
+          "full_duct_height_cm": 30.5,
+          "mean_cm_s": 0.24
+        },
+        {
+          "width_cm": 40.6,
+          "full_duct_height_cm": 51.0,
+          "mean_cm_s": 0.22
+        },
+        {
+          "width_cm": 40.6,
+          "full_duct_height_cm": 30.5,
+          "mean_cm_s": 0.18
+        }
+      ],
+      "known_interaction_cm_s": -0.07999999999999999,
+      "estimated_interaction_cm_s": -0.08338231188842823,
+      "estimate_minus_truth_cm_s": -0.0033823118884282466,
+      "approx_95pct_interval_cm_s": [
+        -0.09459188246388174,
+        -0.07217274131297473
+      ],
+      "interval_contains_zero": false,
+      "correct_estimate_direction": true,
+      "analysis": {
+        "status": "ESTIMATED",
+        "interaction_cm_s": -0.08338231188842823,
+        "interval_cm_s": [
+          -0.09459188246388174,
+          -0.07217274131297473
+        ],
+        "method": "Approximate 95% Student t interval across independent block interaction contrasts",
+        "independent_blocks": 20,
+        "height_contrasts_cm_s": {
+          "narrow": 0.04071929240070215,
+          "wide": -0.042663019487726085
+        },
+        "cell_summaries": [
+          {
+            "width_cm": 5.0,
+            "full_duct_height_cm": 30.5,
+            "mean": 0.2416786806741138,
+            "std": 0.013125014428690813,
+            "count": 20
+          },
+          {
+            "width_cm": 5.0,
+            "full_duct_height_cm": 51.0,
+            "mean": 0.20095938827341162,
+            "std": 0.0100313310947742,
+            "count": 20
+          },
+          {
+            "width_cm": 40.6,
+            "full_duct_height_cm": 30.5,
+            "mean": 0.1783724457077378,
+            "std": 0.013364401894769434,
+            "count": 20
+          },
+          {
+            "width_cm": 40.6,
+            "full_duct_height_cm": 51.0,
+            "mean": 0.22103546519546388,
+            "std": 0.015886218608773164,
+            "count": 20
+          }
+        ],
+        "block_interactions_cm_s": {
+          "SYNTHETIC-negative-block00": -0.07288737988838584,
+          "SYNTHETIC-negative-block01": -0.10649378432269438,
+          "SYNTHETIC-negative-block02": -0.028069853406060885,
+          "SYNTHETIC-negative-block03": -0.09195844065461922,
+          "SYNTHETIC-negative-block04": -0.09842630231943,
+          "SYNTHETIC-negative-block05": -0.09652900782722604,
+          "SYNTHETIC-negative-block06": -0.04834351873388304,
+          "SYNTHETIC-negative-block07": -0.048638497521245105,
+          "SYNTHETIC-negative-block08": -0.12087234842950656,
+          "SYNTHETIC-negative-block09": -0.09406223172397346,
+          "SYNTHETIC-negative-block10": -0.08172289717643735,
+          "SYNTHETIC-negative-block11": -0.08678173197023034,
+          "SYNTHETIC-negative-block12": -0.08645405107596893,
+          "SYNTHETIC-negative-block13": -0.06725772211356165,
+          "SYNTHETIC-negative-block14": -0.08385113406931774,
+          "SYNTHETIC-negative-block15": -0.12580221157419438,
+          "SYNTHETIC-negative-block16": -0.07095744300422596,
+          "SYNTHETIC-negative-block17": -0.08669244524152431,
+          "SYNTHETIC-negative-block18": -0.06999880494839811,
+          "SYNTHETIC-negative-block19": -0.10184643176768124
+        },
+        "exclusions": []
+      }
+    },
+    {
+      "scenario": "positive_height_sessions",
+      "synthetic": true,
+      "source": "invented_means_with_seeded_Gaussian_noise_not_NASA",
+      "purpose": "factorial_analysis_software_verification_only",
+      "design": "randomized_height_sessions",
+      "generated_independent_burns": 48,
+      "generated_independent_blocks_or_sessions": 24,
+      "expected_cell_means_cm_s": [
+        {
+          "width_cm": 5.0,
+          "full_duct_height_cm": 51.0,
+          "mean_cm_s": 0.2
+        },
+        {
+          "width_cm": 5.0,
+          "full_duct_height_cm": 30.5,
+          "mean_cm_s": 0.24
+        },
+        {
+          "width_cm": 40.6,
+          "full_duct_height_cm": 51.0,
+          "mean_cm_s": 0.22
+        },
+        {
+          "width_cm": 40.6,
+          "full_duct_height_cm": 30.5,
+          "mean_cm_s": 0.34
+        }
+      ],
+      "known_interaction_cm_s": 0.08000000000000004,
+      "estimated_interaction_cm_s": 0.07471251919752844,
+      "estimate_minus_truth_cm_s": -0.0052874808024716,
+      "approx_95pct_interval_cm_s": [
+        0.057854790003125614,
+        0.09157024839193127
+      ],
+      "interval_contains_zero": false,
+      "correct_estimate_direction": true,
+      "analysis": {
+        "status": "ESTIMATED",
+        "interaction_cm_s": 0.07471251919752844,
+        "interval_cm_s": [
+          0.057854790003125614,
+          0.09157024839193127
+        ],
+        "method": "Approximate 95% Welch interval comparing independent session width contrasts",
+        "sessions_per_height": {
+          "shallow": 12,
+          "deep": 12
+        },
+        "session_width_contrasts_cm_s": {
+          "SYNTHETIC-positive_height_sessions-session00": 0.024297203160171893,
+          "SYNTHETIC-positive_height_sessions-session01": 0.08759055256266851,
+          "SYNTHETIC-positive_height_sessions-session02": 0.09656108241919156,
+          "SYNTHETIC-positive_height_sessions-session03": 0.0723811591325968,
+          "SYNTHETIC-positive_height_sessions-session04": 0.10800435568026881,
+          "SYNTHETIC-positive_height_sessions-session05": 0.1123509347556034,
+          "SYNTHETIC-positive_height_sessions-session06": -0.006240747908185407,
+          "SYNTHETIC-positive_height_sessions-session07": 0.04031617364078055,
+          "SYNTHETIC-positive_height_sessions-session08": 0.06919549807603415,
+          "SYNTHETIC-positive_height_sessions-session09": 0.11624292395517408,
+          "SYNTHETIC-positive_height_sessions-session10": 0.026935775781675247,
+          "SYNTHETIC-positive_height_sessions-session11": 0.09634729540950376,
+          "SYNTHETIC-positive_height_sessions-session12": 0.0741191676184833,
+          "SYNTHETIC-positive_height_sessions-session13": 0.07843356441354851,
+          "SYNTHETIC-positive_height_sessions-session14": 0.03471568224854593,
+          "SYNTHETIC-positive_height_sessions-session15": 0.12229491632581044,
+          "SYNTHETIC-positive_height_sessions-session16": 0.010464717330591733,
+          "SYNTHETIC-positive_height_sessions-session17": 0.00935547626188532,
+          "SYNTHETIC-positive_height_sessions-session18": 0.028298096976347664,
+          "SYNTHETIC-positive_height_sessions-session19": 0.10110174691254653,
+          "SYNTHETIC-positive_height_sessions-session20": 0.03677247016122914,
+          "SYNTHETIC-positive_height_sessions-session21": 0.009854074412066649,
+          "SYNTHETIC-positive_height_sessions-session22": -0.0019470737857027187,
+          "SYNTHETIC-positive_height_sessions-session23": 0.1195111996535109
+        },
+        "height_contrasts_cm_s": {
+          "narrow": 0.040435275265620574,
+          "wide": 0.11514779446314899
+        },
+        "cell_summaries": [
+          {
+            "width_cm": 5.0,
+            "full_duct_height_cm": 30.5,
+            "mean": 0.2413754791883916,
+            "std": 0.016742474136601956,
+            "count": 12
+          },
+          {
+            "width_cm": 5.0,
+            "full_duct_height_cm": 51.0,
+            "mean": 0.2009402039227711,
+            "std": 0.009798218873625648,
+            "count": 12
+          },
+          {
+            "width_cm": 40.6,
+            "full_duct_height_cm": 30.5,
+            "mean": 0.33985491567025355,
+            "std": 0.013483433967099284,
+            "count": 12
+          },
+          {
+            "width_cm": 40.6,
+            "full_duct_height_cm": 51.0,
+            "mean": 0.22470712120710465,
+            "std": 0.014775340338507754,
+            "count": 12
+          }
+        ],
+        "exclusions": []
+      }
+    }
+  ],
+  "refusal_tests": {
+    "controls_not_verified": {
+      "status": "ANALYSIS_NOT_SUPPORTED",
+      "reason": "Requires a supported randomized design and verified common controls.",
+      "interaction_cm_s": null,
+      "interval_cm_s": null
+    },
+    "missing_configuration": {
+      "status": "ANALYSIS_NOT_SUPPORTED",
+      "reason": "Expected both widths crossed with both full duct heights.",
+      "interaction_cm_s": null,
+      "interval_cm_s": null
+    },
+    "duplicate_burn": {
+      "status": "ANALYSIS_NOT_SUPPORTED",
+      "reason": "Repeated burn or specimen identity.",
+      "interaction_cm_s": null,
+      "interval_cm_s": null
+    },
+    "unknown_design": {
+      "status": "ANALYSIS_NOT_SUPPORTED",
+      "reason": "Requires a supported randomized design and verified common controls.",
+      "interaction_cm_s": null,
+      "interval_cm_s": null
+    }
+  },
+  "checks": {
+    "known_positive_recovered": true,
+    "known_zero_recovered_without_false_positivity": true,
+    "known_negative_recovered": true,
+    "alternate_height_session_design_recovered": true,
+    "all_invalid_inputs_refused": true
+  },
+  "all_checks_pass": true,
+  "frontend_warning": "SYNTHETIC DEMONSTRATION \u2014 invented rates; checks calculation software only. Not NASA data and not a validated fire prediction.",
+  "scientific_hypothesis_status": "UNTESTED_ON_CONTROLLED_MICROGRAVITY_BURNS",
+  "nasa_prediction_status": "VALIDATION_NOT_SUPPORTED"
+}

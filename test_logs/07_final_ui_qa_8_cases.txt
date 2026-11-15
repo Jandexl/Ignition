@@ -1,0 +1,10 @@
+PASS QA01 Same length, different rate: I-1 vs II-5
+PASS QA02 Same length, different rate: III-1 vs II-6
+PASS QA03 Confinement contrast: I-1 vs IV-SIBAL
+PASS QA04 Missing factorial cell
+PASS QA05 PSI-100 source conflict from dataset
+PASS QA06 IV-SIBAL candidate IV-1 alias from dataset
+PASS QA07 NASA prediction refusal and synthetic isolation
+PASS QA08 Brand, offline assistant and deployed paths
+
+8 of 8 final UI QA cases passed

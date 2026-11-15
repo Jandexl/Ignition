@@ -1,0 +1,13 @@
+test_01_all_table1_records_are_published_and_not_ml_approved (test_closeout.CloseoutConsistency.test_01_all_table1_records_are_published_and_not_ml_approved) ... ok
+test_02_three_rates_and_percent_changes (test_closeout.CloseoutConsistency.test_02_three_rates_and_percent_changes) ... ok
+test_03_lengths_distinct_and_warnings_present (test_closeout.CloseoutConsistency.test_03_lengths_distinct_and_warnings_present) ... ok
+test_04_factorial_hypothesis_not_confirmatory (test_closeout.CloseoutConsistency.test_04_factorial_hypothesis_not_confirmatory) ... ok
+test_05_nasa_prediction_remains_refused (test_closeout.CloseoutConsistency.test_05_nasa_prediction_remains_refused) ... ok
+test_06_psi100_airflow_discrepancy_remains_unresolved (test_closeout.CloseoutConsistency.test_06_psi100_airflow_discrepancy_remains_unresolved) ... ok
+test_07_iv_candidate_not_verified_or_double_counted (test_closeout.CloseoutConsistency.test_07_iv_candidate_not_verified_or_double_counted) ... ok
+test_08_status_brand_and_qa_contract (test_closeout.CloseoutConsistency.test_08_status_brand_and_qa_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.001s
+
+OK

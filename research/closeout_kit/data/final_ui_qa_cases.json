@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "instructions": "These eight cases check that the INTEGRATED deployed product matches the finished science. They are not a request to redo published scientific research. All results are currently unverified against the new frontend/backend repo.",
+  "cases": [
+    {
+      "id": "QA01",
+      "title": "Same length, different rate: I-1 vs II-5",
+      "steps": "Open Compare Runs and select I-1 and II-5. Switch from flame length to spread rate.",
+      "expected": "4 vs 4 cm flame length; 0.18 vs 0.21 cm/s spread; +0.03 (+16.67%); confounding warning and Olson source."
+    },
+    {
+      "id": "QA02",
+      "title": "Same length, different rate: III-1 vs II-6",
+      "steps": "Compare III-1 and II-6.",
+      "expected": "5 vs 5 cm flame length; 0.23 vs 0.26 cm/s spread; +0.03 (+13.04%); source conflict for PSI-100 airflow is visible."
+    },
+    {
+      "id": "QA03",
+      "title": "Confinement contrast: I-1 vs IV-SIBAL",
+      "steps": "Compare I-1 and IV-SIBAL.",
+      "expected": "0.18 vs 0.36 cm/s (+100%); duct heights 51 vs 30.5 cm; oxygen 21.7 vs 23.1%; no assertion that duct alone caused the difference."
+    },
+    {
+      "id": "QA04",
+      "title": "Missing factorial cell",
+      "steps": "Open Research Gaps or Scale Transfer Lab 2\u00d72.",
+      "expected": "Narrow 5 cm \u00d7 shallow 30.5 cm historical configuration missing; existing cells labeled historical analogs, not controlled replications; interaction estimate null."
+    },
+    {
+      "id": "QA05",
+      "title": "PSI-100 source conflict from dataset",
+      "steps": "Open III-1 conflict detail and inspect source metadata.",
+      "expected": "Olson 25 cm/s and PSI-100 candidate S1 30 cm/s shown separately; no silent 25 or 30 override; source_conflicts.json drives output."
+    },
+    {
+      "id": "QA06",
+      "title": "IV-SIBAL candidate IV-1 alias from dataset",
+      "steps": "Inspect IV-SIBAL source crosswalk.",
+      "expected": "Match marked probable/not confirmed; digitized ~0.368 vs table 0.36 not double-counted as independent burns."
+    },
+    {
+      "id": "QA07",
+      "title": "NASA prediction refusal and synthetic isolation",
+      "steps": "Request an unseen scenario or open model-prediction state.",
+      "expected": "prediction_status VALIDATION_NOT_SUPPORTED, prediction_cm_s null. Synthetic estimates labeled synthetic; not rendered as NASA predictions."
+    },
+    {
+      "id": "QA08",
+      "title": "Brand, offline assistant and deployed paths",
+      "steps": "Check hero, open Ask 1gnition, refresh all four views from a deployed URL.",
+      "expected": "ZERO GUESSING. ZERO HIDDEN UNCERTAINTY. followed by 1gnition; Ask clearly says offline rule-based; source JS/JSON endpoints load publicly; no dead API dependencies."
+    }
+  ]
+}

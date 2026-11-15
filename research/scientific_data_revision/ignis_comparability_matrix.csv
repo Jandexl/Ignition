@@ -1,0 +1,227 @@
+comparison_a,comparison_b,variable,status,reason,strength
+BASS concurrent 2cm,BASS concurrent 1cm,fuel_composition,matched_nominal,SIBAL caption;batch and measured properties unverified,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS concurrent 1cm,width,different_legend,Legend specimen widths 2 versus 1 cm;exposed dimensions remain source dependent,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS concurrent 1cm,length,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS concurrent 1cm,thickness,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS concurrent 1cm,oxygen,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS concurrent 1cm,pressure,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS concurrent 1cm,airflow,partial_overlap,Compare within overlapping speeds;nominal/actual discrepancies remain,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS concurrent 1cm,direction,matched,Compare concurrent and opposed separately;I/III series contains both,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS concurrent 1cm,gravity,matched_regime,Orbital microgravity;residual acceleration unquantified,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS concurrent 1cm,duct_confinement,matched_reference,Reference full ducts7.6/46/30cm;gap definition and point applicability unresolved,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS concurrent 1cm,instrumentation,different_or_unharmonized,BASS glovebox imaging versus Saffire cameras/sensors;processing windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS concurrent 1cm,outcome,matched_label,Figure10 steady spread rate;measurement windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS concurrent 1cm,independence,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS opposed 2cm,fuel_composition,matched_nominal,SIBAL caption;batch and measured properties unverified,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS opposed 2cm,width,matched_legend,Legend specimen widths 2 versus 2 cm;exposed dimensions remain source dependent,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS opposed 2cm,length,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS opposed 2cm,thickness,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS opposed 2cm,oxygen,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS opposed 2cm,pressure,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS opposed 2cm,airflow,partial_overlap,Compare within overlapping speeds;nominal/actual discrepancies remain,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS opposed 2cm,direction,mixed_or_different,Compare concurrent and opposed separately;I/III series contains both,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS opposed 2cm,gravity,matched_regime,Orbital microgravity;residual acceleration unquantified,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS opposed 2cm,duct_confinement,matched_reference,Reference full ducts7.6/46/30cm;gap definition and point applicability unresolved,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS opposed 2cm,instrumentation,different_or_unharmonized,BASS glovebox imaging versus Saffire cameras/sensors;processing windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS opposed 2cm,outcome,matched_label,Figure10 steady spread rate;measurement windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,BASS opposed 2cm,independence,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire I/III,fuel_composition,matched_nominal,SIBAL caption;batch and measured properties unverified,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire I/III,width,different_legend,Legend specimen widths 2 versus 40 cm;exposed dimensions remain source dependent,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire I/III,length,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire I/III,thickness,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire I/III,oxygen,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire I/III,pressure,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire I/III,airflow,partial_overlap,Compare within overlapping speeds;nominal/actual discrepancies remain,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire I/III,direction,mixed_or_different,Compare concurrent and opposed separately;I/III series contains both,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire I/III,gravity,matched_regime,Orbital microgravity;residual acceleration unquantified,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire I/III,duct_confinement,different,Reference full ducts7.6/46/30cm;gap definition and point applicability unresolved,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire I/III,instrumentation,different_or_unharmonized,BASS glovebox imaging versus Saffire cameras/sensors;processing windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire I/III,outcome,matched_label,Figure10 steady spread rate;measurement windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire I/III,independence,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire II,fuel_composition,matched_nominal,SIBAL caption;batch and measured properties unverified,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire II,width,different_legend,Legend specimen widths 2 versus 5 cm;exposed dimensions remain source dependent,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire II,length,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire II,thickness,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire II,oxygen,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire II,pressure,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire II,airflow,partial_overlap,Compare within overlapping speeds;nominal/actual discrepancies remain,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire II,direction,matched,Compare concurrent and opposed separately;I/III series contains both,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire II,gravity,matched_regime,Orbital microgravity;residual acceleration unquantified,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire II,duct_confinement,different,Reference full ducts7.6/46/30cm;gap definition and point applicability unresolved,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire II,instrumentation,different_or_unharmonized,BASS glovebox imaging versus Saffire cameras/sensors;processing windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire II,outcome,matched_label,Figure10 steady spread rate;measurement windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire II,independence,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire IV,fuel_composition,matched_nominal,SIBAL caption;batch and measured properties unverified,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire IV,width,different_legend,Legend specimen widths 2 versus 40 cm;exposed dimensions remain source dependent,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire IV,length,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire IV,thickness,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire IV,oxygen,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire IV,pressure,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire IV,airflow,partial_overlap,Compare within overlapping speeds;nominal/actual discrepancies remain,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire IV,direction,matched,Compare concurrent and opposed separately;I/III series contains both,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire IV,gravity,matched_regime,Orbital microgravity;residual acceleration unquantified,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire IV,duct_confinement,different,Reference full ducts7.6/46/30cm;gap definition and point applicability unresolved,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire IV,instrumentation,different_or_unharmonized,BASS glovebox imaging versus Saffire cameras/sensors;processing windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire IV,outcome,matched_label,Figure10 steady spread rate;measurement windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 2cm,Saffire IV,independence,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,BASS opposed 2cm,fuel_composition,matched_nominal,SIBAL caption;batch and measured properties unverified,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,BASS opposed 2cm,width,different_legend,Legend specimen widths 1 versus 2 cm;exposed dimensions remain source dependent,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,BASS opposed 2cm,length,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,BASS opposed 2cm,thickness,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,BASS opposed 2cm,oxygen,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,BASS opposed 2cm,pressure,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,BASS opposed 2cm,airflow,partial_overlap,Compare within overlapping speeds;nominal/actual discrepancies remain,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,BASS opposed 2cm,direction,mixed_or_different,Compare concurrent and opposed separately;I/III series contains both,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,BASS opposed 2cm,gravity,matched_regime,Orbital microgravity;residual acceleration unquantified,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,BASS opposed 2cm,duct_confinement,matched_reference,Reference full ducts7.6/46/30cm;gap definition and point applicability unresolved,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,BASS opposed 2cm,instrumentation,different_or_unharmonized,BASS glovebox imaging versus Saffire cameras/sensors;processing windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,BASS opposed 2cm,outcome,matched_label,Figure10 steady spread rate;measurement windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,BASS opposed 2cm,independence,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire I/III,fuel_composition,matched_nominal,SIBAL caption;batch and measured properties unverified,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire I/III,width,different_legend,Legend specimen widths 1 versus 40 cm;exposed dimensions remain source dependent,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire I/III,length,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire I/III,thickness,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire I/III,oxygen,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire I/III,pressure,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire I/III,airflow,partial_overlap,Compare within overlapping speeds;nominal/actual discrepancies remain,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire I/III,direction,mixed_or_different,Compare concurrent and opposed separately;I/III series contains both,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire I/III,gravity,matched_regime,Orbital microgravity;residual acceleration unquantified,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire I/III,duct_confinement,different,Reference full ducts7.6/46/30cm;gap definition and point applicability unresolved,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire I/III,instrumentation,different_or_unharmonized,BASS glovebox imaging versus Saffire cameras/sensors;processing windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire I/III,outcome,matched_label,Figure10 steady spread rate;measurement windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire I/III,independence,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire II,fuel_composition,matched_nominal,SIBAL caption;batch and measured properties unverified,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire II,width,different_legend,Legend specimen widths 1 versus 5 cm;exposed dimensions remain source dependent,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire II,length,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire II,thickness,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire II,oxygen,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire II,pressure,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire II,airflow,partial_overlap,Compare within overlapping speeds;nominal/actual discrepancies remain,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire II,direction,matched,Compare concurrent and opposed separately;I/III series contains both,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire II,gravity,matched_regime,Orbital microgravity;residual acceleration unquantified,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire II,duct_confinement,different,Reference full ducts7.6/46/30cm;gap definition and point applicability unresolved,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire II,instrumentation,different_or_unharmonized,BASS glovebox imaging versus Saffire cameras/sensors;processing windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire II,outcome,matched_label,Figure10 steady spread rate;measurement windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire II,independence,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire IV,fuel_composition,matched_nominal,SIBAL caption;batch and measured properties unverified,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire IV,width,different_legend,Legend specimen widths 1 versus 40 cm;exposed dimensions remain source dependent,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire IV,length,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire IV,thickness,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire IV,oxygen,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire IV,pressure,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire IV,airflow,partial_overlap,Compare within overlapping speeds;nominal/actual discrepancies remain,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire IV,direction,matched,Compare concurrent and opposed separately;I/III series contains both,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire IV,gravity,matched_regime,Orbital microgravity;residual acceleration unquantified,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire IV,duct_confinement,different,Reference full ducts7.6/46/30cm;gap definition and point applicability unresolved,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire IV,instrumentation,different_or_unharmonized,BASS glovebox imaging versus Saffire cameras/sensors;processing windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire IV,outcome,matched_label,Figure10 steady spread rate;measurement windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS concurrent 1cm,Saffire IV,independence,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire I/III,fuel_composition,matched_nominal,SIBAL caption;batch and measured properties unverified,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire I/III,width,different_legend,Legend specimen widths 2 versus 40 cm;exposed dimensions remain source dependent,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire I/III,length,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire I/III,thickness,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire I/III,oxygen,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire I/III,pressure,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire I/III,airflow,partial_overlap,Compare within overlapping speeds;nominal/actual discrepancies remain,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire I/III,direction,mixed_or_different,Compare concurrent and opposed separately;I/III series contains both,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire I/III,gravity,matched_regime,Orbital microgravity;residual acceleration unquantified,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire I/III,duct_confinement,different,Reference full ducts7.6/46/30cm;gap definition and point applicability unresolved,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire I/III,instrumentation,different_or_unharmonized,BASS glovebox imaging versus Saffire cameras/sensors;processing windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire I/III,outcome,matched_label,Figure10 steady spread rate;measurement windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire I/III,independence,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire II,fuel_composition,matched_nominal,SIBAL caption;batch and measured properties unverified,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire II,width,different_legend,Legend specimen widths 2 versus 5 cm;exposed dimensions remain source dependent,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire II,length,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire II,thickness,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire II,oxygen,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire II,pressure,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire II,airflow,partial_overlap,Compare within overlapping speeds;nominal/actual discrepancies remain,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire II,direction,mixed_or_different,Compare concurrent and opposed separately;I/III series contains both,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire II,gravity,matched_regime,Orbital microgravity;residual acceleration unquantified,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire II,duct_confinement,different,Reference full ducts7.6/46/30cm;gap definition and point applicability unresolved,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire II,instrumentation,different_or_unharmonized,BASS glovebox imaging versus Saffire cameras/sensors;processing windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire II,outcome,matched_label,Figure10 steady spread rate;measurement windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire II,independence,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire IV,fuel_composition,matched_nominal,SIBAL caption;batch and measured properties unverified,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire IV,width,different_legend,Legend specimen widths 2 versus 40 cm;exposed dimensions remain source dependent,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire IV,length,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire IV,thickness,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire IV,oxygen,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire IV,pressure,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire IV,airflow,partial_overlap,Compare within overlapping speeds;nominal/actual discrepancies remain,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire IV,direction,mixed_or_different,Compare concurrent and opposed separately;I/III series contains both,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire IV,gravity,matched_regime,Orbital microgravity;residual acceleration unquantified,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire IV,duct_confinement,different,Reference full ducts7.6/46/30cm;gap definition and point applicability unresolved,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire IV,instrumentation,different_or_unharmonized,BASS glovebox imaging versus Saffire cameras/sensors;processing windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire IV,outcome,matched_label,Figure10 steady spread rate;measurement windows not harmonized,descriptive_only;not_causal_or_ML_ready
+BASS opposed 2cm,Saffire IV,independence,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire II,fuel_composition,matched_nominal,SIBAL caption;batch and measured properties unverified,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire II,width,different_legend,Legend specimen widths 40 versus 5 cm;exposed dimensions remain source dependent,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire II,length,different,Table2 lengths:I/III94cm;II30cm;IV50cm;PSI small specimen29cm,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire II,thickness,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire II,oxygen,matched_nominal_actual_conflicted,I-III table21%;IV22%;PSI I21.5-21.7 andII~22.1%,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire II,pressure,matched_nominal,Table2 gives100kPa for I-IV;actual time-resolved pressure not audited,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire II,airflow,partial_overlap,Compare within overlapping speeds;nominal/actual discrepancies remain,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire II,direction,mixed_or_different,Compare concurrent and opposed separately;I/III series contains both,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire II,gravity,matched_regime,Orbital microgravity;residual acceleration unquantified,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire II,duct_confinement,matched_reference,Reference full ducts7.6/46/30cm;gap definition and point applicability unresolved,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire II,instrumentation,different_or_unharmonized,BASS glovebox imaging versus Saffire cameras/sensors;processing windows not harmonized,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire II,outcome,matched_label,Figure10 steady spread rate;measurement windows not harmonized,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire II,independence,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire IV,fuel_composition,matched_nominal,SIBAL caption;batch and measured properties unverified,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire IV,width,matched_legend,Legend specimen widths 40 versus 40 cm;exposed dimensions remain source dependent,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire IV,length,different,Table2 lengths:I/III94cm;II30cm;IV50cm;PSI small specimen29cm,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire IV,thickness,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire IV,oxygen,different_nominal,I-III table21%;IV22%;PSI I21.5-21.7 andII~22.1%,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire IV,pressure,matched_nominal,Table2 gives100kPa for I-IV;actual time-resolved pressure not audited,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire IV,airflow,partial_overlap,Compare within overlapping speeds;nominal/actual discrepancies remain,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire IV,direction,mixed_or_different,Compare concurrent and opposed separately;I/III series contains both,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire IV,gravity,matched_regime,Orbital microgravity;residual acceleration unquantified,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire IV,duct_confinement,different,Reference full ducts7.6/46/30cm;gap definition and point applicability unresolved,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire IV,instrumentation,different_or_unharmonized,BASS glovebox imaging versus Saffire cameras/sensors;processing windows not harmonized,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire IV,outcome,matched_label,Figure10 steady spread rate;measurement windows not harmonized,descriptive_only;not_causal_or_ML_ready
+Saffire I/III,Saffire IV,independence,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+Saffire II,Saffire IV,fuel_composition,matched_nominal,SIBAL caption;batch and measured properties unverified,descriptive_only;not_causal_or_ML_ready
+Saffire II,Saffire IV,width,different_legend,Legend specimen widths 5 versus 40 cm;exposed dimensions remain source dependent,descriptive_only;not_causal_or_ML_ready
+Saffire II,Saffire IV,length,different,Table2 lengths:I/III94cm;II30cm;IV50cm;PSI small specimen29cm,descriptive_only;not_causal_or_ML_ready
+Saffire II,Saffire IV,thickness,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+Saffire II,Saffire IV,oxygen,different_nominal,I-III table21%;IV22%;PSI I21.5-21.7 andII~22.1%,descriptive_only;not_causal_or_ML_ready
+Saffire II,Saffire IV,pressure,matched_nominal,Table2 gives100kPa for I-IV;actual time-resolved pressure not audited,descriptive_only;not_causal_or_ML_ready
+Saffire II,Saffire IV,airflow,partial_overlap,Compare within overlapping speeds;nominal/actual discrepancies remain,descriptive_only;not_causal_or_ML_ready
+Saffire II,Saffire IV,direction,matched,Compare concurrent and opposed separately;I/III series contains both,descriptive_only;not_causal_or_ML_ready
+Saffire II,Saffire IV,gravity,matched_regime,Orbital microgravity;residual acceleration unquantified,descriptive_only;not_causal_or_ML_ready
+Saffire II,Saffire IV,duct_confinement,different,Reference full ducts7.6/46/30cm;gap definition and point applicability unresolved,descriptive_only;not_causal_or_ML_ready
+Saffire II,Saffire IV,instrumentation,different_or_unharmonized,BASS glovebox imaging versus Saffire cameras/sensors;processing windows not harmonized,descriptive_only;not_causal_or_ML_ready
+Saffire II,Saffire IV,outcome,matched_label,Figure10 steady spread rate;measurement windows not harmonized,descriptive_only;not_causal_or_ML_ready
+Saffire II,Saffire IV,independence,unknown,No point-level crosswalk or repeatability record,descriptive_only;not_causal_or_ML_ready
+I-1,II-5,overall,limited,Published same material and atmosphere;flow matched in first2 pairs;length/width/entry/flight and actual conditions confounded,descriptive_only
+II-6,III-1,overall,limited,Published same material and atmosphere;flow matched in first2 pairs;length/width/entry/flight and actual conditions confounded,descriptive_only
+II-5,II-6,overall,limited,Published same material and atmosphere;flow matched in first2 pairs;length/width/entry/flight and actual conditions confounded,descriptive_only
+I-1,III-1,overall,limited,Published same material and atmosphere;flow matched in first2 pairs;length/width/entry/flight and actual conditions confounded,descriptive_only
+I-1,II-5,material,same_in_Table1,SIBAL vs SIBAL; Olson Table 1,descriptive
+I-1,II-5,flow_direction,same_in_Table1,concurrent vs concurrent; Olson Table 1,descriptive
+I-1,II-5,flow_cm_s,same_in_Table1,20 vs 20; Olson Table 1,descriptive
+I-1,II-5,duct_full_height_cm,same_in_Table1,51 vs 51; Olson Table 1,descriptive
+I-1,II-5,duct_width_cm,same_in_Table1,46 vs 46; Olson Table 1,descriptive
+I-1,II-5,sample_length_cm,different_in_Table1,94 vs 29; Olson Table 1,descriptive
+I-1,II-5,sample_width_cm,different_in_Table1,40.6 vs 5; Olson Table 1,descriptive
+I-1,II-5,oxygen_vol_pct,different_in_Table1,21.7 vs 22.1; Olson Table 1,descriptive
+I-1,II-5,pressure_kpa,different_in_Table1,102 vs 103; Olson Table 1,descriptive
+III-1,II-6,material,same_in_Table1,SIBAL vs SIBAL; Olson Table 1,descriptive
+III-1,II-6,flow_direction,same_in_Table1,concurrent vs concurrent; Olson Table 1,descriptive
+III-1,II-6,flow_cm_s,same_in_Table1,25 vs 25; Olson Table 1,descriptive
+III-1,II-6,duct_full_height_cm,same_in_Table1,51 vs 51; Olson Table 1,descriptive
+III-1,II-6,duct_width_cm,same_in_Table1,46 vs 46; Olson Table 1,descriptive
+III-1,II-6,sample_length_cm,different_in_Table1,94 vs 29; Olson Table 1,descriptive
+III-1,II-6,sample_width_cm,different_in_Table1,40.6 vs 5; Olson Table 1,descriptive
+III-1,II-6,oxygen_vol_pct,different_in_Table1,21.2 vs 22.1; Olson Table 1,descriptive
+III-1,II-6,pressure_kpa,different_in_Table1,99 vs 103; Olson Table 1,descriptive
+I-1,IV-SIBAL,material,same_in_Table1,SIBAL vs SIBAL; Olson Table 1,descriptive
+I-1,IV-SIBAL,flow_direction,same_in_Table1,concurrent vs concurrent; Olson Table 1,descriptive
+I-1,IV-SIBAL,flow_cm_s,same_in_Table1,20 vs 20; Olson Table 1,descriptive
+I-1,IV-SIBAL,duct_full_height_cm,different_in_Table1,51 vs 30.5; Olson Table 1,descriptive
+I-1,IV-SIBAL,duct_width_cm,same_in_Table1,46 vs 46; Olson Table 1,descriptive
+I-1,IV-SIBAL,sample_length_cm,different_in_Table1,94 vs 50; Olson Table 1,descriptive
+I-1,IV-SIBAL,sample_width_cm,same_in_Table1,40.6 vs 40.6; Olson Table 1,descriptive
+I-1,IV-SIBAL,oxygen_vol_pct,different_in_Table1,21.7 vs 23.1; Olson Table 1,descriptive
+I-1,IV-SIBAL,pressure_kpa,different_in_Table1,102 vs 99; Olson Table 1,descriptive

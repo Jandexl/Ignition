@@ -1,0 +1,344 @@
+[
+  {
+    "id": "saffire_1",
+    "name": "Saffire-I",
+    "psi_id": "PSI-98",
+    "psi_source_id": "psi_98",
+    "psi_confirmed": true,
+    "pillars": [
+      "prevention"
+    ],
+    "fuel_type": "solid",
+    "objective": "Large-scale flame spread and material flammability in an uncrewed Cygnus cargo vehicle.",
+    "materials": [
+      "SIBAL"
+    ],
+    "materials_note": "SIBAL cotton-fiberglass fabric, 41 × 94 cm in Urban Table 2 (Olson Table 1: 40.6 × 94 cm).",
+    "apparatus": "Fan-driven flow duct inside Cygnus. Urban Table 2 labels it 46 cm; Olson gives a 51 cm full duct height.",
+    "sensors": "Two video cameras, thermocouples, radiometer",
+    "outcomes": [
+      "steady_size",
+      "spread_rate"
+    ],
+    "o2_pct_range": [
+      21,
+      21
+    ],
+    "pressure_kpa_range": [
+      100,
+      100
+    ],
+    "gravity": [
+      "micro"
+    ],
+    "dataset": null,
+    "caution": null,
+    "source_ids": [
+      "saffire_i_v",
+      "OLSON-2023-T1",
+      "psi_98"
+    ]
+  },
+  {
+    "id": "saffire_2",
+    "name": "Saffire-II",
+    "psi_id": "PSI-99",
+    "psi_source_id": "NASA-PSI-99",
+    "psi_confirmed": true,
+    "pillars": [
+      "prevention"
+    ],
+    "fuel_type": "solid",
+    "objective": "Large-scale flame spread and material flammability in an uncrewed Cygnus cargo vehicle.",
+    "materials": [
+      "SIBAL",
+      "PMMA"
+    ],
+    "materials_note": "Nine 5 × 30 cm samples including SIBAL, silicone, PMMA and Nomex (Olson Table 1 lists the SIBAL samples as 5 × 29 cm).",
+    "apparatus": "Fan-driven flow duct inside Cygnus. Urban Table 2 labels it 46 cm; Olson gives a 51 cm full duct height.",
+    "sensors": "Two video cameras, thermocouples, radiometer",
+    "outcomes": [
+      "steady_size",
+      "spread_rate"
+    ],
+    "o2_pct_range": [
+      21,
+      21
+    ],
+    "pressure_kpa_range": [
+      100,
+      100
+    ],
+    "gravity": [
+      "micro"
+    ],
+    "dataset": null,
+    "caution": null,
+    "source_ids": [
+      "saffire_i_v",
+      "OLSON-2023-T1",
+      "NASA-PSI-99"
+    ]
+  },
+  {
+    "id": "saffire_3",
+    "name": "Saffire-III",
+    "psi_id": "PSI-100",
+    "psi_source_id": "NASA-PSI-100",
+    "psi_confirmed": true,
+    "pillars": [
+      "prevention"
+    ],
+    "fuel_type": "solid",
+    "objective": "Large-scale flame spread and material flammability in an uncrewed Cygnus cargo vehicle.",
+    "materials": [
+      "SIBAL"
+    ],
+    "materials_note": "SIBAL cotton-fiberglass fabric, 41 × 94 cm in Urban Table 2 (Olson Table 1: 40.6 × 94 cm).",
+    "apparatus": "Fan-driven flow duct inside Cygnus. Urban Table 2 labels it 46 cm; Olson gives a 51 cm full duct height. PSI-100 lists 30 cm/s airflow where the paper gives 25.",
+    "sensors": "Two video cameras, thermocouples, radiometer",
+    "outcomes": [
+      "steady_size",
+      "spread_rate"
+    ],
+    "o2_pct_range": [
+      21,
+      21
+    ],
+    "pressure_kpa_range": [
+      100,
+      100
+    ],
+    "gravity": [
+      "micro"
+    ],
+    "dataset": null,
+    "caution": null,
+    "source_ids": [
+      "saffire_i_v",
+      "OLSON-2023-T1",
+      "NASA-PSI-100"
+    ]
+  },
+  {
+    "id": "saffire_4_5",
+    "name": "Saffire-IV, -V",
+    "psi_id": null,
+    "psi_source_id": null,
+    "psi_confirmed": false,
+    "pillars": [
+      "prevention",
+      "detection"
+    ],
+    "fuel_type": "solid",
+    "objective": "Spacecraft-scale flame spread across a range of atmospheres, with fire monitoring and cleanup demonstrations.",
+    "materials": [
+      "SIBAL",
+      "Cotton",
+      "PMMA"
+    ],
+    "materials_note": "SIBAL fabric and cotton jersey, 41 × 50 cm. PMMA samples.",
+    "apparatus": "Flow duct, 30 cm high, inside Cygnus",
+    "sensors": "Video, flame temperature, radiant heat, oxygen calorimetry, carbon dioxide",
+    "outcomes": [
+      "steady_size",
+      "spread_rate"
+    ],
+    "o2_pct_range": [
+      22,
+      26.2
+    ],
+    "pressure_kpa_range": [
+      70.7,
+      100
+    ],
+    "gravity": [
+      "micro"
+    ],
+    "dataset": null,
+    "caution": null,
+    "source_ids": [
+      "saffire_i_v"
+    ]
+  },
+  {
+    "id": "bass",
+    "name": "BASS",
+    "psi_id": "PSI-26",
+    "psi_source_id": "NASA-PSI-26",
+    "psi_confirmed": true,
+    "pillars": [
+      "prevention",
+      "suppression"
+    ],
+    "fuel_type": "solid",
+    "objective": "Burning and extinction of small solid fuel samples in low-speed forced flow on the ISS.",
+    "materials": [
+      "SIBAL"
+    ],
+    "materials_note": "SIBAL fabric 1 and 2 cm wide (Urban Figure 10 legend; Olson Table 1 lists 1.2 and 2.2 cm). Other BASS materials are not indexed here.",
+    "apparatus": "Microgravity Science Glovebox with the flow duct built for SPICE",
+    "sensors": "Video cameras",
+    "outcomes": [
+      "spread_rate"
+    ],
+    "o2_pct_range": null,
+    "pressure_kpa_range": null,
+    "gravity": [
+      "micro"
+    ],
+    "dataset": null,
+    "caution": null,
+    "source_ids": [
+      "NASA-PSI-26",
+      "bass_saffire_journal",
+      "OLSON-2023-T1"
+    ]
+  },
+  {
+    "id": "bass2",
+    "name": "BASS-II",
+    "psi_id": "PSI-25",
+    "psi_source_id": "psi_25",
+    "psi_confirmed": true,
+    "pillars": [
+      "prevention",
+      "suppression"
+    ],
+    "fuel_type": "solid",
+    "objective": "Burning and extinction of small solid fuel samples in low-speed forced flow on the ISS.",
+    "materials": [
+      "PMMA"
+    ],
+    "materials_note": "Acrylic (PMMA) slabs and rods in opposed flow. The summary report lists 39 published PMMA spread rates from 18 tests; these are not indexed as runs here.",
+    "apparatus": "Microgravity Science Glovebox with the flow duct built for SPICE",
+    "sensors": "Video cameras",
+    "outcomes": [
+      "spread_rate",
+      "extinction"
+    ],
+    "o2_pct_range": null,
+    "pressure_kpa_range": null,
+    "gravity": [
+      "micro"
+    ],
+    "dataset": null,
+    "caution": null,
+    "source_ids": [
+      "psi_25",
+      "NASA-TM-20210011385"
+    ]
+  },
+  {
+    "id": "same",
+    "name": "SAME and SAME-R",
+    "psi_id": "PSI-101",
+    "psi_source_id": "psi_101",
+    "psi_confirmed": false,
+    "pillars": [
+      "detection"
+    ],
+    "fuel_type": "smoke",
+    "objective": "Smoke and aerosol measurements in microgravity to test fire detection.",
+    "materials": [],
+    "materials_note": "Smoke from several fuel types.",
+    "apparatus": "Smoke instruments, one later reused to detect dust in DAFT and DAFT-2",
+    "sensors": "Smoke and aerosol instruments",
+    "outcomes": [
+      "smoke"
+    ],
+    "o2_pct_range": null,
+    "pressure_kpa_range": null,
+    "gravity": [
+      "micro"
+    ],
+    "dataset": null,
+    "caution": null,
+    "source_ids": [
+      "brief"
+    ]
+  },
+  {
+    "id": "flex",
+    "name": "FLEX and FLEX-2",
+    "psi_id": null,
+    "psi_source_id": null,
+    "psi_confirmed": false,
+    "pillars": [
+      "suppression"
+    ],
+    "fuel_type": "liquid droplet",
+    "objective": "Burning and extinction of liquid fuel droplets. FLEX studied suppression by diluting the atmosphere with carbon dioxide and helium.",
+    "materials": [],
+    "materials_note": "Liquid fuel droplets.",
+    "apparatus": "Multi-user Droplet Combustion Apparatus in the Combustion Integrated Rack",
+    "sensors": null,
+    "outcomes": [
+      "extinction"
+    ],
+    "o2_pct_range": null,
+    "pressure_kpa_range": null,
+    "gravity": [
+      "micro"
+    ],
+    "dataset": null,
+    "caution": null,
+    "source_ids": [
+      "brief"
+    ]
+  },
+  {
+    "id": "acme_bre",
+    "name": "ACME Burning Rate Emulator",
+    "psi_id": null,
+    "psi_source_id": null,
+    "psi_confirmed": false,
+    "pillars": [
+      "prevention"
+    ],
+    "fuel_type": "gas burner",
+    "objective": "Materials flammability in still atmospheres as a function of material properties, studied with a gaseous burner.",
+    "materials": [],
+    "materials_note": "Gaseous fuel through a porous burner that emulates a burning material.",
+    "apparatus": "ACME hardware in the Combustion Integrated Rack",
+    "sensors": null,
+    "outcomes": [
+      "extinction"
+    ],
+    "o2_pct_range": null,
+    "pressure_kpa_range": null,
+    "gravity": [
+      "micro"
+    ],
+    "dataset": null,
+    "caution": null,
+    "source_ids": [
+      "brief"
+    ]
+  },
+  {
+    "id": "acme_cfig",
+    "name": "ACME Cool Flames Investigation with Gases",
+    "psi_id": null,
+    "psi_source_id": null,
+    "psi_confirmed": false,
+    "pillars": [],
+    "fuel_type": "gas",
+    "objective": "Cool flames of gaseous fuels. These were the highest-oxygen microgravity tests.",
+    "materials": [],
+    "materials_note": "Nitrogen with a flammable gas such as propane in the chamber.",
+    "apparatus": "ACME hardware with a spherical burner",
+    "sensors": null,
+    "outcomes": [],
+    "o2_pct_range": null,
+    "pressure_kpa_range": null,
+    "gravity": [
+      "micro"
+    ],
+    "dataset": null,
+    "caution": "Up to 85% oxygen flowed from the burner as an oxidizer stream. That is not a cabin atmosphere, so it is not compared with habitat oxygen.",
+    "source_ids": [
+      "brief"
+    ]
+  }
+]

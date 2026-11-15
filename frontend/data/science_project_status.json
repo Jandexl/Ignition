@@ -1,0 +1,17 @@
+{
+  "project": "1gnition",
+  "updated": "2026-11-15",
+  "science_research_status": "COMPLETE_FOR_HACKATHON",
+  "science_lead_primary_decision": "Scientific_Lead_Decision.md dated 2026-11-15",
+  "published_olsen_table1_records_verified": 8,
+  "published_comparison_cases_verified": 3,
+  "hypothesis_status": "PROPOSED_NOT_EXPERIMENTALLY_VALIDATED",
+  "synthetic_factorial_verification_status": "COMPLETED_ON_SYNTHETIC_DATA",
+  "nasa_scale_transfer_prediction_status": "VALIDATION_NOT_SUPPORTED",
+  "final_ui_scientific_claims_review": "NOT_YET_EVIDENCED_ON_LATEST_BUILD",
+  "final_manual_ui_cases_review": "NOT_YET_EVIDENCED_ON_LATEST_BUILD",
+  "deployed_public_api": "NOT_VERIFIED",
+  "deployed_public_site": "NOT_VERIFIED",
+  "ask_1gnition_type": "OFFLINE_RULE_BASED_HELPER",
+  "note": "Do not interpret unconfirmed integration QA as unfinished underlying research."
+}

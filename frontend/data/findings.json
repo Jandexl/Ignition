@@ -1,0 +1,30 @@
+[
+  {
+    "id": "F1",
+    "text": "Saffire-I concurrent flame spread averaged 1.8 mm/s over a 420 s burn.",
+    "source_id": "saffire_slides",
+    "location": "slides",
+    "state": "published"
+  },
+  {
+    "id": "F2",
+    "text": "Spread rate rose by about 100% in the reduced-height duct of Saffire-IV compared with Saffire-I and -III.",
+    "source_id": "saffire_i_v",
+    "location": "text",
+    "state": "published"
+  },
+  {
+    "id": "F3",
+    "text": "Steady spread rates in Saffire were significantly lower than in BASS at the same oxygen level and flow rate.",
+    "source_id": "bass_saffire_journal",
+    "location": "text",
+    "state": "published"
+  },
+  {
+    "id": "F4",
+    "text": "Steady flame size was affected by oxygen concentration and flow velocity.",
+    "source_id": "saffire_i_v",
+    "location": "text",
+    "state": "published"
+  }
+]

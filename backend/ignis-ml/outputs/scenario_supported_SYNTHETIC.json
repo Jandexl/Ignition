@@ -1,0 +1,15 @@
+{
+  "flow_velocity_cm_s": 5.0,
+  "oxygen_percent": 20.0,
+  "pressure_kpa": 90.0,
+  "sample_width_cm": 2.0,
+  "sample_length_cm": 30.0,
+  "sample_thickness_mm": 0.3,
+  "duct_height_cm": 10.0,
+  "material": "synthetic_fabric",
+  "flow_direction": "opposed",
+  "gravity_regime": "synthetic_microgravity",
+  "combustion_regime": "synthetic_steady_solid_spread",
+  "geometry_definition_id": "SYN-GEOMETRY-v1",
+  "geometry_status": "synthetic"
+}

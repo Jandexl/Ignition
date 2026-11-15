@@ -1,0 +1,270 @@
+{
+  "collection": {
+    "investigations_total": 24,
+    "size_note": "about 12 TB",
+    "source_id": "brief"
+  },
+  "moon_base": {
+    "o2_pct_min": 30,
+    "pressure_kpa_max": 70.3,
+    "pressure_psi_max": 10.2,
+    "source_id": "brief"
+  },
+  "updated": "2026-11-15",
+  "note": "Seed data typed by the front-end team from the cited papers. Replace or extend with the data team's files.",
+  "figure10": [
+    {
+      "id": "BASS_F10_CC2_01",
+      "series": "BASS · 2 cm · concurrent",
+      "flow": -23.1,
+      "rate": 0.529,
+      "direction": "concurrent",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "BASS_F10_CC2_02",
+      "series": "BASS · 2 cm · concurrent",
+      "flow": -10.1,
+      "rate": 0.289,
+      "direction": "concurrent",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "BASS_F10_CC2_03",
+      "series": "BASS · 2 cm · concurrent",
+      "flow": -5.0,
+      "rate": 0.187,
+      "direction": "concurrent",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "BASS_F10_CC2_04",
+      "series": "BASS · 2 cm · concurrent",
+      "flow": -3.8,
+      "rate": 0.137,
+      "direction": "concurrent",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "BASS_F10_CC2_05",
+      "series": "BASS · 2 cm · concurrent",
+      "flow": -2.2,
+      "rate": 0.116,
+      "direction": "concurrent",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "BASS_F10_CC1_01",
+      "series": "BASS · 1 cm · concurrent",
+      "flow": -19.1,
+      "rate": 0.314,
+      "direction": "concurrent",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "BASS_F10_CC1_02",
+      "series": "BASS · 1 cm · concurrent",
+      "flow": -11.0,
+      "rate": 0.21,
+      "direction": "concurrent",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "BASS_F10_OF2_01",
+      "series": "BASS · 2 cm · opposed",
+      "flow": 0.9,
+      "rate": 0.057,
+      "direction": "opposed",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "BASS_F10_OF2_02",
+      "series": "BASS · 2 cm · opposed",
+      "flow": 1.6,
+      "rate": 0.087,
+      "direction": "opposed",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "BASS_F10_OF2_03",
+      "series": "BASS · 2 cm · opposed",
+      "flow": 3.2,
+      "rate": 0.1,
+      "direction": "opposed",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "BASS_F10_OF2_04",
+      "series": "BASS · 2 cm · opposed",
+      "flow": 6.1,
+      "rate": 0.114,
+      "direction": "opposed",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "BASS_F10_OF2_05",
+      "series": "BASS · 2 cm · opposed",
+      "flow": 8.8,
+      "rate": 0.143,
+      "direction": "opposed",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "BASS_F10_OF2_06",
+      "series": "BASS · 2 cm · opposed",
+      "flow": 10.1,
+      "rate": 0.151,
+      "direction": "opposed",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "BASS_F10_OF2_07",
+      "series": "BASS · 2 cm · opposed",
+      "flow": 9.4,
+      "rate": 0.114,
+      "direction": "opposed",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "BASS_F10_OF2_08",
+      "series": "BASS · 2 cm · opposed",
+      "flow": 19.8,
+      "rate": 0.159,
+      "direction": "opposed",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "BASS_F10_OF2_09",
+      "series": "BASS · 2 cm · opposed",
+      "flow": 46.8,
+      "rate": 0.116,
+      "direction": "opposed",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "SAFFIRE_I_III_F10_01",
+      "series": "Saffire I & III pooled · 40 cm",
+      "flow": -25.0,
+      "rate": 0.23,
+      "direction": "concurrent",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "SAFFIRE_I_III_F10_02",
+      "series": "Saffire I & III pooled · 40 cm",
+      "flow": -20.0,
+      "rate": 0.175,
+      "direction": "concurrent",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "SAFFIRE_I_III_F10_03",
+      "series": "Saffire I & III pooled · 40 cm",
+      "flow": 19.8,
+      "rate": 0.124,
+      "direction": "opposed",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "SAFFIRE_I_III_F10_04",
+      "series": "Saffire I & III pooled · 40 cm",
+      "flow": 25.0,
+      "rate": 0.094,
+      "direction": "opposed",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "SAFFIRE_II_F10_01",
+      "series": "Saffire II · 5 cm",
+      "flow": -25.0,
+      "rate": 0.259,
+      "direction": "concurrent",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "SAFFIRE_II_F10_02",
+      "series": "Saffire II · 5 cm",
+      "flow": -20.0,
+      "rate": 0.21,
+      "direction": "concurrent",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    },
+    {
+      "id": "SAFFIRE_IV_F10_01",
+      "series": "Saffire IV · 40 cm",
+      "flow": -18.9,
+      "rate": 0.368,
+      "direction": "concurrent",
+      "source_id": "saffire_i_v",
+      "location": "Figure 10, printed p. 8",
+      "flow_reading_envelope": 1.1,
+      "rate_reading_envelope": 0.01
+    }
+  ]
+}

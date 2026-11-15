@@ -1,0 +1,25 @@
+[
+  {
+    "id": "SR-saffire1-avg",
+    "run_id": "I-1",
+    "investigation_id": "saffire_1",
+    "series": "Saffire-I, 41 cm wide, concurrent",
+    "material": "SIBAL",
+    "sample_width_cm": 41,
+    "flow_direction": "concurrent",
+    "o2_pct": 21,
+    "pressure_kpa": 100,
+    "airflow_cm_s": 20,
+    "gravity": "micro",
+    "rate_mm_s": 1.8,
+    "uncertainty_mm_s": null,
+    "duration_s": 420,
+    "kind": "average over burn",
+    "provenance": {
+      "source_id": "saffire_slides",
+      "location": "slides, Saffire-I results",
+      "method": "text",
+      "checks": 1
+    }
+  }
+]

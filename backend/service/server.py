@@ -1,0 +1,192 @@
+#!/usr/bin/env python3
+"""1gnition API server (standard library only, plus the ignis_ml package).
+
+    python3 backend/server.py --frontend ../frontend --port 8787
+
+Serves the static site and a small JSON API:
+
+  GET  /api/health                 status, package version, data build hash
+  GET  /api/<collection>           any data/<collection>.json (DATA_MODE "api" in js/config.js)
+  POST /api/compare                {"baseline": "I-1", "comparison": "II-5"}
+                                   deterministic descriptive comparison of two Olson Table 1 records
+  POST /api/predict                scenario per ignis-ml/docs/request.schema.json
+                                   returns ignis_ml.prediction.predict(..., bundle=None): never a number.
+                                   Validated against response.schema.json before it is sent.
+
+No model bundle is ever loaded, so this server cannot return a NASA prediction.
+There is no authentication: run it for demos and local integration, behind a
+proper gateway if exposed publicly. CORS origins: IGNITION_CORS_ORIGINS
+(comma-separated, default "*"). POST rate limit: 60 requests per minute per IP.
+"""
+import argparse
+import json
+import mimetypes
+import os
+import sys
+import threading
+import time
+from http import HTTPStatus
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from urllib.parse import urlparse
+
+HERE = Path(__file__).resolve().parent
+PKG = HERE.parent / "ignis-ml"
+sys.path.insert(0, str(PKG / "src"))
+sys.path.insert(0, str(HERE))
+
+import jsonschema  # noqa: E402
+import evidence  # noqa: E402
+from ignis_ml import __version__  # noqa: E402
+from ignis_ml.prediction import predict  # noqa: E402
+
+RESPONSE_SCHEMA = json.loads((PKG / "docs" / "response.schema.json").read_text())
+MAX_BODY = 16 * 1024
+RATE = 60
+COLLECTION_OK = set("abcdefghijklmnopqrstuvwxyz_")
+
+
+class State:
+    def __init__(self, frontend):
+        self.frontend = Path(frontend).resolve()
+        self.data = self.frontend / "data"
+        self.lock = threading.Lock()
+        self.hits = {}
+        self.origins = [o.strip() for o in os.environ.get("IGNITION_CORS_ORIGINS", "*").split(",") if o.strip()]
+
+    def sci(self):
+        return evidence.load_json(self.data / "scientific_comparisons.json")
+
+    def allow(self, ip):
+        now = time.time()
+        with self.lock:
+            q = [t for t in self.hits.get(ip, []) if now - t < 60]
+            if len(q) >= RATE:
+                self.hits[ip] = q
+                return False
+            q.append(now)
+            self.hits[ip] = q
+            return True
+
+
+def make_handler(state):
+    class H(SimpleHTTPRequestHandler):
+        server_version = "1gnition"
+        sys_version = ""
+
+        def __init__(self, *a, **kw):
+            super().__init__(*a, directory=str(state.frontend), **kw)
+
+        def log_message(self, fmt, *args):
+            if os.environ.get("IGNITION_QUIET") != "1":
+                super().log_message(fmt, *args)
+
+        # ---- helpers
+        def _cors(self):
+            origin = self.headers.get("Origin")
+            if "*" in state.origins:
+                self.send_header("Access-Control-Allow-Origin", "*")
+            elif origin and origin in state.origins:
+                self.send_header("Access-Control-Allow-Origin", origin)
+                self.send_header("Vary", "Origin")
+
+        def end_headers(self):
+            self.send_header("X-Content-Type-Options", "nosniff")
+            self.send_header("Referrer-Policy", "no-referrer")
+            super().end_headers()
+
+        def _json(self, code, obj):
+            body = json.dumps(obj, ensure_ascii=False, allow_nan=False).encode()
+            self.send_response(code)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
+            self.send_header("Cache-Control", "no-store")
+            self._cors()
+            self.end_headers()
+            self.wfile.write(body)
+
+        def _body(self):
+            n = int(self.headers.get("Content-Length") or 0)
+            if n <= 0:
+                raise ValueError("Empty request body")
+            if n > MAX_BODY:
+                raise OverflowError("Request body too large")
+            if "application/json" not in (self.headers.get("Content-Type") or ""):
+                raise ValueError("Content-Type must be application/json")
+            return json.loads(self.rfile.read(n).decode("utf-8"))
+
+        # ---- verbs
+        def do_OPTIONS(self):
+            self.send_response(HTTPStatus.NO_CONTENT)
+            self._cors()
+            self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+            self.send_header("Access-Control-Allow-Headers", "Content-Type")
+            self.send_header("Access-Control-Max-Age", "600")
+            self.end_headers()
+
+        def do_GET(self):
+            path = urlparse(self.path).path
+            if not path.startswith("/api/"):
+                return super().do_GET()
+            name = path[len("/api/"):].strip("/")
+            if name == "health":
+                man = state.data / "build_manifest.json"
+                return self._json(200, dict(status="ok", service="1gnition", ignis_ml_version=__version__,
+                                            data_build=evidence.load_json(man) if man.exists() else None,
+                                            prediction_status=state.sci()["prediction_status"]))
+            if not name or not set(name) <= COLLECTION_OK:
+                return self._json(404, dict(error="Unknown endpoint"))
+            f = state.data / f"{name}.json"
+            if not f.exists():
+                return self._json(404, dict(error=f"No collection '{name}'"))
+            return self._json(200, evidence.load_json(f))
+
+        def do_POST(self):
+            path = urlparse(self.path).path
+            if path not in ("/api/compare", "/api/predict"):
+                return self._json(404, dict(error="Unknown endpoint"))
+            if not state.allow(self.client_address[0]):
+                return self._json(429, dict(error="Rate limit: 60 requests per minute"))
+            try:
+                body = self._body()
+            except OverflowError as e:
+                return self._json(413, dict(error=str(e)))
+            except (ValueError, UnicodeDecodeError) as e:
+                return self._json(400, dict(status="INPUT_ERROR", error=str(e).split("\n")[0]))
+            if path == "/api/compare":
+                if not isinstance(body, dict) or not isinstance(body.get("baseline"), str) or not isinstance(body.get("comparison"), str):
+                    return self._json(400, dict(status="INPUT_ERROR", error="Send {\"baseline\": id, \"comparison\": id}"))
+                try:
+                    return self._json(200, evidence.compare_records(state.sci(), body["baseline"], body["comparison"]))
+                except (KeyError, ValueError) as e:
+                    return self._json(400, dict(status="INPUT_ERROR", error=str(e).strip("'")))
+            # /api/predict: never loads a bundle, so the answer is LIMITED_EVIDENCE or UNSUPPORTED with a null number
+            ev = evidence.table1_evidence_frame(state.sci())
+            resp = predict(body, bundle=None, evidence=ev)
+            try:
+                jsonschema.validate(resp, RESPONSE_SCHEMA)
+            except jsonschema.ValidationError as e:
+                return self._json(500, dict(error="Response failed schema validation", detail=str(e).split("\n")[0]))
+            if resp["predicted_flame_spread_rate_cm_s"] is not None:  # belt and braces
+                return self._json(500, dict(error="Refusing to return a numeric NASA prediction"))
+            return self._json(200, resp)
+
+    return H
+
+
+def serve(frontend, host="127.0.0.1", port=8787):
+    state = State(frontend)
+    mimetypes.add_type("text/markdown; charset=utf-8", ".md")
+    httpd = ThreadingHTTPServer((host, port), make_handler(state))
+    return httpd
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--frontend", required=True)
+    ap.add_argument("--host", default="127.0.0.1")
+    ap.add_argument("--port", type=int, default=8787)
+    a = ap.parse_args()
+    httpd = serve(a.frontend, a.host, a.port)
+    print(f"1gnition serving {Path(a.frontend).resolve()} on http://{a.host}:{a.port}  (API under /api/)")
+    httpd.serve_forever()

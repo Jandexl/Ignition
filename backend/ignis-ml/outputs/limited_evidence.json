@@ -1,0 +1,22 @@
+{
+  "status": "LIMITED_EVIDENCE",
+  "predicted_flame_spread_rate_cm_s": null,
+  "prediction_units": "cm/s",
+  "model_version": "0.1.0",
+  "model_type": null,
+  "inputs_used": {},
+  "validation_status": "VALIDATION_NOT_SUPPORTED",
+  "model_performance": null,
+  "source_ids": [
+    "SYNTHETIC-GENERATOR"
+  ],
+  "evidence_limitations": [
+    "Relevant records are not a validated model; source IDs may still require reconciliation."
+  ],
+  "out_of_domain_warnings": [],
+  "abstention_reasons": [
+    "No independently evaluated and reviewed active model."
+  ],
+  "synthetic": true,
+  "intended_use": "research_demonstration_only"
+}

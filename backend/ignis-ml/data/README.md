@@ -1,0 +1,1 @@
+Current CSVs are historical starter text snapshots read in full, retained unchanged in measurement content. They are NOT approved modeling data. Later audit findings are documented in docs/DATA_COMPATIBILITY.md. Synthetic files are generated fixtures; never merge them with experimental records. Do not edit raw source records to make validation pass.

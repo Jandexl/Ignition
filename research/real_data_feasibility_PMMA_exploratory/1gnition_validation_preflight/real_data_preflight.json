@@ -1,0 +1,253 @@
+{
+  "study": "1gnition real-data predictive validation feasibility and preliminary within-PMMA group-holdout benchmark",
+  "status": "EXPLORATORY_NOT_VALIDATED",
+  "source_audit": {
+    "SIBAL_olson_published_rows": 7,
+    "SIBAL_unique_groups_by_flight": 5,
+    "SIBAL_records_approved_for_ML": 0,
+    "SIBAL_factorial_historical_analogs": {
+      "narrow_deep": {
+        "count": 2,
+        "records": [
+          "II-5",
+          "II-6"
+        ]
+      },
+      "wide_deep": {
+        "count": 2,
+        "records": [
+          "I-1",
+          "III-1"
+        ]
+      },
+      "narrow_shallow": {
+        "count": 0,
+        "records": []
+      },
+      "wide_shallow": {
+        "count": 1,
+        "records": [
+          "IV-SIBAL"
+        ]
+      }
+    },
+    "PMMA_published_flow_step_rows_with_rate": 39,
+    "PMMA_named_test_groups_with_rate": 18,
+    "PMMA_missing_step_specific_oxygen_rows": 39,
+    "PMMA_missing_stage_specific_pressure_rows": 39,
+    "PMMA_flame_direction_categories": [
+      "opposed"
+    ],
+    "PMMA_approx_independent_grouping": "test_id is provisional as independent-burn identifier; original NASA run logs not reverified",
+    "PMMA_source": "NASA/TM-20210011385 Table 5.1, through the team's unverified transcription"
+  },
+  "exploratory_holdout": {
+    "description": "5-fold GroupKFold by PMMA test_id, fixed alpha=1.0, no target-based feature selection or test-group tuning",
+    "models": {
+      "mean_only": "Dummy mean on training groups",
+      "flow_only_ridge": "Ridge with only stage airflow",
+      "flow_plus_geometry_ridge": "Ridge with stage airflow, specimen width, thickness and burning sides; NOT canonical M2"
+    },
+    "results": {
+      "mean_only": {
+        "MAE_cm_s": 0.0024153,
+        "RMSE_cm_s": 0.0032303,
+        "folds": [
+          {
+            "fold": 1,
+            "train_group_count": 15,
+            "held_out_groups": [
+              "M18",
+              "M4",
+              "M7"
+            ],
+            "held_out_rows": 8
+          },
+          {
+            "fold": 2,
+            "train_group_count": 14,
+            "held_out_groups": [
+              "M11",
+              "M5",
+              "M8",
+              "M9"
+            ],
+            "held_out_rows": 8
+          },
+          {
+            "fold": 3,
+            "train_group_count": 14,
+            "held_out_groups": [
+              "M13",
+              "M15",
+              "M17",
+              "M20"
+            ],
+            "held_out_rows": 8
+          },
+          {
+            "fold": 4,
+            "train_group_count": 14,
+            "held_out_groups": [
+              "M1",
+              "M14",
+              "M19",
+              "M2"
+            ],
+            "held_out_rows": 8
+          },
+          {
+            "fold": 5,
+            "train_group_count": 15,
+            "held_out_groups": [
+              "M10",
+              "M16",
+              "M3"
+            ],
+            "held_out_rows": 7
+          }
+        ]
+      },
+      "flow_only_ridge": {
+        "MAE_cm_s": 0.0027059,
+        "RMSE_cm_s": 0.0033602,
+        "folds": [
+          {
+            "fold": 1,
+            "train_group_count": 15,
+            "held_out_groups": [
+              "M18",
+              "M4",
+              "M7"
+            ],
+            "held_out_rows": 8
+          },
+          {
+            "fold": 2,
+            "train_group_count": 14,
+            "held_out_groups": [
+              "M11",
+              "M5",
+              "M8",
+              "M9"
+            ],
+            "held_out_rows": 8
+          },
+          {
+            "fold": 3,
+            "train_group_count": 14,
+            "held_out_groups": [
+              "M13",
+              "M15",
+              "M17",
+              "M20"
+            ],
+            "held_out_rows": 8
+          },
+          {
+            "fold": 4,
+            "train_group_count": 14,
+            "held_out_groups": [
+              "M1",
+              "M14",
+              "M19",
+              "M2"
+            ],
+            "held_out_rows": 8
+          },
+          {
+            "fold": 5,
+            "train_group_count": 15,
+            "held_out_groups": [
+              "M10",
+              "M16",
+              "M3"
+            ],
+            "held_out_rows": 7
+          }
+        ]
+      },
+      "flow_plus_geometry_ridge": {
+        "MAE_cm_s": 0.0022923,
+        "RMSE_cm_s": 0.0029036,
+        "folds": [
+          {
+            "fold": 1,
+            "train_group_count": 15,
+            "held_out_groups": [
+              "M18",
+              "M4",
+              "M7"
+            ],
+            "held_out_rows": 8
+          },
+          {
+            "fold": 2,
+            "train_group_count": 14,
+            "held_out_groups": [
+              "M11",
+              "M5",
+              "M8",
+              "M9"
+            ],
+            "held_out_rows": 8
+          },
+          {
+            "fold": 3,
+            "train_group_count": 14,
+            "held_out_groups": [
+              "M13",
+              "M15",
+              "M17",
+              "M20"
+            ],
+            "held_out_rows": 8
+          },
+          {
+            "fold": 4,
+            "train_group_count": 14,
+            "held_out_groups": [
+              "M1",
+              "M14",
+              "M19",
+              "M2"
+            ],
+            "held_out_rows": 8
+          },
+          {
+            "fold": 5,
+            "train_group_count": 15,
+            "held_out_groups": [
+              "M10",
+              "M16",
+              "M3"
+            ],
+            "held_out_rows": 7
+          }
+        ]
+      }
+    },
+    "posthoc_mean_MAE_reduction_vs_mean_baseline_cm_s": 0.000123,
+    "posthoc_group_bootstrap_95pct_interval_cm_s": [
+      -0.0006595,
+      0.0009005
+    ],
+    "limitations": [
+      "Published rates have not been checked against original NASA raw flame-tracking data",
+      "Test IDs are assumed independent; raw burn logs have not been verified",
+      "Step-specific oxygen is missing for all 39 rows; initial/final readings are not substitutes",
+      "Pressure at each step absent from this transcription",
+      "Only PMMA opposed-flow BASS-II experiments; no SIBAL or Saffire target domain",
+      "Not original M1/M2, not cross-scale, not NASA qualified accuracy or prediction software",
+      "Small cohort with possible per-test material, thickness and geometry confounding",
+      "Test-fold results are a diagnostic only, not an approved deployment predictor"
+    ]
+  },
+  "next_evidence": [
+    "Independent qualified experiments at all four widths/heights with matched controls and replicates",
+    "Flight/sample/run IDs, independent burn and exposure grouping",
+    "Stage-level oxygen, pressure, geometry, airflow calibration and instrument uncertainty",
+    "Complete standardized source provenance and documented exclusions",
+    "Campaign-held-out cross-scale evaluation with frozen model comparison and uncertainty budget"
+  ]
+}

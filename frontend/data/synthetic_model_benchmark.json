@@ -1,0 +1,43 @@
+{
+  "evidence_class": "synthetic",
+  "synthetic": true,
+  "is_nasa_data": false,
+  "label": "SOFTWARE BENCHMARK ON SYNTHETIC DATA, NOT NASA ACCURACY",
+  "note": "72 invented observations in 12 invented groups. The generator includes a width effect on purpose, so the geometry-aware model is expected to win.",
+  "models": {
+    "mean": {
+      "mae_cm_s": 0.0402994445244352,
+      "rmse_cm_s": 0.05040488085804267,
+      "features": [],
+      "n_test_observations": 72,
+      "n_independent_test_groups": 12
+    },
+    "condition_ridge": {
+      "mae_cm_s": 0.02399537174119306,
+      "rmse_cm_s": 0.028076741234942117,
+      "features": [
+        "flow_velocity_cm_s",
+        "oxygen_percent",
+        "pressure_kpa",
+        "material",
+        "flow_direction"
+      ],
+      "n_test_observations": 72,
+      "n_independent_test_groups": 12
+    },
+    "geometry_ridge": {
+      "mae_cm_s": 0.002588727836721367,
+      "rmse_cm_s": 0.0032455796744743945,
+      "features": [
+        "flow_velocity_cm_s",
+        "oxygen_percent",
+        "pressure_kpa",
+        "sample_width_cm",
+        "material",
+        "flow_direction"
+      ],
+      "n_test_observations": 72,
+      "n_independent_test_groups": 12
+    }
+  }
+}

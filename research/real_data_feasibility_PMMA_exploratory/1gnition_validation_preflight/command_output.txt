@@ -1,0 +1,56 @@
+{
+  "source_audit": {
+    "SIBAL_olson_published_rows": 7,
+    "SIBAL_unique_groups_by_flight": 5,
+    "SIBAL_records_approved_for_ML": 0,
+    "SIBAL_factorial_historical_analogs": {
+      "narrow_deep": {
+        "count": 2,
+        "records": [
+          "II-5",
+          "II-6"
+        ]
+      },
+      "wide_deep": {
+        "count": 2,
+        "records": [
+          "I-1",
+          "III-1"
+        ]
+      },
+      "narrow_shallow": {
+        "count": 0,
+        "records": []
+      },
+      "wide_shallow": {
+        "count": 1,
+        "records": [
+          "IV-SIBAL"
+        ]
+      }
+    },
+    "PMMA_published_flow_step_rows_with_rate": 39,
+    "PMMA_named_test_groups_with_rate": 18,
+    "PMMA_missing_step_specific_oxygen_rows": 39,
+    "PMMA_missing_stage_specific_pressure_rows": 39,
+    "PMMA_flame_direction_categories": [
+      "opposed"
+    ],
+    "PMMA_approx_independent_grouping": "test_id is provisional as independent-burn identifier; original NASA run logs not reverified",
+    "PMMA_source": "NASA/TM-20210011385 Table 5.1, through the team's unverified transcription"
+  },
+  "metrics": {
+    "mean_only": {
+      "MAE_cm_s": 0.0024153,
+      "RMSE_cm_s": 0.0032303
+    },
+    "flow_only_ridge": {
+      "MAE_cm_s": 0.0027059,
+      "RMSE_cm_s": 0.0033602
+    },
+    "flow_plus_geometry_ridge": {
+      "MAE_cm_s": 0.0022923,
+      "RMSE_cm_s": 0.0029036
+    }
+  }
+}

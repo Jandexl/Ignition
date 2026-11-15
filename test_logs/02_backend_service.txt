@@ -1,0 +1,25 @@
+test_acceptance_checks_all_pass (test_backend.Adapter.test_acceptance_checks_all_pass) ... ok
+test_adhoc_pair_matches_package_arithmetic (test_backend.Adapter.test_adhoc_pair_matches_package_arithmetic) ... ok
+test_catalog_classes_and_no_double_counting (test_backend.Adapter.test_catalog_classes_and_no_double_counting) ... ok
+test_closeout_conflicts_and_brand (test_backend.Adapter.test_closeout_conflicts_and_brand) ... ok
+test_cotton_pair_warns_about_fuel (test_backend.Adapter.test_cotton_pair_warns_about_fuel) ... ok
+test_frontend_data_matches_build_manifest (test_backend.Adapter.test_frontend_data_matches_build_manifest) ... ok
+test_no_hardcoded_conflicts_in_frontend (test_backend.Adapter.test_no_hardcoded_conflicts_in_frontend) ... ok
+test_null_stays_null (test_backend.Adapter.test_null_stays_null) ... ok
+test_reviewed_case_returned_unchanged (test_backend.Adapter.test_reviewed_case_returned_unchanged) ... ok
+test_unknown_and_same_ids_refused (test_backend.Adapter.test_unknown_and_same_ids_refused) ... ok
+test_body_too_large (test_backend.Api.test_body_too_large) ... ok
+test_collections_match_files (test_backend.Api.test_collections_match_files) ... ok
+test_compare_endpoint (test_backend.Api.test_compare_endpoint) ... ok
+test_health (test_backend.Api.test_health) ... ok
+test_path_traversal_refused (test_backend.Api.test_path_traversal_refused) ... ok
+test_predict_invalid_scenario_abstains (test_backend.Api.test_predict_invalid_scenario_abstains) ... ok
+test_predict_matching_evidence_is_limited_and_null (test_backend.Api.test_predict_matching_evidence_is_limited_and_null) ... ok
+test_predict_unmatched_material_unsupported (test_backend.Api.test_predict_unmatched_material_unsupported) ... ok
+test_predict_wrong_content_type (test_backend.Api.test_predict_wrong_content_type) ... ok
+test_static_site_served (test_backend.Api.test_static_site_served) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.582s
+
+OK

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1gnition · Know What the Evidence Supports</title>
+<meta name="description" content="1gnition ranks, compares and audits NASA microgravity combustion evidence for a spacecraft or Moon-base fire scenario, and marks where the data runs out.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Unbounded:wght@500;600;700&family=Sora:wght@400;500;600&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/story.css">
+<link rel="icon" type="image/png" href="img/favicon-1gnition.png">
+<link rel="apple-touch-icon" href="img/logo-1gnition-256.png">
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="logo" href="#overview" aria-label="1gnition home">
+      <img class="logo-mark" src="img/logo-1gnition-128.png" alt="" width="36" height="36">
+      <span class="logo-word">1gnition</span>
+    </a>
+    <nav class="nav" aria-label="Views">
+      <a href="#overview" data-nav="overview">Overview</a>
+      <a href="#evidence" data-nav="evidence">Evidence</a>
+      <a href="#compare" data-nav="compare">Compare runs</a>
+      <a href="#transfer" data-nav="transfer">Scale transfer</a>
+      <a href="#gaps" data-nav="gaps">Research gaps</a>
+      <a href="#data" data-nav="data">Data</a>
+    </nav>
+    <div class="top-act">
+      <button class="btn btn-ghost btn-sm menu-btn" type="button" id="menuBtn" aria-expanded="false" aria-label="Menu">Menu</button>
+      <button class="btn btn-ghost btn-sm hide-sm" type="button" id="askBtn">Ask 1gnition</button>
+      <button class="btn btn-primary btn-sm" type="button" data-tour-start>Guided demo</button>
+    </div>
+  </div>
+</header>
+
+<!-- ======================= OVERVIEW ======================= -->
+<div class="view landing story" id="v-overview">
+
+  <!-- HERO -->
+  <section class="hx" id="hero">
+    <div class="hx-photo" id="heroPhoto" aria-hidden="true"><img src="img/hero-sunrise.jpg" alt="" fetchpriority="high"></div>
+    <div class="hx-shade" aria-hidden="true"></div>
+    <div class="hx-copy">
+      <p class="hx-date">NASA Space Apps 2026 · Flame in Freefall</p>
+      <h1 class="display hero-zero"><span class="z" id="heroL1">ZERO GUESSING.</span><span class="z" id="heroL2">ZERO HIDDEN UNCERTAINTY.</span><span class="brand-x hero-name" id="heroName">1gnition</span></h1>
+      <p class="hx-tag" id="heroTag">Know What the Evidence Supports.</p>
+      <p class="lede">Describe a habitat. 1gnition finds the microgravity combustion runs that bear on it, checks which comparisons are fair, and marks where the evidence runs out instead of guessing.</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary btn-lg" type="button" data-tour-start>Start the guided demo</button>
+        <a class="btn btn-ghost btn-lg" href="#evidence">Open the explorer</a>
+      </div>
+      <p class="hero-note"><span id="heroNote"></span></p>
+      <p class="hero-qual" id="heroQual">We separate published measurements, scientific interpretation, synthetic verification, and unvalidated predictions. Unknowns and source conflicts are shown explicitly.</p>
+    </div>
+    <div class="hx-stage">
+      <figure class="hero-viz float-card" id="floatCard" style="margin:0">
+        <div class="vhead">
+          <h2>Every indexed run, against the Moon-base atmosphere</h2>
+          <span class="state s-pub">Published observation</span>
+        </div>
+        <div id="heroMap"></div>
+        <figcaption class="vfoot" id="heroCap"></figcaption>
+      </figure>
+    </div>
+    <p class="ph-credit hx-credit" data-credit="hero"></p>
+    <button class="hx-scroll" type="button" id="scrollCue" aria-label="Scroll to the story"><span></span></button>
+  </section>
+
+  <!-- TWO FLAMES -->
+  <section class="sx" id="flames">
+    <div class="sx-head" data-rv>
+      <h2 class="display-2">On Earth, hot gas rises and drags fresh air into the flame. <em>In orbit, nothing rises.</em></h2>
+      <p>Without buoyancy, a flame loses its teardrop shape and feeds only on slow diffusion or on whatever airflow the cabin fans supply. That is why NASA had to fly its fire experiments, and why Earth fire-safety tests don't transfer directly to a spacecraft or a Moon base.</p>
+    </div>
+    <div class="flames">
+      <figure class="flame-card" data-rv>
+        <div class="flame-art"><img src="img/flame-earth.jpg" alt="Photo of a candle flame on Earth: a tall yellow teardrop"></div>
+        <figcaption><b>Earth, 1 g</b><span>Hot gas rises and pulls fresh air in from below. The flame stretches tall, bright and yellow with soot.</span></figcaption>
+      </figure>
+      <figure class="flame-card" data-rv>
+        <div class="flame-art"><img src="img/flame-micro.jpg" alt="Photo of a candle flame in microgravity: a small blue dome"></div>
+        <figcaption><b>Microgravity</b><span>Nothing rises, so the flame sits in a dim blue dome and feeds on slow diffusion or cabin airflow.</span></figcaption>
+      </figure>
+    </div>
+    <p class="ph-credit illus-note" data-rv data-credit="flames"></p>
+  </section>
+
+  <!-- FLIGHT PHOTOS -->
+  <section class="plate" id="flight">
+    <figure class="plate-main" data-rv>
+      <img src="img/saffire-iv-acrylic.jpg" alt="Flight photo: a sheet of acrylic burning in orbit inside Saffire-IV, with bright orange flame balls along its edge" loading="lazy">
+      <div class="plate-copy">
+        <h2 class="display-2">So NASA lit real fires in orbit, <em>on purpose.</em></h2>
+        <p>The Saffire experiments burned full-size samples inside uncrewed Cygnus cargo ships after they left the station. Their cameras and sensors produced the measurements 1gnition indexes.</p>
+      </div>
+      <figcaption class="ph-credit" data-credit="acrylic"></figcaption>
+    </figure>
+    <figure class="plate-side" data-rv>
+      <img src="img/saffire-iv-fabric.jpg" alt="Flight photo: cotton-fiberglass fabric burning in Saffire-IV under green LED light, the orange flame front moving left to right" loading="lazy">
+      <figcaption><b>The same fabric 1gnition tracks.</b> Cotton-fiberglass, 40 cm wide, burning in Saffire-IV. The orange band is the flame front. Green is the LED lighting.<span class="ph-credit" data-credit="fabric"></span></figcaption>
+    </figure>
+  </section>
+
+  <!-- STICKY BURN -->
+  <section class="burn" id="burn">
+    <div class="burn-stage">
+      <div class="burn-copy">
+        <div class="burn-step" data-bs="0"><h2 class="display-2">Saffire-I, 2016.</h2><p>After leaving the ISS, an uncrewed Cygnus cargo ship lit a sheet of cotton-fiberglass fabric <b id="bsLen"></b> long and <b id="bsWid"></b> wide. It was the largest fire NASA had ever burned in orbit.</p></div>
+        <div class="burn-step" data-bs="1"><h2 class="display-2">Air pushed the flame along.</h2><p>Fans drove air along the sample at <b id="bsAir"></b>, the same way the flame spread. The flame held a steady length of about <b id="bsSize"></b>.</p></div>
+        <div class="burn-step" data-bs="2"><h2 class="display-2"><span id="bsRate"></span> for <span id="bsDur"></span>.</h2><p>That published average moved the front <b id="bsDist"></b> along the sample. Scroll to replay it. Tap any underlined number to see its source.</p></div>
+      </div>
+      <div class="burn-viz">
+        <div id="burnSvg"></div>
+        <div class="burn-read">
+          <div><span>Time</span><b class="num" id="brT">0 s</b></div>
+          <div><span>Front position</span><b class="num" id="brX">0.0 cm</b></div>
+          <div><span>Sample burned</span><b class="num" id="brP">0%</b></div>
+          <div class="burn-bar"><i id="brBar"></i></div>
+        </div>
+        <p class="tiny muted burn-note">Drawn to scale at the published average rate. The real front sped up and slowed down. This replays a reported number, not a simulation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- I-1 REVEAL -->
+  <section class="sx reveal" id="revealSx">
+    <div class="reveal-in">
+      <div class="sx-head" data-rv>
+        <h2 class="display-2">We almost proposed a test <em>NASA had already flown.</em></h2>
+        <p>Does a bigger sample burn differently? Saffire flights covered three cells of this grid. The fourth looked empty, so the obvious next step was to propose it. 1gnition searches the index first.</p>
+      </div>
+      <div class="rgrid" id="rgrid" data-rv></div>
+      <div class="reveal-out" id="revealOut"></div>
+    </div>
+  </section>
+
+  <!-- DATA BENTO -->
+  <section class="sx" id="dataSx">
+    <div class="sx-head" data-rv>
+      <h2 class="display-2">Built on records you can open, <em>not on a model.</em></h2>
+      <p>Every number in 1gnition comes from a row in the project data files, with its source, page and read method. The counts below are read live from those files.</p>
+    </div>
+    <div class="bento" id="bento"></div>
+  </section>
+
+  <!-- SCENARIOS -->
+  <section class="sx" id="scenesSx">
+    <div class="sx-head" data-rv>
+      <h2 class="display-2">Pick where you're building. <em>The evidence changes with it.</em></h2>
+      <p>Each place has its own gravity and cabin air. 1gnition checks every indexed run against them, using a tolerance of ±1 point of oxygen and ±5 kPa of pressure.</p>
+    </div>
+    <div class="scenes" id="scenes"></div>
+  </section>
+
+  <!-- PIPELINE -->
+  <section class="sx" id="howSx">
+    <div class="sx-head" data-rv>
+      <h2 class="display-2">How 1gnition decides</h2>
+      <p>Rules do the matching and ranking. Every claim carries one of four result states, and the AI only explains what the records say.</p>
+    </div>
+    <ol class="pipe" id="pipe" data-rv>
+      <li><span class="pn"></span><h3>Your scenario</h3><p>Material, oxygen, pressure, gravity, airflow. Blank fields stay blank.</p></li>
+      <li><span class="pn"></span><h3>Two scores, kept apart</h3><p>Scientific relevance and environmental similarity, with stated tolerances.</p></li>
+      <li><span class="pn"></span><h3>Fair-comparison check</h3><p>A pair that changes several conditions at once is never credited to one of them.</p></li>
+      <li><span class="pn"></span><h3>A labeled answer</h3><div class="legend-col"><span class="state s-pub">Published observation</span><span class="state s-expl">Exploratory comparison</span><span class="state s-eval">Independently evaluated prediction</span><span class="state s-insuf">Insufficient evidence</span></div></li>
+    </ol>
+  </section>
+
+  <!-- QUESTIONS -->
+  <section class="sx">
+    <div class="sx-head" data-rv>
+      <h2 class="display-2">Three questions raw data can't answer on its own</h2>
+      <p>PSI stores the experiments. 1gnition turns them into answers that show their own evidence.</p>
+    </div>
+    <div class="qgrid" id="qgrid" data-rv></div>
+  </section>
+
+  <!-- INCIDENTS -->
+  <section class="sx">
+    <div class="sx-head" data-rv>
+      <h2 class="display-2">Why it matters</h2>
+      <p>Spacecraft fires are rare, fast and hard to test. Start from a real incident and see what the data can say about it.</p>
+    </div>
+    <div class="incidents" id="incidents" data-rv></div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-x">
+    <div class="cta-photo" aria-hidden="true"><img src="img/earth-night.jpg" alt=""></div>
+    <h2 class="display">See what the evidence supports for your habitat.</h2>
+    <div class="hero-cta" style="justify-content:center">
+      <a class="btn btn-primary btn-lg" href="#evidence">Open the explorer</a>
+      <button class="btn btn-ghost btn-lg" type="button" data-tour-start>Start the guided demo</button>
+    </div>
+    <p class="ph-credit" data-credit="night"></p>
+  </section>
+
+  <footer class="foot">
+    <div class="foot-line"><b><span class="brand-x">1gnition</span> — Know What the Evidence Supports.</b></div>
+    <div>1gnition is a student project for NASA Space Apps 2026. It is a research and education tool, not a NASA product and not a fire-safety certification tool. The physical explanations shown are those of the published authors, chiefly Olson et al. (2023) and Urban et al. (2021); 1gnition did not discover confinement effects or run new burns. Its contribution is a traceable workflow for deciding what the evidence supports.</div>
+    <div id="footData"></div>
+    <details class="credits"><summary>Photo credits</summary><ul id="photoCredits"></ul><p>NASA imagery is used under NASA's media usage guidelines. NASA does not endorse this project.</p></details>
+  </footer>
+</div>
+
+<!-- ======================= APP ======================= -->
+<div class="app hide" id="app">
+  <aside class="side" id="side" aria-label="Scenario">
+    <div class="row between">
+      <div style="display:grid;gap:2px"><h2>Your scenario</h2><span class="tiny muted side-sum" id="scnSum"></span></div>
+      <button class="btn btn-quiet btn-sm side-toggle" type="button" id="sideToggle" aria-expanded="true">Hide</button>
+    </div>
+    <div class="side-body">
+      <div class="scn-art" id="scnArt" aria-hidden="true"></div>
+      <div class="seg" role="group" aria-label="Habitat preset" id="presetSeg"></div>
+      <div class="fields">
+        <div class="field full"><label for="fMat">Material</label>
+          <select id="fMat"><option value="SIBAL">SIBAL cotton-fiberglass fabric</option><option value="Cotton">Cotton jersey</option><option value="PMMA">PMMA (acrylic)</option></select></div>
+        <div class="field full"><label for="fOut">Outcome you care about</label>
+          <select id="fOut"><option value="steady_size">Steady flame size (cm)</option><option value="spread_rate">Flame spread rate (mm/s)</option><option value="smoke">Smoke particle size</option><option value="extinction">Extinction or suppression limit</option></select></div>
+        <div class="field"><label for="fO2">Oxygen, %</label><input id="fO2" inputmode="decimal" placeholder="not set"></div>
+        <div class="field"><label for="fP">Pressure, kPa</label><input id="fP" inputmode="decimal" placeholder="not set"></div>
+        <div class="field full"><label for="fG">Gravity</label>
+          <select id="fG"><option value="micro">Microgravity</option><option value="lunar">Lunar, 0.165 g</option><option value="mars">Mars, 0.38 g</option><option value="earth">Earth, 1 g</option></select></div>
+        <div class="field"><label for="fAir">Airflow, cm/s</label><input id="fAir" inputmode="decimal" placeholder="not set"></div>
+        <div class="field"><label for="fDir"><span class="term" tabindex="0" data-term="flow_direction">Flow direction</span></label>
+          <select id="fDir"><option value="">Not set</option><option value="concurrent">Concurrent</option><option value="opposed">Opposed</option></select></div>
+      </div>
+      <p class="scn-note" id="scnNote"></p>
+      <div style="display:grid;gap:8px"><span class="tiny muted">Start from an incident</span><div class="incs" id="sideInc"></div></div>
+      <div class="side-legend"><span class="tiny muted">Result states</span>
+        <span class="state s-pub">Published observation</span><span class="state s-expl">Exploratory comparison</span><span class="state s-eval">Independently evaluated prediction</span><span class="state s-insuf">Insufficient evidence</span></div>
+    </div>
+  </aside>
+
+  <main class="main" id="main">
+    <!-- EVIDENCE -->
+    <section class="view" id="v-evidence">
+      <div style="display:grid;gap:24px">
+        <div class="vh"><h1>Which investigations bear on this scenario?</h1>
+          <p>Ranked by scientific relevance first, then environmental similarity. The rank describes relevance for retrieval. It is not a safety score.</p>
+          <div class="datastrip" id="evStrip"></div></div>
+        <div class="cover" id="cover"></div>
+        <div class="inv-list" id="invList"></div>
+        <p class="small muted" id="evRule"></p>
+      </div>
+    </section>
+
+    <!-- COMPARE -->
+    <section class="view" id="v-compare">
+      <div style="display:grid;gap:24px">
+        <div class="vh"><h1>Which comparisons between runs are fair?</h1>
+          <p>Pick any two runs. 1gnition lists what matched, what changed and what was never reported, then says what the pair can and cannot support.</p>
+          <div class="datastrip" id="cmpStrip"></div></div>
+        <div class="g2 g2-fill">
+          <div class="card" id="gridCard">
+            <div class="row between"><h2>Steady flame size by sample and airflow</h2><span class="state s-pub">Published observation</span></div>
+            <div class="grid22" id="grid22"></div>
+            <div id="gridNote"></div>
+          </div>
+          <div class="stack">
+          <div class="card" id="pairCard">
+            <div class="pickers">
+              <div class="field"><label for="pA">First run</label><select id="pA"></select></div>
+              <button class="btn btn-ghost btn-sm swap" type="button" id="swapBtn" aria-label="Swap runs">⇄</button>
+              <div class="field"><label for="pB">Second run</label><select id="pB"></select></div>
+            </div>
+            <div class="sizebars" id="sizeBars"></div>
+            <div class="callout" id="finding"></div>
+          </div>
+          <div class="card soft" id="flagsCard"></div>
+          </div>
+        </div>
+        <div class="sect">
+          <div class="row between"><h2 id="cmpTitle"></h2><span id="cmpState"></span></div>
+          <div class="tw"><table class="t" id="cmpTable"></table></div>
+          <div class="ai" id="cmpAI"></div>
+        </div>
+        <div id="cmpOlson" class="cmp-olson"></div>
+        <div id="cmpApply" class="apply-wide"></div>
+      </div>
+    </section>
+
+    <!-- TRANSFER -->
+    <section class="view" id="v-transfer">
+      <div style="display:grid;gap:24px">
+        <div class="vh"><h1>Does a small-sample result carry over to spacecraft scale?</h1>
+          <p>Three published Saffire comparisons from Olson et al. (2023) Table 1, the conditions that changed with each, the experiment that would separate them, and the status of the ML prediction. Every number links to its table row.</p>
+          <div class="datastrip" id="trStrip"></div></div>
+        <div class="stepper" role="tablist" id="stepper"></div>
+        <div class="pane" id="pane-compare" role="tabpanel"></div>
+        <div class="pane" id="pane-synthetic" role="tabpanel"></div>
+        <div class="pane" id="pane-design" role="tabpanel"></div>
+        <div class="pane" id="pane-predict" role="tabpanel"></div>
+        <div class="pane" id="pane-apply" role="tabpanel"></div>
+      </div>
+    </section>
+
+    <!-- GAPS -->
+    <section class="view" id="v-gaps">
+      <div style="display:grid;gap:24px">
+        <div class="vh"><h1>Where does the evidence run out?</h1>
+          <p>Drag your habitat across oxygen and pressure. Each run carries a tolerance box. Outside every box, 1gnition proposes a test instead of a number.</p>
+          <div class="datastrip" id="gapStrip"></div></div>
+        <div class="g2-wide g2-fill">
+          <div class="card" id="mapCard">
+            <div class="row between"><h2>Oxygen and pressure of runs in the team's indexed dataset</h2>
+              <div class="field" style="min-width:160px"><label for="gMat" class="sr">Material filter</label>
+                <select id="gMat"><option value="all">All materials</option><option value="SIBAL">SIBAL fabric</option><option value="Cotton">Cotton jersey</option></select></div></div>
+            <div class="map" id="map" tabindex="0" aria-label="Interactive map. Click or drag to place your habitat. Arrow keys move it."></div>
+            <div class="readout" id="readout" aria-live="polite"></div>
+          </div>
+          <div class="card prop-card" id="propCard">
+            <h2>Next test for your scenario</h2>
+            <div id="proposal"></div>
+          </div>
+        </div>
+        <div id="gapTypes" class="cmp-olson"></div>
+        <div class="sect" id="heatCard">
+          <div class="row between"><h2>Coverage across investigations</h2><span class="small muted">What has been tested, and what is not indexed yet</span></div>
+          <div class="heat" id="heat"></div>
+          <div class="heat-legend">
+            <span><i style="background:rgba(127,178,255,.30)"></i>Matches your scenario</span>
+            <span><i style="background:rgba(127,178,255,.16)"></i>Tested, other value</span>
+            <span><i style="background:rgba(242,130,111,.12)"></i>Not tested</span>
+            <span><i style="background:rgba(255,255,255,.03);border:1px dashed #2a3240"></i>Not indexed yet</span>
+          </div>
+        </div>
+        <div class="card soft">
+          <div class="row between"><h2>Lunar forecast record</h2><span class="state s-insuf">Insufficient evidence</span></div>
+          <p class="small t2">A forecast is written down before lunar data exists, so it can be checked later. This record stays empty until a run supports a number.</p>
+          <dl class="prop">
+            <dt>Predicted outcome</dt><dd>Not recorded. No indexed run supports a number at 0.165 g.</dd>
+            <dt>Reference points</dt><dd>Microgravity runs indexed here. Earth-gravity runs are not indexed yet.</dd>
+            <dt>Assumption to state</dt><dd>Lunar behavior can fall outside the range between microgravity and Earth results.</dd>
+            <dt>Observation that would test it</dt><dd>Flame spread over solid samples in lunar gravity, as planned for <a href="https://www.nasa.gov/glenn/glenn-expertise-space-exploration/physical-sciences-program/combustion-science/flammability-of-materials-on-the-moon-fm2/">FM2</a>. Mission status and dates need checking.</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- DATA -->
+    <section class="view" id="v-data">
+      <div style="display:grid;gap:24px">
+        <div class="vh"><h1>The data, as 1gnition uses it</h1>
+          <p>Every row 1gnition reasons from, where it came from and how it was read. Download any table as CSV.</p>
+          <div class="datastrip" id="dataStrip"></div></div>
+        <div class="row between">
+          <div class="tabs" role="tablist" id="dataTabs"></div>
+          <div class="row"><input class="search" id="dataSearch" type="search" placeholder="Filter rows" aria-label="Filter rows"><button class="btn btn-ghost btn-sm" type="button" id="csvCopy">Copy CSV</button><button class="btn btn-ghost btn-sm" type="button" id="csvBtn">Download CSV</button></div>
+        </div>
+        <div class="data-cls" id="dataCls" hidden></div>
+        <div class="tw data-tw"><table class="t" id="dataTable"></table></div>
+        <div class="health" id="dataHealth" aria-label="Loading and checks"></div>
+        <div class="sect"><h2>Fields in this table</h2><div id="schema"></div></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Ask drawer -->
+<aside class="drawer" id="drawer" aria-label="Ask 1gnition" aria-hidden="true">
+  <div class="drawer-h">
+    <div class="row between"><h2 style="font-size:17px">Ask 1gnition <span class="ask-kind">offline · rule-based</span></h2><button class="btn btn-quiet btn-sm" type="button" id="askClose">Close</button></div>
+    <p class="small muted" id="askMode"></p>
+  </div>
+  <div class="drawer-b" id="askLog"></div>
+  <div class="drawer-f">
+    <div class="row" id="askSuggest"></div>
+    <form id="askForm"><input id="askIn" placeholder="Ask about your scenario or a run" aria-label="Question"><button class="btn btn-primary btn-sm" type="submit">Ask</button></form>
+  </div>
+</aside>
+
+<!-- Guided demo -->
+<div class="tour" id="tour" hidden role="dialog" aria-label="Guided demo">
+  <div class="tbar"><i id="tBar"></i></div>
+  <div class="tour-top"><span id="tStep"></span><button class="btn btn-quiet btn-sm" type="button" id="tExit">Exit</button></div>
+  <h3 id="tTitle"></h3>
+  <p id="tText"></p>
+  <div class="row between"><button class="btn btn-ghost btn-sm" type="button" id="tBack">Back</button><button class="btn btn-primary btn-sm" type="button" id="tNext">Next</button></div>
+</div>
+
+<div class="pop hide" id="pop" role="tooltip"></div>
+
+<script src="js/config.js"></script>
+<script src="data/seed.js"></script>
+<script src="js/data.js"></script>
+<script src="js/logic.js"></script>
+<script src="js/art.js"></script>
+<script src="js/story.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

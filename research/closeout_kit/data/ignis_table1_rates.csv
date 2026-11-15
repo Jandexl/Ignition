@@ -1,0 +1,9 @@
+record_id,flight,sample_label,material,sample_length_cm,sample_width_cm,holder_length_cm,holder_width_cm,duct_length_cm,duct_width_cm,duct_full_height_cm,oxygen_vol_pct,pressure_kpa,flow_cm_s,spread_cm_s,flame_length_cm,pyrolysis_length_cm,flame_height_cm,thermocouple_locations_cm,flow_direction,source_id,source_locator,height_estimated,approved_for_ml
+I-1,I,1,SIBAL,94,40.6,109,46,109,46,51,21.7,102,20,0.18,4,4,2.0,30|60,concurrent,OLSON-2023-T1,"Table 1, PDF p9, row 1",True,False
+II-5,II,5,SIBAL,29,5,109,46,109,46,51,22.1,103,20,0.21,4,4,1.0,7.5,concurrent,OLSON-2023-T1,"Table 1, PDF p9, row 2",True,False
+II-6,II,6,SIBAL,29,5,109,46,109,46,51,22.1,103,25,0.26,5,5,0.9,7.5,concurrent,OLSON-2023-T1,"Table 1, PDF p9, row 3",True,False
+III-1,III,1,SIBAL,94,40.6,109,46,109,46,51,21.2,99,25,0.23,5,5,1.8,30|60,concurrent,OLSON-2023-T1,"Table 1, PDF p9, row 4",True,False
+IV-SIBAL,IV,4,SIBAL,50,40.6,109,46,109,46,30.5,23.1,99,20,0.36,8.5,8.5,2.7,30|42,concurrent,OLSON-2023-T1,"Table 1, PDF p9, row 5",False,False
+V-COTTON,V,5,Cotton,50,40.6,109,6,109,46,30.5,26.9,76,20,0.34,14,10,3.5,30|42,concurrent,OLSON-2023-T1,"Table 1, PDF p9, row 6",False,False
+BASS-NARROW,BASS,11,SIBAL,10,1.2,13,2.7,17,7.6,7.6,21.5,101,19,0.27,2.2,NA,0.4,NA,concurrent,OLSON-2023-T1,"Table 1, PDF p9, row 7",False,False
+BASS-WIDE,BASS,4,SIBAL,10,2.2,13,3.8,17,7.6,7.6,21.6,101,22,0.51,6.2,NA,0.6,NA,concurrent,OLSON-2023-T1,"Table 1, PDF p9, row 8",False,False

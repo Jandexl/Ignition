@@ -1,0 +1,16 @@
+{
+  "status": "VALIDATION_NOT_SUPPORTED",
+  "synthetic": false,
+  "reasons": [
+    "A frozen evaluation plan, independence review and comparability review are required."
+  ],
+  "metrics": {},
+  "folds": [],
+  "predictions": [],
+  "limitations": [
+    "Group independence and comparability require human evidence; software checks declarations and overlap.",
+    "No confidence/prediction intervals; residual error is not measurement uncertainty.",
+    "Grouped errors alone do not authorize predictions or prove geometry effects.",
+    "Small group counts yield unstable estimates; minimum counts are engineering gates, not statistical proof."
+  ]
+}

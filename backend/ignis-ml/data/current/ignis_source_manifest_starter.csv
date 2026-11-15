@@ -1,0 +1,3 @@
+source_id,title,url,investigation_id,file_version,extraction_method,retrieved_date,notes
+NASA-ICES-2021-266,Fire Safety Implications of Preliminary Results from Saffire IV and V Experiments on Large Scale Spacecraft Fires,https://ntrs.nasa.gov/api/citations/20210011521/downloads/ICES%202021-266%200503-2021%20final.pdf,PSI-98 (association stated in supplied project notes; verify against NASA PSI record),ICES-2021-266 conference paper PDF,Direct transcription of Table 2; sample dimensions converted from cm to mm,2026-11-14,"Table 2 summarizes Saffire I–V. Four selected rows I-1, II-5, II-6, III-1. Flow direction is not specified per run in Table 2 and is left blank. Oxygen retained as percent, not fraction."
+

@@ -1,0 +1,107 @@
+{
+  "status": "UNSUPPORTED",
+  "predicted_flame_spread_rate_cm_s": null,
+  "prediction_units": "cm/s",
+  "model_version": "0.1.0",
+  "model_type": "geometry_ridge",
+  "inputs_used": {},
+  "validation_status": "SYNTHETIC_DEMO_ONLY",
+  "model_performance": {
+    "mae_cm_s": 0.002588727836721367,
+    "rmse_cm_s": 0.0032455796744743945,
+    "bias_cm_s": -5.653393833062366e-06,
+    "group_macro_mae_cm_s": 0.002588727836721367,
+    "group_macro_rmse_cm_s": 0.0030179483940121735,
+    "n_test_observations": 72,
+    "n_independent_test_groups": 12,
+    "n_out_of_domain": 0,
+    "features": [
+      "flow_velocity_cm_s",
+      "oxygen_percent",
+      "pressure_kpa",
+      "sample_width_cm",
+      "material",
+      "flow_direction"
+    ],
+    "group_metrics": {
+      "SYN-G0": {
+        "mae_cm_s": 0.005089381450100586,
+        "rmse_cm_s": 0.0053149268766580346,
+        "bias_cm_s": 0.005089381450100586
+      },
+      "SYN-G1": {
+        "mae_cm_s": 0.0012846976114364213,
+        "rmse_cm_s": 0.0016639273992940225,
+        "bias_cm_s": 0.00039038747399548307
+      },
+      "SYN-G10": {
+        "mae_cm_s": 0.0021564418024541307,
+        "rmse_cm_s": 0.0023996287463314576,
+        "bias_cm_s": 0.0005245897463883042
+      },
+      "SYN-G11": {
+        "mae_cm_s": 0.000863933317516353,
+        "rmse_cm_s": 0.0009763490475725795,
+        "bias_cm_s": 1.1134810554596272e-05
+      },
+      "SYN-G2": {
+        "mae_cm_s": 0.002011004026302642,
+        "rmse_cm_s": 0.00284420466480935,
+        "bias_cm_s": 0.0006578884551872582
+      },
+      "SYN-G3": {
+        "mae_cm_s": 0.0034571949972199284,
+        "rmse_cm_s": 0.004144108089636373,
+        "bias_cm_s": 0.0034571949972199284
+      },
+      "SYN-G4": {
+        "mae_cm_s": 0.0021282363219330878,
+        "rmse_cm_s": 0.0025528325943370267,
+        "bias_cm_s": -0.0021282363219330878
+      },
+      "SYN-G5": {
+        "mae_cm_s": 0.0037378043006891745,
+        "rmse_cm_s": 0.004136767212762023,
+        "bias_cm_s": -0.003207532163008032
+      },
+      "SYN-G6": {
+        "mae_cm_s": 0.003242653279541166,
+        "rmse_cm_s": 0.003914252880116168,
+        "bias_cm_s": -0.0020283416950687833
+      },
+      "SYN-G7": {
+        "mae_cm_s": 0.002337590669614318,
+        "rmse_cm_s": 0.0029306511379831772,
+        "bias_cm_s": -0.0002893326683071166
+      },
+      "SYN-G8": {
+        "mae_cm_s": 0.003291365660279766,
+        "rmse_cm_s": 0.003571129462085003,
+        "bias_cm_s": -0.002608024630141842
+      },
+      "SYN-G9": {
+        "mae_cm_s": 0.001464430603568832,
+        "rmse_cm_s": 0.001766602616560872,
+        "bias_cm_s": 6.304981901595712e-05
+      }
+    }
+  },
+  "source_ids": [
+    "SYNTHETIC-GENERATOR"
+  ],
+  "evidence_limitations": [
+    "Group independence and comparability require human evidence; software checks declarations and overlap.",
+    "No confidence/prediction intervals; residual error is not measurement uncertainty.",
+    "Grouped errors alone do not authorize predictions or prove geometry effects.",
+    "Small group counts yield unstable estimates; minimum counts are engineering gates, not statistical proof.",
+    "SYNTHETIC demonstration: no NASA accuracy or spacecraft-safety claim."
+  ],
+  "out_of_domain_warnings": [
+    "flow_velocity_cm_s=900 outside observed [5, 22]"
+  ],
+  "abstention_reasons": [
+    "Scenario is outside the reviewed evidence domain."
+  ],
+  "synthetic": true,
+  "intended_use": "research_demonstration_only"
+}

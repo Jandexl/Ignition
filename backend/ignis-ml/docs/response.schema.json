@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "enum": [
+        "SUPPORTED",
+        "LIMITED_EVIDENCE",
+        "UNSUPPORTED"
+      ]
+    },
+    "predicted_flame_spread_rate_cm_s": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "prediction_units": {
+      "const": "cm/s"
+    },
+    "model_version": {
+      "type": "string"
+    },
+    "model_type": {
+      "enum": [
+        null,
+        "mean",
+        "condition_ridge",
+        "geometry_ridge"
+      ]
+    },
+    "inputs_used": {
+      "type": "object"
+    },
+    "validation_status": {
+      "enum": [
+        "VALIDATION_NOT_SUPPORTED",
+        "SYNTHETIC_DEMO_ONLY",
+        "REVIEWED_GROUPED_EVALUATION"
+      ]
+    },
+    "model_performance": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "out_of_domain_warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "abstention_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "synthetic": {
+      "type": "boolean"
+    },
+    "intended_use": {
+      "const": "research_demonstration_only"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "SUPPORTED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "predicted_flame_spread_rate_cm_s": {
+            "type": "number",
+            "minimum": 0
+          },
+          "validation_status": {
+            "enum": [
+              "SYNTHETIC_DEMO_ONLY",
+              "REVIEWED_GROUPED_EVALUATION"
+            ]
+          },
+          "abstention_reasons": {
+            "maxItems": 0
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "predicted_flame_spread_rate_cm_s": {
+            "type": "null"
+          },
+          "abstention_reasons": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "validation_status": {
+            "const": "SYNTHETIC_DEMO_ONLY"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "synthetic": {
+            "const": true
+          }
+        }
+      }
+    }
+  ],
+  "required": [
+    "status",
+    "predicted_flame_spread_rate_cm_s",
+    "prediction_units",
+    "model_version",
+    "model_type",
+    "inputs_used",
+    "validation_status",
+    "model_performance",
+    "source_ids",
+    "evidence_limitations",
+    "out_of_domain_warnings",
+    "abstention_reasons",
+    "synthetic",
+    "intended_use"
+  ]
+}

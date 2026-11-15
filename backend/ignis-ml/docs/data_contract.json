@@ -1,0 +1,226 @@
+{
+  "observation_id": {
+    "role": "identifier",
+    "meaning": "Unique measurement record, not evidence of independence",
+    "units": null,
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  },
+  "investigation_id": {
+    "role": "metadata",
+    "meaning": "Verified investigation identity; BASS and BASS-II stay distinct",
+    "units": null,
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  },
+  "campaign_id": {
+    "role": "group",
+    "meaning": "Verified campaign identifier",
+    "units": null,
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  },
+  "run_id": {
+    "role": "group",
+    "meaning": "Verified experimental run within investigation and campaign",
+    "units": null,
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  },
+  "dependency_group_id": {
+    "role": "group",
+    "meaning": "Globally unique cluster covering repeats and all related runs",
+    "units": null,
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  },
+  "material": {
+    "role": "input",
+    "meaning": "Reviewed canonical fuel specification, not a loose alias",
+    "units": null,
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "Use only pre-outcome measurements; fit transformations inside each training fold"
+  },
+  "flow_direction": {
+    "role": "input",
+    "meaning": "Concurrent or opposed relative to spread",
+    "units": null,
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "Use only pre-outcome measurements; fit transformations inside each training fold"
+  },
+  "gravity_regime": {
+    "role": "domain",
+    "meaning": "Reviewed gravity regime, such as microgravity",
+    "units": null,
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  },
+  "combustion_regime": {
+    "role": "domain",
+    "meaning": "Reviewed outcome/regime definition such as steady_solid_spread",
+    "units": null,
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  },
+  "flow_velocity_cm_s": {
+    "role": "input",
+    "meaning": "Nonnegative imposed flow speed magnitude",
+    "units": "cm/s",
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "Use only pre-outcome measurements; fit transformations inside each training fold"
+  },
+  "oxygen_percent": {
+    "role": "input",
+    "meaning": "Oxygen mole/volume percentage, not mass percentage",
+    "units": "%",
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "Use only pre-outcome measurements; fit transformations inside each training fold"
+  },
+  "pressure_kpa": {
+    "role": "input",
+    "meaning": "Absolute total gas pressure",
+    "units": "kPa",
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "Use only pre-outcome measurements; fit transformations inside each training fold"
+  },
+  "sample_width_cm": {
+    "role": "candidate input",
+    "meaning": "Verified transverse specimen width",
+    "units": "cm",
+    "missing": "if not selected",
+    "requires_review": true,
+    "leakage_risk": "Use only pre-outcome measurements; fit transformations inside each training fold"
+  },
+  "sample_length_cm": {
+    "role": "candidate input",
+    "meaning": "Verified specimen length along spread",
+    "units": "cm",
+    "missing": "if not selected",
+    "requires_review": true,
+    "leakage_risk": "Use only pre-outcome measurements; fit transformations inside each training fold"
+  },
+  "sample_thickness_mm": {
+    "role": "candidate input",
+    "meaning": "Verified fuel thickness",
+    "units": "mm",
+    "missing": "if not selected",
+    "requires_review": true,
+    "leakage_risk": "Use only pre-outcome measurements; fit transformations inside each training fold"
+  },
+  "duct_height_cm": {
+    "role": "candidate input",
+    "meaning": "Verified confinement height with consistent definition",
+    "units": "cm",
+    "missing": "if not selected",
+    "requires_review": true,
+    "leakage_risk": "Use only pre-outcome measurements; fit transformations inside each training fold"
+  },
+  "flame_spread_rate_cm_s": {
+    "role": "target",
+    "meaning": "Measured flame-front displacement per elapsed time in the specified regime",
+    "units": "cm/s",
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  },
+  "outcome_type": {
+    "role": "metadata",
+    "meaning": "Must be flame_spread_rate",
+    "units": null,
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  },
+  "outcome_unit": {
+    "role": "metadata",
+    "meaning": "Must be cm/s after explicit conversion",
+    "units": null,
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  },
+  "measurement_status": {
+    "role": "metadata",
+    "meaning": "verified_numeric, reviewed_digitized, or synthetic",
+    "units": null,
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  },
+  "verification_status": {
+    "role": "metadata",
+    "meaning": "verified or synthetic; unreviewed blocks modeling",
+    "units": null,
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  },
+  "grouping_status": {
+    "role": "metadata",
+    "meaning": "verified or synthetic; human review of dependency structure",
+    "units": null,
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  },
+  "geometry_status": {
+    "role": "metadata",
+    "meaning": "verified or synthetic when geometry is selected",
+    "units": null,
+    "missing": "if unused",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  },
+  "geometry_definition_id": {
+    "role": "metadata",
+    "meaning": "Shared reviewed dimension-definition document",
+    "units": null,
+    "missing": "if unused",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  },
+  "source_id": {
+    "role": "provenance",
+    "meaning": "Foreign key to source manifest",
+    "units": null,
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  },
+  "source_location": {
+    "role": "provenance",
+    "meaning": "Table, figure, file or extraction location",
+    "units": null,
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  },
+  "review_id": {
+    "role": "provenance",
+    "meaning": "External scientific audit/review document reference",
+    "units": null,
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  },
+  "data_origin": {
+    "role": "metadata",
+    "meaning": "experimental or synthetic; mixing is forbidden",
+    "units": null,
+    "missing": "never",
+    "requires_review": true,
+    "leakage_risk": "NEVER a predictor"
+  }
+}

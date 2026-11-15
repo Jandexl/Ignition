@@ -1,0 +1,17 @@
+{
+  "geometry": [
+    "sample_width_cm"
+  ],
+  "width_height_ratio": false,
+  "alpha": 1.0,
+  "strategy": "logo",
+  "n_splits": 3,
+  "min_groups": 3,
+  "holdout_investigation": "",
+  "plan_id": "",
+  "independence_review_id": "",
+  "comparability_review_id": "",
+  "geometry_rationale": "",
+  "frozen_before_evaluation": false,
+  "max_domain_distance": 0.35
+}

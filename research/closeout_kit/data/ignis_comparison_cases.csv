@@ -1,0 +1,4 @@
+baseline,comparison,baseline_cm_s,comparison_cm_s,difference_cm_s,ratio,pct_change,baseline_Lf_cm,comparison_Lf_cm,baseline_Lp_cm,comparison_Lp_cm,limitations,source_id
+I-1,II-5,0.18,0.21,0.03,1.1667,16.67,4,4,4,4,"Width, length, entrance position, flight, O2, pressure, RH and instrumentation/fit comparability",OLSON-2023-T1
+III-1,II-6,0.23,0.26,0.03,1.1304,13.04,5,5,5,5,"Width, length, entrance position, flight, O2, pressure, RH and conflicting archive flow labels",OLSON-2023-T1
+I-1,IV-SIBAL,0.18,0.36,0.18,2.0000,100.00,4,8.5,4,8.5,"Height, length, atmosphere, RH, flight and camera configuration; IV plateau is short",OLSON-2023-T1

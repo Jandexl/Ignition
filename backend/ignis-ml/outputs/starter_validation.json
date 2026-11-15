@@ -1,0 +1,201 @@
+{
+  "status": "INVALID",
+  "n_observations": 4,
+  "issues": [
+    {
+      "code": "MISSING_VALUE",
+      "severity": "error",
+      "message": "investigation_id: missing values block reviewed evaluation.",
+      "rows": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "code": "MISSING_VALUE",
+      "severity": "error",
+      "message": "dependency_group_id: missing values block reviewed evaluation.",
+      "rows": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "code": "MISSING_VALUE",
+      "severity": "error",
+      "message": "flow_direction: missing values block reviewed evaluation.",
+      "rows": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "code": "MISSING_VALUE",
+      "severity": "error",
+      "message": "gravity_regime: missing values block reviewed evaluation.",
+      "rows": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "code": "MISSING_VALUE",
+      "severity": "error",
+      "message": "combustion_regime: missing values block reviewed evaluation.",
+      "rows": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "code": "MISSING_VALUE",
+      "severity": "error",
+      "message": "flame_spread_rate_cm_s: missing values block reviewed evaluation.",
+      "rows": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "code": "MISSING_VALUE",
+      "severity": "error",
+      "message": "measurement_status: missing values block reviewed evaluation.",
+      "rows": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "code": "MISSING_VALUE",
+      "severity": "error",
+      "message": "review_id: missing values block reviewed evaluation.",
+      "rows": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "code": "MISSING_VALUE",
+      "severity": "error",
+      "message": "geometry_definition_id: missing values block reviewed evaluation.",
+      "rows": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "code": "UNAPPROVED_OUTCOME_TYPE",
+      "severity": "error",
+      "message": "outcome_type must be one of ['flame_spread_rate'].",
+      "rows": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "code": "UNAPPROVED_OUTCOME_UNIT",
+      "severity": "error",
+      "message": "outcome_unit must be one of ['cm/s'].",
+      "rows": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "code": "UNAPPROVED_FLOW_DIRECTION",
+      "severity": "error",
+      "message": "flow_direction must be one of ['concurrent', 'opposed'].",
+      "rows": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "code": "UNAPPROVED_VERIFICATION_STATUS",
+      "severity": "error",
+      "message": "verification_status must be one of ['verified'].",
+      "rows": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "code": "UNAPPROVED_GROUPING_STATUS",
+      "severity": "error",
+      "message": "grouping_status must be one of ['verified'].",
+      "rows": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "code": "UNAPPROVED_MEASUREMENT_STATUS",
+      "severity": "error",
+      "message": "measurement_status must be one of ['verified_numeric', 'reviewed_digitized'].",
+      "rows": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "code": "UNAPPROVED_GEOMETRY_STATUS",
+      "severity": "error",
+      "message": "geometry_status must be one of ['verified'].",
+      "rows": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    {
+      "code": "GEOMETRY_DEFINITIONS",
+      "severity": "error",
+      "message": "Geometry requires one consistent reviewed definition ID per cohort.",
+      "rows": []
+    },
+    {
+      "code": "UNKNOWN_GEOMETRY",
+      "severity": "warning",
+      "message": "sample_thickness_mm unavailable in some rows; excluded unless verified and complete.",
+      "rows": []
+    },
+    {
+      "code": "SOURCE_MANIFEST",
+      "severity": "error",
+      "message": "Manifest needs source_id, title, url and verification_status.",
+      "rows": []
+    }
+  ],
+  "note": "Readiness is not scientific validation or proof of independence."
+}
