@@ -45,7 +45,11 @@ python3 frontend/tools/final_ui_qa.py --out qa                         # the 8 f
 
 ## Deploy (GitHub Pages)
 
-Push the repository, then Settings → Pages → deploy from branch, folder `/frontend` (or copy `frontend/` to a `docs/` folder or a `gh-pages` branch). Static hosting gives working CSV downloads and rendered links, which the Claude artifact viewer blocks. The API server needs a Python host (Render, Fly.io, a VM) and is optional.
+The workflow `.github/workflows/pages.yml` publishes the `frontend/` folder on every push to `main`. One-time setup: repository **Settings → Pages → Build and deployment → Source: GitHub Actions**. The site appears at `https://<user>.github.io/<repo>/`. On Pages, CSV downloads and the linked `.md` documents work, which the Claude artifact viewer blocks.
+
+`.github/workflows/tests.yml` runs the Python, data and JS tests on every push. Browser tests (`acceptance_ui.py`, `final_ui_qa.py`) need Chrome and Playwright and are run locally.
+
+The optional API server needs a Python host (Render, Fly.io, a VM) and is not required by the site.
 
 ## Brand
 
