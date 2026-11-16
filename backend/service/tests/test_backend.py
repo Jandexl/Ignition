@@ -162,6 +162,78 @@ class Api(unittest.TestCase):
         code, j, _ = self.req("/api/compare", {"baseline": "I-1", "comparison": "nope"})
         self.assertEqual(code, 400)
 
+    def test_scenario_returns_original_measurement_and_geometry(self):
+        code, result, _ = self.req("/api/scenario", self.SCENARIO)
+        self.assertEqual(code, 200)
+        matches = result["measurements"]["exact_matches"]
+        self.assertEqual(len(matches), 1)
+        self.assertEqual(matches[0]["record"]["record_id"], "I-1")
+        self.assertEqual(matches[0]["measured_flame_spread_rate_cm_s"], 0.18)
+        self.assertEqual(matches[0]["measured_flame_spread_rate_mm_s"], 1.8)
+        self.assertEqual(matches[0]["record"]["sample_width_cm"], 40.6)
+        self.assertEqual(matches[0]["record"]["source_locator"], "Table 1, PDF p9, row 1")
+        self.assertIsNone(result["prediction"]["predicted_flame_spread_rate_cm_s"])
+        self.assertIn("sample_width_cm", result["measurements"]["omitted_geometry"])
+
+    def test_scenario_all_eight_records_return_their_own_rates(self):
+        sci = evidence.load_json(DATA / "scientific_comparisons.json")
+        for row in sci["table1_records"]:
+            query = dict(self.SCENARIO, material=row["material"], oxygen_percent=row["oxygen_vol_pct"],
+                         pressure_kpa=row["pressure_kpa"], flow_velocity_cm_s=row["flow_cm_s"])
+            code, result, _ = self.req("/api/scenario", query)
+            self.assertEqual(code, 200)
+            found = {m["record"]["record_id"]: m["measured_flame_spread_rate_cm_s"]
+                     for m in result["measurements"]["exact_matches"]}
+            self.assertEqual(found[row["record_id"]], row["spread_cm_s"])
+
+    def test_scenario_nearby_record_exposes_differences(self):
+        code, result, _ = self.req("/api/scenario", dict(self.SCENARIO, pressure_kpa=102.5))
+        self.assertEqual(code, 200)
+        measurements = result["measurements"]
+        self.assertEqual(measurements["status"], "RELATED_MEASUREMENTS")
+        self.assertEqual(measurements["exact_matches"], [])
+        first = measurements["related_measurements"][0]
+        differences = {d["condition"]: d for d in first["differing_conditions"]}
+        self.assertEqual(differences["pressure_kpa"]["requested"], 102.5)
+        self.assertEqual(differences["pressure_kpa"]["recorded"], 102)
+        self.assertIsNone(result["prediction"]["predicted_flame_spread_rate_cm_s"])
+
+    def test_scenario_regime_and_material_cannot_cross_match(self):
+        for field, value in [("material", "PMMA"), ("flow_direction", "opposed"),
+                             ("gravity_regime", "lunar"), ("combustion_regime", "gas_jet")]:
+            code, result, _ = self.req("/api/scenario", dict(self.SCENARIO, **{field: value}))
+            self.assertEqual(code, 200)
+            self.assertEqual(result["measurements"]["status"], "NO_MATCH")
+            self.assertEqual(result["measurements"]["exact_matches"], [])
+            self.assertEqual(result["measurements"]["related_measurements"], [])
+
+    def test_scenario_invalid_inputs_cannot_return_measurements(self):
+        for change in [{"oxygen_percent": 150}, {"pressure_kpa": None},
+                       {"flow_velocity_cm_s": float("nan")}, {"material": None}]:
+            code, result, _ = self.req("/api/scenario", dict(self.SCENARIO, **change))
+            self.assertEqual(code, 400)
+            self.assertEqual(result["status"], "INPUT_ERROR")
+
+    def test_scenario_geometry_and_unknown_thickness_are_not_ignored(self):
+        query = dict(self.SCENARIO, sample_width_cm=5)
+        _, result, _ = self.req("/api/scenario", query)
+        self.assertEqual(result["measurements"]["exact_matches"], [])
+        query = dict(self.SCENARIO, sample_width_cm=40.6, sample_length_cm=94, duct_height_cm=51)
+        _, result, _ = self.req("/api/scenario", query)
+        self.assertEqual(result["measurements"]["exact_matches"][0]["record"]["record_id"], "I-1")
+        _, result, _ = self.req("/api/scenario", dict(query, sample_thickness_mm=1))
+        self.assertEqual(result["measurements"]["exact_matches"], [])
+
+    def test_scenario_multiple_matches_stay_separate(self):
+        sci = evidence.load_json(DATA / "scientific_comparisons.json")
+        second = dict(sci["table1_records"][0], record_id="INDEPENDENT-EXAMPLE", spread_cm_s=0.3,
+                      sample_width_cm=12)
+        sci["table1_records"].append(second)
+        result = evidence.scenario_measurements(sci, self.SCENARIO)
+        self.assertEqual(len(result["exact_matches"]), 2)
+        self.assertEqual([r["measured_flame_spread_rate_cm_s"] for r in result["exact_matches"]],
+                         [0.18, 0.3])
+
     def test_body_too_large(self):
         code, _, _ = self.req("/api/compare", {"baseline": "x" * 20000, "comparison": "y"})
         self.assertEqual(code, 413)

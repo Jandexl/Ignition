@@ -7,6 +7,7 @@ Serves the static site and a small JSON API:
 
   GET  /api/health                 status, package version, data build hash
   GET  /api/<collection>           any data/<collection>.json (DATA_MODE "api" in js/config.js)
+  POST /api/scenario               published measurement matches and model status
   POST /api/compare                {"baseline": "I-1", "comparison": "II-5"}
                                    deterministic descriptive comparison of two Olson Table 1 records
   POST /api/predict                scenario per ignis-ml/docs/request.schema.json
@@ -38,7 +39,8 @@ sys.path.insert(0, str(HERE))
 import jsonschema  # noqa: E402
 import evidence  # noqa: E402
 from ignis_ml import __version__  # noqa: E402
-from ignis_ml.prediction import predict  # noqa: E402
+from ignis_ml.prediction import predict
+from ignis_ml.contracts import REQUEST_SCHEMA  # noqa: E402
 
 RESPONSE_SCHEMA = json.loads((PKG / "docs" / "response.schema.json").read_text())
 MAX_BODY = 16 * 1024
@@ -143,7 +145,7 @@ def make_handler(state):
 
         def do_POST(self):
             path = urlparse(self.path).path
-            if path not in ("/api/compare", "/api/predict"):
+            if path not in ("/api/compare", "/api/predict", "/api/scenario"):
                 return self._json(404, dict(error="Unknown endpoint"))
             if not state.allow(self.client_address[0]):
                 return self._json(429, dict(error="Rate limit: 60 requests per minute"))
@@ -160,6 +162,19 @@ def make_handler(state):
                     return self._json(200, evidence.compare_records(state.sci(), body["baseline"], body["comparison"]))
                 except (KeyError, ValueError) as e:
                     return self._json(400, dict(status="INPUT_ERROR", error=str(e).strip("'")))
+            if path == "/api/scenario":
+                try:
+                    jsonschema.validate(body, REQUEST_SCHEMA)
+                    json.dumps(body, allow_nan=False)
+                except (jsonschema.ValidationError, ValueError, TypeError) as exc:
+                    return self._json(400, dict(status="INPUT_ERROR", error=str(exc).split("\n")[0]))
+                sci = state.sci()
+                prediction = predict(body, bundle=None, evidence=evidence.table1_evidence_frame(sci))
+                return self._json(200, dict(
+                    scenario=body,
+                    measurements=evidence.scenario_measurements(sci, body),
+                    prediction=prediction,
+                ))
             # /api/predict: never loads a bundle, so the answer is LIMITED_EVIDENCE or UNSUPPORTED with a null number
             ev = evidence.table1_evidence_frame(state.sci())
             resp = predict(body, bundle=None, evidence=ev)

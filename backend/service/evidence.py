@@ -215,3 +215,69 @@ def table1_evidence_frame(sci):
                  combustion_regime="steady_solid_spread", source_id=r["source_id"], record_id=r["record_id"])
             for r in sci["table1_records"]]
     return pd.DataFrame(rows)
+
+
+def scenario_measurements(sci, scenario):
+    """Look up original Table 1 observations without estimating a new outcome.
+
+    All supplied conditions must match a single record for an exact match.
+    Nearby records retain every mismatch. Proximity orders observations only.
+    """
+    numeric = {
+        "flow_velocity_cm_s": "flow_cm_s",
+        "oxygen_percent": "oxygen_vol_pct",
+        "pressure_kpa": "pressure_kpa",
+        "sample_width_cm": "sample_width_cm",
+        "sample_length_cm": "sample_length_cm",
+        "duct_height_cm": "duct_full_height_cm",
+    }
+    geometry = ["sample_width_cm", "sample_length_cm", "duct_height_cm",
+                "sample_thickness_mm", "geometry_definition_id"]
+    result = dict(status="NO_MATCH", exact_matches=[], related_measurements=[],
+                  omitted_geometry=[key for key in geometry if key not in scenario],
+                  source_scope="Olson et al. (2023), Table 1",
+                  matching_rule="Numerical conditions match at their recorded values (absolute tolerance 1e-9).",
+                  interpretation="Published observations; each rate applies to the recorded specimen and apparatus.")
+    if scenario["gravity_regime"] != "microgravity" or scenario["combustion_regime"] != "steady_solid_spread":
+        result["reason"] = "Table 1 records cover microgravity solid-fuel flame spread."
+        return result
+    candidates = [
+        row for row in sci["table1_records"]
+        if row.get("material") == scenario["material"]
+        and row.get("flow_direction") == scenario["flow_direction"]
+        and isinstance(row.get("spread_cm_s"), (int, float))
+        and math.isfinite(row["spread_cm_s"]) and row["spread_cm_s"] >= 0
+    ]
+    related = []
+    for row in candidates:
+        differences, matched, distance = [], [], 0.0
+        for key, field in numeric.items():
+            if key not in scenario:
+                continue
+            observed = row.get(field)
+            if observed is not None and math.isclose(scenario[key], observed, rel_tol=0, abs_tol=1e-9):
+                matched.append(key)
+                continue
+            differences.append(dict(condition=key, requested=scenario[key], recorded=observed))
+            values = [r[field] for r in candidates if isinstance(r.get(field), (int, float))]
+            scale = (max(values) - min(values)) if values else 1
+            distance += abs(scenario[key] - observed) / (scale or abs(observed) or 1) if observed is not None else 1e6
+        for key in ("sample_thickness_mm", "geometry_definition_id"):
+            if key in scenario:
+                differences.append(dict(condition=key, requested=scenario[key], recorded=None))
+        item = dict(record=dict(row), evidence_class="published_numeric",
+                    measured_flame_spread_rate_cm_s=row["spread_cm_s"],
+                    measured_flame_spread_rate_mm_s=round(row["spread_cm_s"] * 10, 10),
+                    matched_conditions=matched, differing_conditions=differences)
+        if differences:
+            related.append((distance, row["record_id"], item))
+        else:
+            result["exact_matches"].append(item)
+    result["related_measurements"] = [item for _, _, item in sorted(related)[:3]]
+    if result["exact_matches"]:
+        result["status"] = "PUBLISHED_MATCH"
+    elif related:
+        result["status"] = "RELATED_MEASUREMENTS"
+    else:
+        result["reason"] = "No Table 1 records share this material, flow direction and gravity regime."
+    return result

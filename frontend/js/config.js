@@ -18,7 +18,7 @@ window.IGNIS_CONFIG = {
   AI_ENDPOINT: "",
   COLLECTIONS: ["meta", "sources", "investigations", "runs", "spread_rates", "findings", "flags", "predictions", "scientific_comparisons", "synthetic_verification_results", "synthetic_model_benchmark", "evidence_catalog", "build_manifest", "source_conflicts", "brand_copy", "science_project_status"],
   OPTIONAL: ["synthetic_verification_results", "synthetic_model_benchmark", "evidence_catalog", "build_manifest", "source_conflicts", "brand_copy", "science_project_status"],   // site still works if these are absent
-  PREDICT_ENDPOINT: "",   // e.g. "http://localhost:8787/api/predict" when backend/server.py runs. Empty: use the static status in scientific_comparisons.json
+  PREDICT_ENDPOINT: "https://onegnition.onrender.com/api/predict",   // e.g. "http://localhost:8787/api/predict" when backend/server.py runs. Empty: use the static status in scientific_comparisons.json
   TOLERANCE: { o2_pct: 1, pressure_kpa: 5 },        // design choice, shown on screen
   GATE: { min_spread_rows: 6, min_flights: 3 }        // legacy heuristic only. NOT scientific approval; prediction state comes from the backend (VALIDATION_NOT_SUPPORTED)
 };

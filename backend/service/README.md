@@ -21,6 +21,14 @@ python3 -m unittest discover -s backend/service/tests -v
 (cd backend/ignis-ml && python3 -m unittest discover -s tests -v)           # the package's own 77 tests
 ```
 
+## Scenario measurement lookup
+
+POST `/api/scenario` accepts the prediction request fields and returns the original prediction status alongside `measurements`. Exact matches require all supplied numerical conditions to equal a single published Table 1 record (absolute tolerance 1e-9), plus material, direction, gravity and combustion regime. Optional geometry fields restrict matches when provided. Unreported thickness or geometry definitions cannot be treated as verified matches.
+
+Results include the original record, rate in cm/s and mm/s, source locator, omitted geometry and all differing conditions for up to three related records. Related records share the categorical conditions and are sorted by the sum of numerical differences normalized by each candidate-set range. This ordering supplies references for comparison and carries no calibrated confidence. Records are never averaged or counted as additional burns.
+
+The website's published-experiment selector fills the shared scenario and requests these measurements. The prediction result remains independently labeled.
+
 ## API
 
 | Method | Path | Body | Returns |

@@ -564,7 +564,7 @@
       <div class="gate">${checks.map(([l, h, ok]) => `<div><span class="ic ${ok ? "ok" : "need"}">${ok ? "✓" : "○"}</span><span>${esc(l)}</span><span class="have">${esc(h)}</span><span class="need">${ok ? "" : "Blocks validation"}</span></div>`).join("")}</div>
       <p class="tiny muted">The only model numbers on this site are in B · Synthetic verification, labelled as a software benchmark on invented data.</p></div>
     <div class="g2 g2-fill">
-      <div class="card soft" id="apiCard"><h2>Ask the backend about your scenario</h2>${backendBox()}</div>
+      <div class="card soft" id="apiCard"><h2>Published rates for your scenario</h2>${backendBox()}</div>
       <div class="sect"><h2>What would make a prediction trustworthy</h2><ul class="clean small t2">
         <li>Fresh, independently ignited specimens in all four cells of the 2 × 2 design, with common controls and randomized blocks.</li>
         <li>Independent burn, flight and run IDs; one spread-rate definition and unit; oxygen and pressure at measurement time; verified geometry and flow.</li>
@@ -578,26 +578,89 @@
     const missing = [["flow_velocity_cm_s", "airflow"], ["oxygen_percent", "oxygen"], ["pressure_kpa", "pressure"], ["flow_direction", "flow direction"]].filter(([k]) => q[k] === null).map(([, l]) => l);
     return { q, missing };
   }
+  function scenarioEndpoint() {
+    if (!C.PREDICT_ENDPOINT) return "";
+    const endpoint = new URL(C.PREDICT_ENDPOINT, location.href);
+    endpoint.pathname = endpoint.pathname.replace(/\/predict\/?$/, "/scenario");
+    return endpoint.href;
+  }
   function backendBox() {
     const { q, missing } = scenarioRequest();
-    const req = `<pre class="code-sm">POST /api/predict\n${esc(JSON.stringify(q, null, 1))}</pre>`;
-    if (!C.PREDICT_ENDPOINT) return `<p class="small t2">This copy of the site is static, so it isn't connected to the Python backend. When <code>backend/server.py</code> runs and <code>PREDICT_ENDPOINT</code> is set in <code>js/config.js</code>, this panel sends your scenario to <code>ignis_ml.prediction.predict</code>. With no reviewed model, the backend can only answer LIMITED_EVIDENCE or UNSUPPORTED, with a null number.</p>${req}`;
-    return `<p class="small t2">Sends your scenario to <code>${esc(C.PREDICT_ENDPOINT)}</code>. ${missing.length ? `Set ${listJoin(missing)} in the scenario panel first; the backend refuses incomplete scenarios.` : ""}</p>${req}
-      <div class="row"><button class="btn btn-primary btn-sm" type="button" id="apiSend" ${missing.length ? "disabled" : ""}>Send to backend</button></div><div id="apiOut" aria-live="polite"></div>`;
+    const examples = (sci()?.table1_records || []).map(row =>
+      `<option value="${esc(row.record_id)}">${esc(row.record_id)} · ${esc(row.material)} · ${row.spread_cm_s} cm/s</option>`).join("");
+    return `<p class="small t2">Find published rates for your scenario. Matching uses each record’s material, airflow, oxygen, pressure, direction and gravity. Results include the specimen and duct dimensions.</p>
+      <div class="field"><label for="apiExample">Load a published experiment</label><select id="apiExample"><option value="">Choose an experiment…</option>${examples}</select></div>
+      ${C.PREDICT_ENDPOINT ? "" : '<p class="small">Connect the backend in the website configuration to search.</p>'}
+      ${missing.length ? `<p class="small t2">Set ${listJoin(missing)} in your scenario, or load an experiment above.</p>` : ""}
+      <details><summary class="small muted">Request details</summary><pre class="code-sm">POST /api/scenario\n${esc(JSON.stringify(q, null, 1))}</pre></details>
+      <div class="row"><button class="btn btn-primary btn-sm" type="button" id="apiSend" ${missing.length || !C.PREDICT_ENDPOINT ? "disabled" : ""}>Find measured rates</button></div><div id="apiOut" aria-live="polite"></div>`;
   }
+  function loadPublishedScenario(event) {
+    const row = (sci()?.table1_records || []).find(item => item.record_id === event.target.value);
+    if (!row) return;
+    Object.assign(S, { hab: "custom", mat: row.material, out: "spread_rate",
+      o2: String(row.oxygen_vol_pct), p: String(row.pressure_kpa), air: String(row.flow_cm_s),
+      dir: row.flow_direction, g: "micro", note: `Loaded conditions from Olson Table 1, ${row.record_id}. Specimen geometry is shown with each result.` });
+    renderAll();
+    sendPredict();
+  }
+  function observationCard(item, exact) {
+    const row = item.record;
+    const dimensions = `${row.sample_width_cm} × ${row.sample_length_cm} cm specimen; ${row.duct_full_height_cm} cm duct height`;
+    const differences = item.differing_conditions.map(d =>
+      `<li>${esc(d.condition.replace(/_/g, " "))}: requested ${esc(String(d.requested))}; recorded ${d.recorded === null ? "unreported" : esc(String(d.recorded))}</li>`).join("");
+    const source = D.source(row.source_id);
+    return `<article class="callout ${exact ? "ok" : "warn"}">
+      <div class="row between"><h3>${esc(row.record_id)} · ${esc(row.material)}</h3><span class="state s-pub">Published observation</span></div>
+      <p><b class="num" style="font-size:28px">${item.measured_flame_spread_rate_cm_s} cm/s</b> <span class="small t2">(${item.measured_flame_spread_rate_mm_s} mm/s)</span></p>
+      <p class="small">${exact ? "All supplied conditions match this record." : "Related experiment with different conditions."}</p>
+      <p class="small t2">${row.oxygen_vol_pct}% oxygen · ${row.pressure_kpa} kPa · ${row.flow_cm_s} cm/s · ${esc(row.flow_direction)} · microgravity</p>
+      <p class="small t2">${esc(dimensions)}${row.height_estimated ? ". Duct height is estimated in the source." : ""}</p>
+      ${differences ? `<details open><summary class="small">Conditions that differ</summary><ul class="clean small t2">${differences}</ul></details>` : ""}
+      <p class="tiny muted">Source: ${source ? srcLink(row.source_id) : esc(row.source_id)} · ${esc(row.source_locator)}</p>
+    </article>`;
+  }
+  let scenarioController = null;
   async function sendPredict() {
-    const out = $("apiOut"); if (!out) return;
-    const { q } = scenarioRequest();
-    out.innerHTML = `<p class="small muted">Waiting for the backend…</p>`;
+    if (scenarioController) scenarioController.abort();
+    const out = $("apiOut");
+    if (!out) return;
+    const { q, missing } = scenarioRequest();
+    if (missing.length || !C.PREDICT_ENDPOINT) return;
+    const controller = new AbortController();
+    scenarioController = controller;
+    const button = $("apiSend");
+    button.disabled = true;
+    out.innerHTML = '<p class="small muted">Searching published records… The free backend may take a minute to wake up.</p>';
+    const snapshot = JSON.stringify(q);
+    const timer = setTimeout(() => controller.abort(), 120000);
     try {
-      const r = await fetch(C.PREDICT_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(q) });
-      const j = await r.json();
-      if (!r.ok) throw new Error(j.error || r.status);
-      if (j.predicted_flame_spread_rate_cm_s !== null) { out.innerHTML = `<div class="callout bad"><h3>Refused to display</h3><p class="small">The backend returned a number without a reviewed NASA model. 1gnition does not show it.</p></div>`; return; }
-      out.innerHTML = `<div class="callout ${j.status === "LIMITED_EVIDENCE" ? "warn" : "bad"}"><span class="small muted">Backend response · ${esc(j.validation_status)}</span><h3>${esc(j.status.replace(/_/g, " ").toLowerCase())}: no number</h3>
-        <ul class="clean small t2">${[...j.abstention_reasons, ...j.evidence_limitations, ...j.out_of_domain_warnings].map(x => `<li>${esc(x)}</li>`).join("")}</ul>
-        ${j.source_ids.length ? `<p class="tiny muted">Relevant sources: ${j.source_ids.map(id => D.source(id) ? srcLink(id) : esc(id)).join(", ")}</p>` : ""}</div>`;
-    } catch (e) { out.innerHTML = `<div class="callout bad"><h3>Backend unavailable</h3><p class="small">${esc(String(e.message || e))}. Nothing is shown in its place.</p></div>`; }
+      const response = await fetch(scenarioEndpoint(), { method: "POST",
+        headers: { "Content-Type": "application/json" }, body: snapshot, signal: controller.signal });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || `Request failed (${response.status})`);
+      if (!out.isConnected || snapshot !== JSON.stringify(scenarioRequest().q)) return;
+      const measurements = result.measurements;
+      if (!measurements || !Array.isArray(measurements.exact_matches) || !Array.isArray(measurements.related_measurements))
+        throw new Error("The backend has not been updated with measurement lookup yet");
+      const exact = measurements.exact_matches;
+      const related = measurements.related_measurements;
+      out.innerHTML = `<div class="stack" style="margin-top:16px">
+        <h3>${exact.length ? `${exact.length} published measurement${exact.length === 1 ? "" : "s"} match your supplied conditions` : "No published measurement matches all supplied conditions"}</h3>
+        ${measurements.omitted_geometry.length ? '<p class="small t2">Specimen and apparatus geometry were not specified. Each value applies to its recorded geometry, shown below. Multiple records remain separate.</p>' : ""}
+        ${exact.map(item => observationCard(item, true)).join("")}
+        ${related.length ? `<details ${exact.length ? "" : "open"}><summary class="small">Related measured rates (${related.length})</summary><p class="small t2">Ordered by proximity within the same material, flow direction and gravity. Differences are listed for each record.</p><div class="stack">${related.map(item => observationCard(item, false)).join("")}</div></details>` : ""}
+        ${measurements.reason ? `<p class="small t2">${esc(measurements.reason)}</p>` : ""}
+        <div class="callout"><h3>Model prediction unavailable</h3><p class="small">No evaluated model is active. The numbers above are published measurements for the listed experiments.</p></div>
+      </div>`;
+    } catch (error) {
+      if (scenarioController !== controller || !out.isConnected || snapshot !== JSON.stringify(scenarioRequest().q)) return;
+      const message = error.name === "AbortError" ? "The backend did not respond within two minutes. Try again after it wakes up." : error.message;
+      out.innerHTML = `<div class="callout bad"><h3>Could not retrieve measurements</h3><p class="small">${esc(String(message))}</p></div>`;
+    } finally {
+      clearTimeout(timer);
+      if (button.isConnected && scenarioController === controller) button.disabled = false;
+    }
   }
   function replayCard() {
     const sat = D.spread_rates[0]; if (!sat || !D.run(sat.run_id)) return "";
@@ -643,6 +706,7 @@
     $("pane-design").innerHTML = `<div class="g2-wide g2-fill sci-design">${factorialCard("fact")}${hypothesisCard()}</div>${protocolCard()}`;
     $("pane-predict").innerHTML = predictionCard();
     if ($("apiSend")) $("apiSend").addEventListener("click", sendPredict);
+    if ($("apiExample")) $("apiExample").addEventListener("change", loadPublishedScenario);
     $("pane-apply").innerHTML = `${applyBox(D.runs, "Applicability of all indexed runs")}
       <div class="row"><span class="small muted">Try another habitat:</span>${["iss", "lunar", "mars"].map(k => `<button class="chip" type="button" data-preset="${k}" aria-pressed="${S.hab === k}">${L.PRESET[k].label}</button>`).join("")}</div>
       <p class="small muted">No spread-rate estimate is shown for any scenario, because no prediction has been validated on independent flight data. Matching uses the team's indexed records only.</p>`;
