@@ -1,0 +1,14 @@
+PASS Site served at /index.html
+PASS GET /api/health ok
+PASS Health: NASA prediction VALIDATION_NOT_SUPPORTED
+PASS Health: synthetic demo model loaded
+PASS POST /api/predict: NASA answer has no number
+PASS POST /api/scenario: published I-1 rate 0.18 cm/s with its source
+PASS GET /api/synthetic-demo/domain labelled synthetic
+PASS Domain: start-up self-test passed
+PASS Synthetic demo reproduces saved reference 0.121519 cm/s
+PASS Synthetic demo refuses Moon-base air (no number)
+PASS Synthetic demo rejects a real material (400)
+PASS CORS allows the Netlify site https://1gnition.netlify.app
+
+12 of 12 deployment checks passed against http://localhost:10000

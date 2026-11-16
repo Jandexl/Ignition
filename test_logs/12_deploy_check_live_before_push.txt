@@ -1,0 +1,14 @@
+PASS Site served at /index.html
+PASS GET /api/health ok
+PASS Health: NASA prediction VALIDATION_NOT_SUPPORTED
+FAIL Health: synthetic demo model loaded  [field missing: old deploy?]
+PASS POST /api/predict: NASA answer has no number
+PASS POST /api/scenario: published I-1 rate 0.18 cm/s with its source
+FAIL GET /api/synthetic-demo/domain labelled synthetic  [404]
+FAIL Domain: start-up self-test passed
+FAIL Synthetic demo reproduces saved reference 0.121519 cm/s  [404 None]
+FAIL Synthetic demo refuses Moon-base air (no number)  [404]
+FAIL Synthetic demo rejects a real material (400)  [404]
+PASS CORS allows the Netlify site https://1gnition.netlify.app
+
+6 of 12 deployment checks passed against https://onegnition.onrender.com

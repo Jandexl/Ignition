@@ -234,6 +234,67 @@ class Api(unittest.TestCase):
         self.assertEqual([r["measured_flame_spread_rate_cm_s"] for r in result["exact_matches"]],
                          [0.18, 0.3])
 
+    # ---- synthetic demo model (backend/ignis-ml/outputs/SYNTHETIC_DEMO_MODEL.joblib)
+    DEMO = dict(flow_velocity_cm_s=5, oxygen_percent=20, pressure_kpa=90, sample_width_cm=2, flow_direction="opposed")
+
+    def test_synthetic_demo_ready_and_labelled(self):
+        code, j, _ = self.req("/api/health")
+        self.assertTrue(j["synthetic_demo"]["ready"], j["synthetic_demo"]["reason"])
+        code, d, _ = self.req("/api/synthetic-demo/domain")
+        self.assertEqual(code, 200)
+        self.assertTrue(d["not_nasa_data"])
+        self.assertEqual(d["validation_status"], "SYNTHETIC_DEMO_ONLY")
+        self.assertEqual(d["training"]["source_id"], ["SYNTHETIC-GENERATOR"])
+        self.assertEqual(d["inputs"]["oxygen_percent"]["min"], 20.0)
+        self.assertEqual(d["inputs"]["oxygen_percent"]["max"], 23.0)
+        self.assertTrue(d["self_test"]["passed"])
+
+    def test_synthetic_demo_reproduces_saved_reference(self):
+        ref = json.loads((HERE.parents[1] / "ignis-ml" / "outputs" / "supported_SYNTHETIC.json").read_text())
+        code, j, _ = self.req("/api/synthetic-demo", self.DEMO)
+        self.assertEqual(code, 200)
+        r = j["result"]
+        self.assertEqual(r["status"], "SUPPORTED")
+        self.assertTrue(r["synthetic"])
+        self.assertEqual(r["validation_status"], "SYNTHETIC_DEMO_ONLY")
+        self.assertAlmostEqual(r["predicted_flame_spread_rate_cm_s"], ref["predicted_flame_spread_rate_cm_s"], places=12)
+        self.assertTrue(j["not_nasa_data"])
+        self.assertIn("NOT NASA", j["label"])
+
+    def test_synthetic_demo_refuses_outside_domain(self):
+        code, j, _ = self.req("/api/synthetic-demo", dict(self.DEMO, oxygen_percent=30, pressure_kpa=70.3))
+        self.assertEqual(code, 200)
+        r = j["result"]
+        self.assertEqual(r["status"], "UNSUPPORTED")
+        self.assertIsNone(r["predicted_flame_spread_rate_cm_s"])
+        self.assertTrue(any("oxygen_percent=30" in w for w in r["out_of_domain_warnings"]))
+
+    def test_synthetic_demo_rejects_real_material_and_bad_input(self):
+        for body in [dict(self.DEMO, material="SIBAL"), dict(self.DEMO, oxygen_percent="21"),
+                     dict(self.DEMO, flow_direction="up"), {"oxygen_percent": 21}]:
+            code, j, _ = self.req("/api/synthetic-demo", body)
+            self.assertEqual(code, 400, body)
+            self.assertEqual(j["status"], "INPUT_ERROR")
+
+    def test_nasa_predict_still_never_numeric(self):
+        code, j, _ = self.req("/api/predict", dict(self.SCENARIO))
+        self.assertIsNone(j["predicted_flame_spread_rate_cm_s"])
+        self.assertFalse(j["synthetic"])
+
+    def test_tampered_model_file_is_refused(self):
+        import shutil, tempfile, synthetic_demo
+        pkg = HERE.parents[1] / "ignis-ml"
+        with tempfile.TemporaryDirectory() as tmp:
+            t = Path(tmp)
+            for sub in ["outputs", "docs"]:
+                shutil.copytree(pkg / sub, t / sub)
+            shutil.copy(pkg / "MANIFEST.sha256", t / "MANIFEST.sha256")
+            with open(t / "outputs" / "SYNTHETIC_DEMO_MODEL.joblib", "ab") as f:
+                f.write(b"tamper")
+            demo = synthetic_demo.SyntheticDemo(t)
+            self.assertFalse(demo.ready)
+            self.assertIn("does not match MANIFEST", demo.reason)
+
     def test_body_too_large(self):
         code, _, _ = self.req("/api/compare", {"baseline": "x" * 20000, "comparison": "y"})
         self.assertEqual(code, 413)

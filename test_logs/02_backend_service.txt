@@ -12,14 +12,27 @@ test_body_too_large (test_backend.Api.test_body_too_large) ... ok
 test_collections_match_files (test_backend.Api.test_collections_match_files) ... ok
 test_compare_endpoint (test_backend.Api.test_compare_endpoint) ... ok
 test_health (test_backend.Api.test_health) ... ok
+test_nasa_predict_still_never_numeric (test_backend.Api.test_nasa_predict_still_never_numeric) ... ok
 test_path_traversal_refused (test_backend.Api.test_path_traversal_refused) ... ok
 test_predict_invalid_scenario_abstains (test_backend.Api.test_predict_invalid_scenario_abstains) ... ok
 test_predict_matching_evidence_is_limited_and_null (test_backend.Api.test_predict_matching_evidence_is_limited_and_null) ... ok
 test_predict_unmatched_material_unsupported (test_backend.Api.test_predict_unmatched_material_unsupported) ... ok
 test_predict_wrong_content_type (test_backend.Api.test_predict_wrong_content_type) ... ok
+test_scenario_all_eight_records_return_their_own_rates (test_backend.Api.test_scenario_all_eight_records_return_their_own_rates) ... ok
+test_scenario_geometry_and_unknown_thickness_are_not_ignored (test_backend.Api.test_scenario_geometry_and_unknown_thickness_are_not_ignored) ... ok
+test_scenario_invalid_inputs_cannot_return_measurements (test_backend.Api.test_scenario_invalid_inputs_cannot_return_measurements) ... ok
+test_scenario_multiple_matches_stay_separate (test_backend.Api.test_scenario_multiple_matches_stay_separate) ... ok
+test_scenario_nearby_record_exposes_differences (test_backend.Api.test_scenario_nearby_record_exposes_differences) ... ok
+test_scenario_regime_and_material_cannot_cross_match (test_backend.Api.test_scenario_regime_and_material_cannot_cross_match) ... ok
+test_scenario_returns_original_measurement_and_geometry (test_backend.Api.test_scenario_returns_original_measurement_and_geometry) ... ok
 test_static_site_served (test_backend.Api.test_static_site_served) ... ok
+test_synthetic_demo_ready_and_labelled (test_backend.Api.test_synthetic_demo_ready_and_labelled) ... ok
+test_synthetic_demo_refuses_outside_domain (test_backend.Api.test_synthetic_demo_refuses_outside_domain) ... ok
+test_synthetic_demo_rejects_real_material_and_bad_input (test_backend.Api.test_synthetic_demo_rejects_real_material_and_bad_input) ... ok
+test_synthetic_demo_reproduces_saved_reference (test_backend.Api.test_synthetic_demo_reproduces_saved_reference) ... ok
+test_tampered_model_file_is_refused (test_backend.Api.test_tampered_model_file_is_refused) ... ok
 
 ----------------------------------------------------------------------
-Ran 20 tests in 0.582s
+Ran 33 tests in 0.939s
 
 OK

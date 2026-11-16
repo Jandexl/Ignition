@@ -1,0 +1,19 @@
+# Render Blueprint for the 1gnition web service (https://onegnition.onrender.com).
+# If the service was created by hand in the Render dashboard, copy these values
+# into Settings instead; the dashboard values win over this file.
+services:
+  - type: web
+    name: onegnition
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python3 backend/service/server.py --frontend frontend --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.8"
+      - key: IGNITION_CORS_ORIGINS
+        value: "https://1gnition.netlify.app,https://onegnition.onrender.com,https://knnucs.github.io"
+      - key: IGNITION_QUIET
+        value: "1"

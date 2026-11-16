@@ -517,6 +517,115 @@
     g += `<text transform="translate(14 ${(t + H - b) / 2}) rotate(-90)" text-anchor="middle">Invented mean rate, cm/s</text>`;
     return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Synthetic interaction plot for the ${esc(SYN_LABEL[s.scenario] || s.scenario)} scenario">${g}</svg><p class="tiny muted">Dashed: the means programmed into the generator. Solid with dots: what the analysis recovered from the noisy invented burns. Unequal slopes are the interaction.</p>`;
   }
+  /* B0 · Interactive SYNTHETIC model demo: backend/ignis-ml/outputs/SYNTHETIC_DEMO_MODEL.joblib served by
+     backend/service/server.py (POST /api/synthetic-demo). The browser never computes a rate itself: every
+     number shown here comes from ignis_ml.prediction.predict on the server and is labelled synthetic. */
+  const DEMO_KEYS = ["flow_velocity_cm_s", "oxygen_percent", "pressure_kpa", "sample_width_cm"];
+  const DEMO_SLIDE = { flow_velocity_cm_s: [0, 40, 0.5], oxygen_percent: [15, 35, 0.1], pressure_kpa: [50, 110, 0.5], sample_width_cm: [1, 12, 0.5] };   // wider than the data on purpose, so refusals can be shown
+  const DEMO_PRESETS = {
+    inside: ["Inside the invented data", { flow_velocity_cm_s: 13, oxygen_percent: 21.5, pressure_kpa: 95, sample_width_cm: 5, flow_direction: "concurrent" }],
+    ref: ["Saved reference case", { flow_velocity_cm_s: 5, oxygen_percent: 20, pressure_kpa: 90, sample_width_cm: 2, flow_direction: "opposed" }],
+    moon: ["Moon-base air (outside)", { flow_velocity_cm_s: 13, oxygen_percent: 30, pressure_kpa: 70.3, sample_width_cm: 5, flow_direction: "concurrent" }]
+  };
+  const DM = () => (S.demo = S.demo || { in: { ...DEMO_PRESETS.inside[1] }, dom: null, res: null, state: "idle", err: "", seq: 0 });
+  const f3 = v => (+v).toFixed(3), f4 = v => (+v).toFixed(4);
+  function demoCard() {
+    const M = DM(), d = M.dom;
+    const head = `<div class="row between wrap-gap"><h2>Try the synthetic model</h2><span class="ev-cls ev-synthetic">Synthetic model · not NASA data</span></div>`;
+    if (!C.SYNTHETIC_DEMO_ENDPOINT) return `<div class="card syn-demo" id="demoCard">${head}<p class="small t2">No backend is configured in js/config.js, so the synthetic model can't run here.</p></div>`;
+    if (!d) return `<div class="card syn-demo" id="demoCard">${head}<div id="demoLoad">${demoStatusHTML()}</div></div>`;
+    const ins = DEMO_KEYS.map(k => { const m = d.inputs[k], [lo, hi, st] = DEMO_SLIDE[k], v = M.in[k], out = v < m.min || v > m.max;
+      return `<label class="demo-in${out ? " out" : ""}" data-k="${k}"><span class="row between"><span>${esc(m.label)}</span><b class="num"><span data-v="${k}">${v}</span> ${esc(m.unit)}</b></span>
+        <input type="range" min="${lo}" max="${hi}" step="${st}" value="${v}" data-demo="${k}" aria-label="${esc(m.label)} in ${esc(m.unit)}">
+        <span class="tiny muted">Invented data covers ${m.min}–${m.max} ${esc(m.unit)}</span></label>`; }).join("");
+    const fx = d.fixed;
+    return `<div class="card syn-demo" id="demoCard">${head}
+      <p class="small t2">A ridge-regression model the ML pipeline fitted to <b>${d.training.rows} invented observations from ${d.training.independent_groups} invented runs</b>. Generator: ${esc(d.generator)}. It shows the full software path working: inputs → domain check → saved model → labelled answer. Its numbers are not NASA measurements, not a flame simulation and not a fire-safety prediction.</p>
+      <div class="demo-grid">
+        <div class="demo-form">
+          <div class="row wrap-gap">${Object.entries(DEMO_PRESETS).map(([k, [l]]) => `<button class="chip" type="button" data-demo-preset="${k}">${esc(l)}</button>`).join("")}</div>
+          ${ins}
+          <div><span class="small">Flow direction</span><div class="seg" role="group" aria-label="Flow direction">${d.flow_direction.map(x => `<button type="button" data-demo-dir="${x}" aria-pressed="${M.in.flow_direction === x}">${x}</button>`).join("")}</div></div>
+          <p class="tiny muted">Fixed by the model, not editable: material <code>${esc(fx.material.value)}</code>, sample length ${fx.sample_length_cm.value} cm, thickness ${fx.sample_thickness_mm.value} mm, duct ${fx.duct_height_cm.value} cm, <code>${esc(fx.gravity_regime.value)}</code>. Real materials such as SIBAL or cotton are refused.</p>
+        </div>
+        <div class="demo-out" id="demoOut" aria-live="polite">${demoResultHTML()}</div>
+      </div>
+      <details class="demo-more"><summary class="small">How this model was checked, and its limits</summary>
+        <div class="small t2"><p>Error when each invented run is held out: MAE ${f4(d.performance_on_invented_holdouts.mae_cm_s)} cm/s, RMSE ${f4(d.performance_on_invented_holdouts.rmse_cm_s)} cm/s over ${d.performance_on_invented_holdouts.n_test_observations} invented observations in ${d.performance_on_invented_holdouts.n_independent_test_groups} invented groups. The generator programmed a simple linear rule, so a low error shows the code recovers it, nothing about real fire.</p>
+        <ul class="clean">${d.limitations.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+        <p class="tiny muted">Model file <code>${esc(d.model_file)}</code>, SHA-256 <code>${esc(d.model_sha256.slice(0, 16))}…</code>, checked against MANIFEST.sha256 before loading. Start-up self-test: reproduced the saved reference ${f4(d.self_test.reference_cm_s)} cm/s (difference ${d.self_test.abs_diff_cm_s}). Server: <code>${esc(C.SYNTHETIC_DEMO_ENDPOINT.replace(/\/api\/.*/, "") || location.origin)}</code>.</p></div></details>
+      <p class="small">Real published spread rates stay separate: Olson et al. (2023) Table 1 lists ${(sci() || { table1_records: [] }).table1_records.length} Saffire burns, ${(() => { const r = (sci() || { table1_records: [] }).table1_records.map(x => x.spread_cm_s); return r.length ? Math.min(...r) + "–" + Math.max(...r) : "" })()} cm/s, in <a href="#transfer" data-step-go="compare">A · Published evidence</a> (${srcLink("OLSON-2023-T1")}). None of them were used to train this model.</p>
+    </div>`;
+  }
+  function demoStatusHTML() {
+    const M = DM();
+    if (M.state === "error") return `<div class="callout bad"><h3>Synthetic model unavailable</h3><p class="small">${esc(M.err)}. No number is shown in its place.</p><div class="row"><button class="btn btn-ghost btn-sm" type="button" id="demoRetry">Try again</button></div></div>`;
+    return `<p class="small muted"><span class="spin" aria-hidden="true"></span> Connecting to the backend at <code>${esc(C.BACKEND_URL)}</code>. The free Render server sleeps when idle, so the first request can take up to a minute.</p>`;
+  }
+  function demoResultHTML() {
+    const M = DM();
+    if (M.state === "busy" && !M.res) return `<p class="small muted"><span class="spin" aria-hidden="true"></span> Asking the synthetic model…</p>`;
+    if (M.state === "error") return `<div class="callout bad"><h3>No answer</h3><p class="small">${esc(M.err)}. No number is shown in its place.</p></div>`;
+    if (!M.res) return `<p class="small muted">Move a slider or pick a preset to run the model.</p>`;
+    const r = M.res.result;
+    if (!(r.synthetic === true && r.validation_status === "SYNTHETIC_DEMO_ONLY")) return `<div class="callout bad"><h3>Refused to display</h3><p class="small">The response was not labelled synthetic, so 1gnition does not show it.</p></div>`;
+    const busy = M.state === "busy" ? ` <span class="spin" aria-hidden="true"></span>` : "";
+    if (r.status === "SUPPORTED") return `<div class="demo-res ok"><span class="syn-stamp">SYNTHETIC · invented data · not NASA</span>
+        <span class="small muted">Synthetic model output${busy}</span>
+        <b class="demo-num num">${f3(r.predicted_flame_spread_rate_cm_s)} <small>cm/s</small></b>
+        <span class="small t2">${esc(r.model_type.replace(/_/g, " "))} · ${esc(r.validation_status)}</span>
+        <p class="tiny muted">Inside the invented data, so the model answers. Read it as "the code works", not as how fast a real flame would spread.</p></div>`;
+    return `<div class="demo-res refused"><span class="syn-stamp">SYNTHETIC MODEL · REFUSED</span><span class="small muted">No number${busy}</span>
+        <b class="demo-num num">none</b>
+        <ul class="clean small">${[...r.out_of_domain_warnings, ...r.abstention_reasons].map(x => `<li>${esc(x.replace(/_/g, " "))}</li>`).join("")}</ul>
+        <p class="tiny muted">The model only answers inside the invented data it was fitted to. Outside it, it refuses instead of extrapolating.</p></div>`;
+  }
+  async function demoFetchDomain() {
+    const M = DM(); if (M.dom || M.loading) return; M.loading = true; M.state = "busy";
+    try {
+      const r = await fetch(C.SYNTHETIC_DEMO_ENDPOINT + "/domain", { headers: { Accept: "application/json" } });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(j.reason || j.error || "HTTP " + r.status);
+      if (j.not_nasa_data !== true || j.validation_status !== "SYNTHETIC_DEMO_ONLY") throw new Error("the backend's model description is not labelled synthetic");
+      M.dom = j; M.state = "idle";
+    } catch (e) { M.state = "error"; M.err = `Couldn't reach ${C.BACKEND_URL}: ${e.message || e}`; }
+    M.loading = false;
+    if (S.step === "synthetic") { const el = $("demoCard"); if (el) { el.outerHTML = demoCard(); bindDemo(); if (M.dom) demoRun(); } }
+  }
+  let demoTimer = null;
+  function demoQueue() { clearTimeout(demoTimer); demoTimer = setTimeout(demoRun, 220); }
+  async function demoRun() {
+    const M = DM(); if (!M.dom) return;
+    const id = ++M.seq; M.state = "busy"; if ($("demoOut")) $("demoOut").innerHTML = demoResultHTML();
+    try {
+      const r = await fetch(C.SYNTHETIC_DEMO_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(M.in) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(j.error || j.reason || "HTTP " + r.status);
+      if (id !== M.seq) return;
+      M.res = j; M.state = "idle";
+    } catch (e) { if (id !== M.seq) return; M.state = "error"; M.err = String(e.message || e); }
+    if ($("demoOut")) $("demoOut").innerHTML = demoResultHTML();
+  }
+  function bindDemo() {
+    const card = $("demoCard"); if (!card) return;
+    const M = DM();
+    if (S.step !== "synthetic") return;   // contact the backend only when the demo is opened
+    if (!M.dom && M.state !== "error") demoFetchDomain();
+    else if (M.dom && !M.res && M.state === "idle") demoRun();
+    const retry = $("demoRetry"); if (retry) retry.addEventListener("click", () => { M.state = "idle"; card.outerHTML = demoCard(); bindDemo(); });
+    card.querySelectorAll("input[data-demo]").forEach(inp => inp.addEventListener("input", e => {
+      const k = e.target.dataset.demo, v = +e.target.value, m = M.dom.inputs[k];
+      M.in[k] = v; card.querySelector(`[data-v="${k}"]`).textContent = v;
+      e.target.closest(".demo-in").classList.toggle("out", v < m.min || v > m.max);
+      demoQueue();
+    }));
+    card.querySelectorAll("[data-demo-dir]").forEach(b => b.addEventListener("click", () => {
+      M.in.flow_direction = b.dataset.demoDir; card.querySelectorAll("[data-demo-dir]").forEach(x => x.setAttribute("aria-pressed", x === b)); demoRun();
+    }));
+    card.querySelectorAll("[data-demo-preset]").forEach(b => b.addEventListener("click", () => {
+      M.in = { ...DEMO_PRESETS[b.dataset.demoPreset][1] }; card.outerHTML = demoCard(); bindDemo(); demoRun();
+    }));
+  }
   function syntheticPane() {
     const V = D.synthetic_verification_results;
     if (!V) return `<div class="callout bad"><h3>Synthetic verification results not loaded</h3><p class="small">data/synthetic_verification_results.json is missing. Run backend/build_frontend_data.py.</p></div>`;
@@ -525,6 +634,7 @@
     const B = D.synthetic_model_benchmark;
     const MOD = { mean: ["M0", "Training mean baseline"], condition_ridge: ["M1", "Ridge on flow, oxygen, pressure, material, direction"], geometry_ridge: ["M2", "M1 plus sample width"] };
     return `<div class="syn-banner" role="note"><b>SYNTHETIC VERIFICATION — NOT NASA DATA</b><span>NOT PHYSICAL VALIDATION</span><p>${esc(V.frontend_warning)}</p></div>
+      ${demoCard()}
       <div class="card" id="synCard"><div class="row between wrap-gap"><h2>Does the analysis code recover a known answer?</h2>
         <div class="seg seg4" role="group" aria-label="Choose synthetic scenario">${sc.map((x, i) => `<button type="button" data-syn="${i}" aria-pressed="${i === S.synCase}">${esc(SYN_LABEL[x.scenario] || x.scenario)}</button>`).join("")}</div></div>
         <p class="small t2">The generator invents a 2 × 2 width × duct-height experiment with a chosen interaction, adds seeded noise, and hands the burns to the same analysis code a real experiment would use. If the code is right, it recovers the number the generator was told. Design: ${esc(s.design.replace(/_/g, " "))}, ${s.generated_independent_burns} invented burns in ${s.generated_independent_blocks_or_sessions} ${s.design.includes("session") ? "sessions" : "blocks"}.</p>
@@ -562,7 +672,7 @@
       <div class="pred-hero"><div><span class="small muted">Backend status</span><b class="num">${esc(X.prediction_status)}</b></div><div><span class="small muted">Predicted rate</span><b class="num">${X.prediction_cm_s === null ? "none" : X.prediction_cm_s + " cm/s"}</b></div></div>
       <p class="small">1gnition does not show a predicted spread rate or an accuracy score, because no model has been validated on independent NASA flight data. Showing a number now would look like evidence it isn't.</p>
       <div class="gate">${checks.map(([l, h, ok]) => `<div><span class="ic ${ok ? "ok" : "need"}">${ok ? "✓" : "○"}</span><span>${esc(l)}</span><span class="have">${esc(h)}</span><span class="need">${ok ? "" : "Blocks validation"}</span></div>`).join("")}</div>
-      <p class="tiny muted">The only model numbers on this site are in B · Synthetic verification, labelled as a software benchmark on invented data.</p></div>
+      <p class="tiny muted">The only model numbers on this site are in <a href="#transfer" data-step-go="synthetic">B · Synthetic check</a>: the interactive synthetic model and the software benchmark, both on invented data and labelled as such.</p></div>
     <div class="g2 g2-fill">
       <div class="card soft" id="apiCard"><h2>Published rates for your scenario</h2>${backendBox()}</div>
       <div class="sect"><h2>What would make a prediction trustworthy</h2><ul class="clean small t2">
@@ -703,6 +813,7 @@
       ${replayCard()}`;
     if ($("rpPlay")) $("rpPlay").addEventListener("click", playReplay);
     $("pane-synthetic").innerHTML = syntheticPane();
+    bindDemo();
     $("pane-design").innerHTML = `<div class="g2-wide g2-fill sci-design">${factorialCard("fact")}${hypothesisCard()}</div>${protocolCard()}`;
     $("pane-predict").innerHTML = predictionCard();
     if ($("apiSend")) $("apiSend").addEventListener("click", sendPredict);

@@ -1,0 +1,6 @@
+PUBLISHED RATES: 1 published measurement match your supplied conditions |  | Specimen and apparatus geometry were not specified. Each value applies to its recorded geometry, shown below. Multiple records remain separate. |  | II-5 · SIBAL | Published observation |  | 0.21 cm/s (2.1 mm/s) |  | A
+SYNTHETIC inside: SYNTHETIC · INVENTED DATA · NOT NASA | Synthetic model output | 0.247 cm/s | geometry ridge · SYNTHETIC_DEMO_ONLY |  | Inside the invented data, so th
+SYNTHETIC reference: SYNTHETIC · INVENTED DATA · NOT NASA | Synthetic model output | 0.122 cm/s | geometry ridge · SYNTHETIC_DEMO_O
+SYNTHETIC moon: SYNTHETIC MODEL · REFUSED | No number | none | oxygen percent=30 outside observed [20, 23] | pressure kpa=70.3 outside observed [90, 100] | Scenario is outside the reviewed evidence domain. |  | The model only answers in
+API calls: ['GET /api/synthetic-demo/domain 200', 'POST /api/scenario 200', 'POST /api/synthetic-demo 200']
+ERRORS: []

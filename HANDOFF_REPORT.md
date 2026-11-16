@@ -6,6 +6,24 @@ Public site (static, complete): https://claude.ai/artifact/519TnVzzHEeWpvkrSwT34
 
 ---
 
+## 00. Synthetic model demo and Render connection (16 November 2026)
+
+| Request | Status | Evidence |
+|---|---|---|
+| Connect the saved `SYNTHETIC_DEMO_MODEL.joblib` to an interactive demo | Done | `backend/service/synthetic_demo.py`, `POST /api/synthetic-demo`, **Scale transfer → B · Synthetic check → Try the synthetic model** |
+| Inspect required inputs and supported domain first | Done | Inputs: airflow 5–22 cm/s, oxygen 20–23 %, pressure 90–100 kPa, width 2–8 cm, direction concurrent/opposed. Fixed: `synthetic_fabric`, 30 cm × 0.3 mm sample, 10 cm duct, `synthetic_microgravity`. Plus a local-distance check (≤ 0.35). Served live at `GET /api/synthetic-demo/domain` |
+| Use the existing load and predict functions | Done | `ignis_ml.prediction.load` and `ignis_ml.prediction.predict`, unchanged; no refit, no clipping, no number computed in the browser |
+| Keep NASA measurements and sources | Done | All NASA data and views unchanged; `/api/predict` still never returns a number; the demo card links back to Olson Table 1 |
+| Label synthetic predictions clearly | Done | "SYNTHETIC · invented data · not NASA" stamp on every answer; API returns `not_nasa_data: true` and `SYNTHETIC_DEMO_ONLY`; frontend refuses any answer not labelled synthetic |
+| Report what blocks the real-data pipeline | Done | `backend/ignis-ml/docs/REAL_DATA_PIPELINE_STATUS.md`, `test_logs/10_real_data_pipeline_check.txt` |
+| Connect the frontend to https://onegnition.onrender.com | Done in code, **live after push** | `frontend/js/config.js`; `render.yaml`; `DEPLOYMENT.md`. The live service still runs the previous commit, which passes only some of the 12 checks (no synthetic demo yet) (`test_logs/12_...`). The same code under Render's settings passes 12 of 12 locally (`test_logs/11_...`) |
+
+**Safety:** the model file is unpickled only after its SHA-256 matches `MANIFEST.sha256`. At start-up it must reproduce the saved reference (0.121519 cm/s, to within 1e-9), or the demo is disabled. Library versions are pinned to the ones the model was saved with.
+
+**Needs a person:** approve the GitHub push, then set `IGNITION_CORS_ORIGINS` on Render as in `DEPLOYMENT.md` (the live service currently sends no CORS header, so a GitHub Pages copy can't reach it). After that, run `python3 backend/service/check_deploy.py` and expect 12 of 12.
+
+---
+
 ## 0. Closeout release (science-closed deployment kit)
 
 | Definition of done | Status | Evidence |
@@ -193,12 +211,12 @@ Passing unit tests don't prove scientific correctness. Section 6 is the science 
 
 ## 9. Known limitations and unimplemented items
 
-1. **API not hosted publicly.** That's by design for this release: the site needs no runtime API. The optional API is tested locally, and the static site's scenario-check panel explains it instead of calling it.
+1. **The API is on Render's free plan.** It sleeps when idle, so the first request takes up to a minute. The synthetic demo and the backend scenario check need it; every NASA view works without it.
 2. **Ask 1gnition is an offline rule-based evidence helper,** labelled as such in the panel header and text. It is not a generative AI assistant, and none is connected.
 3. **Claude artifact viewer limits.** It blocks file downloads (Copy CSV works) and shows `.md` documents as plain text.
 4. **Fixed in the closeout release:** the PSI-100 airflow conflict and the IV alias now come from `data/source_conflicts.json`. V-COTTON is no longer linked to Urban V-2, because no conflict record supports that link.
 5. **BASS-II's 39 PMMA rates are not indexed as runs,** by design. The exploratory feasibility study stays in `research/` and never appears as an accuracy card.
-6. **The model code benchmark (M0/M1/M2) is shown only as synthetic.** No model has been evaluated on Saffire holdouts.
+6. **The only model numbers come from invented data:** the M0/M1/M2 benchmark and the interactive synthetic demo. No model has been evaluated on Saffire holdouts. `REAL_DATA_PIPELINE_STATUS.md` explains why.
 7. **Small layout issues remain.** The Overview "almost proposed" grid leaves its right column blank until the reveal animation runs, and guided-demo step 2 partly covers the hero map.
 8. **Accessibility is only partly verified.** Keyboard and focus were checked, but no automated contrast audit (such as axe) was run.
 9. **The handoff branch's Cygnus hero photo was not carried over;** the round-6 hero was kept.

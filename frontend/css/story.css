@@ -622,3 +622,28 @@ table.claims td{padding:4px 6px;border-top:1px solid rgba(255,255,255,.07);verti
 table.claims td.n{white-space:nowrap;text-align:right;font-family:var(--f-mono)}
 table.claims{table-layout:fixed}table.claims td{overflow-wrap:anywhere}
 .hero-note,.hero-qual{text-shadow:0 0 10px #000,0 0 18px #000}
+
+/* ---- interactive synthetic model demo (Scale transfer → B) ---- */
+.syn-demo{border:1px solid rgba(255,95,162,.45);background:linear-gradient(180deg,rgba(255,95,162,.07),rgba(255,95,162,.015) 60%)}
+.demo-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:start}
+.demo-form{display:grid;gap:14px}
+.demo-in{display:grid;gap:4px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:rgba(10,12,16,.35)}
+.demo-in b{font-size:14px}
+.demo-in.out{border-color:rgba(242,130,111,.6)}
+.demo-in.out .tiny{color:var(--insuf)}
+.demo-in input[type=range]{width:100%;accent-color:#ff5fa2;margin:4px 0}
+.demo-out{position:sticky;top:90px}
+.demo-res{display:grid;gap:6px;padding:20px;border-radius:14px;border:2px dashed #ff5fa2;background:rgba(255,95,162,.06)}
+.demo-res.refused{border-color:rgba(242,130,111,.7);background:rgba(242,130,111,.06)}
+.demo-res ul{margin:2px 0 0;color:var(--text2)}
+.demo-num{font-size:44px;line-height:1.05;letter-spacing:-.01em;color:#fff}
+.demo-num small{font-size:18px;color:var(--text2)}
+.demo-res.refused .demo-num{color:var(--insuf)}
+.syn-stamp{justify-self:start;font:700 11px/1 var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:#fff;background:#d6337e;padding:6px 9px;border-radius:6px}
+.demo-res.refused .syn-stamp{background:#9a3b2e}
+.demo-more summary{cursor:pointer;color:var(--text2)}
+.demo-more>div{display:grid;gap:8px;padding-top:8px}
+.spin{display:inline-block;width:11px;height:11px;border:2px solid rgba(255,255,255,.25);border-top-color:#ff5fa2;border-radius:50%;animation:spin .8s linear infinite;vertical-align:-1px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (max-width:860px){.demo-grid{grid-template-columns:minmax(0,1fr)}.demo-out{position:sticky;top:64px;z-index:2;order:-1}.demo-res{padding:12px 14px;gap:4px;background:#1b1219}.demo-res .tiny{display:none}.demo-num{font-size:32px}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}

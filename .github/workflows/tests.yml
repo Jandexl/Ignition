@@ -13,13 +13,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Install science package
-        run: python -m pip install -e backend/ignis-ml
+      - name: Install pinned runtime (same as Render) and the science package
+        run: python -m pip install -r requirements.txt && python -m pip install -e backend/ignis-ml
       - name: ML package tests (77)
         run: cd backend/ignis-ml && python -m unittest discover -s tests -v
       - name: Rebuild data and run acceptance checks (71)
         run: python backend/service/build_frontend_data.py --frontend frontend
-      - name: Backend tests
+      - name: Backend tests (includes the synthetic demo model)
         run: python -m unittest discover -s backend/service/tests -v
       - name: Closeout kit consistency (8)
         run: cd research/closeout_kit && python -m unittest discover -s tests -v

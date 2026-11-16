@@ -13,8 +13,15 @@ Serves the static site and a small JSON API:
   POST /api/predict                scenario per ignis-ml/docs/request.schema.json
                                    returns ignis_ml.prediction.predict(..., bundle=None): never a number.
                                    Validated against response.schema.json before it is sent.
+  GET  /api/synthetic-demo/domain  inputs, observed ranges and labels of the SYNTHETIC demo model
+  POST /api/synthetic-demo         {"flow_velocity_cm_s", "oxygen_percent", "pressure_kpa",
+                                    "sample_width_cm", "flow_direction"} -> ignis_ml.prediction.predict
+                                   with the saved SYNTHETIC_DEMO_MODEL.joblib (see synthetic_demo.py).
+                                   Every answer is labelled SYNTHETIC_DEMO_ONLY: invented data, not NASA.
 
-No model bundle is ever loaded, so this server cannot return a NASA prediction.
+/api/predict never loads a bundle, so this server cannot return a NASA prediction.
+The only model it loads is the synthetic demo bundle, after a SHA-256 check against
+MANIFEST.sha256 and a start-up self-test; its answers go out on a separate endpoint.
 There is no authentication: run it for demos and local integration, behind a
 proper gateway if exposed publicly. CORS origins: IGNITION_CORS_ORIGINS
 (comma-separated, default "*"). POST rate limit: 60 requests per minute per IP.
@@ -38,6 +45,7 @@ sys.path.insert(0, str(HERE))
 
 import jsonschema  # noqa: E402
 import evidence  # noqa: E402
+import synthetic_demo  # noqa: E402
 from ignis_ml import __version__  # noqa: E402
 from ignis_ml.prediction import predict
 from ignis_ml.contracts import REQUEST_SCHEMA  # noqa: E402
@@ -55,6 +63,7 @@ class State:
         self.lock = threading.Lock()
         self.hits = {}
         self.origins = [o.strip() for o in os.environ.get("IGNITION_CORS_ORIGINS", "*").split(",") if o.strip()]
+        self.demo = synthetic_demo.SyntheticDemo()
 
     def sci(self):
         return evidence.load_json(self.data / "scientific_comparisons.json")
@@ -135,7 +144,12 @@ def make_handler(state):
                 man = state.data / "build_manifest.json"
                 return self._json(200, dict(status="ok", service="1gnition", ignis_ml_version=__version__,
                                             data_build=evidence.load_json(man) if man.exists() else None,
-                                            prediction_status=state.sci()["prediction_status"]))
+                                            prediction_status=state.sci()["prediction_status"],
+                                            synthetic_demo=state.demo.status()))
+            if name == "synthetic-demo/domain":
+                if not state.demo.ready:
+                    return self._json(503, dict(error="Synthetic demo model unavailable", reason=state.demo.reason))
+                return self._json(200, state.demo.domain())
             if not name or not set(name) <= COLLECTION_OK:
                 return self._json(404, dict(error="Unknown endpoint"))
             f = state.data / f"{name}.json"
@@ -145,7 +159,7 @@ def make_handler(state):
 
         def do_POST(self):
             path = urlparse(self.path).path
-            if path not in ("/api/compare", "/api/predict", "/api/scenario"):
+            if path not in ("/api/compare", "/api/predict", "/api/scenario", "/api/synthetic-demo"):
                 return self._json(404, dict(error="Unknown endpoint"))
             if not state.allow(self.client_address[0]):
                 return self._json(429, dict(error="Rate limit: 60 requests per minute"))
@@ -155,6 +169,15 @@ def make_handler(state):
                 return self._json(413, dict(error=str(e)))
             except (ValueError, UnicodeDecodeError) as e:
                 return self._json(400, dict(status="INPUT_ERROR", error=str(e).split("\n")[0]))
+            if path == "/api/synthetic-demo":
+                if not state.demo.ready:
+                    return self._json(503, dict(error="Synthetic demo model unavailable", reason=state.demo.reason))
+                try:
+                    return self._json(200, state.demo.run(body))
+                except ValueError as e:
+                    return self._json(400, dict(status="INPUT_ERROR", error=str(e)))
+                except (jsonschema.ValidationError, RuntimeError) as e:
+                    return self._json(500, dict(error="Synthetic response refused", detail=str(e).split("\n")[0]))
             if path == "/api/compare":
                 if not isinstance(body, dict) or not isinstance(body.get("baseline"), str) or not isinstance(body.get("comparison"), str):
                     return self._json(400, dict(status="INPUT_ERROR", error="Send {\"baseline\": id, \"comparison\": id}"))
@@ -193,6 +216,7 @@ def serve(frontend, host="127.0.0.1", port=8787):
     state = State(frontend)
     mimetypes.add_type("text/markdown; charset=utf-8", ".md")
     httpd = ThreadingHTTPServer((host, port), make_handler(state))
+    httpd.state = state
     return httpd
 
 
@@ -204,4 +228,5 @@ if __name__ == "__main__":
     a = ap.parse_args()
     httpd = serve(a.frontend, a.host, a.port)
     print(f"1gnition serving {Path(a.frontend).resolve()} on http://{a.host}:{a.port}  (API under /api/)")
+    print("Synthetic demo model:", "ready" if httpd.state.demo.ready else f"DISABLED ({httpd.state.demo.reason})")
     httpd.serve_forever()

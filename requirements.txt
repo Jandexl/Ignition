@@ -1,0 +1,5 @@
+# Runtime for the 1gnition API on Render (backend/service/server.py).
+# Pinned to the versions SYNTHETIC_DEMO_MODEL.joblib was saved with
+# (backend/ignis-ml/outputs/runtime_versions.json). The server also self-tests the
+# model at start-up and disables the demo if a version change alters its output.
+-r backend/ignis-ml/requirements-tested.txt

@@ -33,4 +33,3 @@
 [4/5] 71 of 71 acceptance checks passed
 seed.js rebuilt: {'meta': 'object', 'sources': 25, 'investigations': 10, 'runs': 6, 'spread_rates': 1, 'findings': 4, 'flags': 4, 'predictions': 0, 'scientific_comparisons': 'object', 'synthetic_verification_results': 'object', 'synthetic_model_benchmark': 'object', 'evidence_catalog': 48, 'build_manifest': 'object', 'source_conflicts': 'object', 'brand_copy': 'object', 'science_project_status': 'object'}
 [5/5] build_manifest.json written, seed.js rebuilt
-seed.js rebuilt: {'meta': 'object', 'sources': 25, 'investigations': 10, 'runs': 6, 'spread_rates': 1, 'findings': 4, 'flags': 4, 'predictions': 0, 'scientific_comparisons': 'object', 'synthetic_verification_results': 'object', 'synthetic_model_benchmark': 'object', 'evidence_catalog': 48, 'build_manifest': 'object', 'source_conflicts': 'object', 'brand_copy': 'object', 'science_project_status': 'object'}

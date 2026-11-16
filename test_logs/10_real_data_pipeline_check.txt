@@ -1,0 +1,65 @@
+Diagnostic run of ignis_ml.validation.validate and ignis_ml.evaluation.evaluate on the project's real data.
+The evaluation plan below is HYPOTHETICAL (filled in only to reach the data-level checks); nothing is saved.
+
+== data/current/ignis_experiments_starter.csv (adapter 'starter'): 4 rows -> validation INVALID, evaluation VALIDATION_NOT_SUPPORTED
+   ERROR MISSING_VALUE: investigation_id: missing values block reviewed evaluation. (4 rows)
+   ERROR MISSING_VALUE: dependency_group_id: missing values block reviewed evaluation. (4 rows)
+   ERROR MISSING_VALUE: flow_direction: missing values block reviewed evaluation. (4 rows)
+   ERROR MISSING_VALUE: gravity_regime: missing values block reviewed evaluation. (4 rows)
+   ERROR MISSING_VALUE: combustion_regime: missing values block reviewed evaluation. (4 rows)
+   ERROR MISSING_VALUE: flame_spread_rate_cm_s: missing values block reviewed evaluation. (4 rows)
+   ERROR MISSING_VALUE: measurement_status: missing values block reviewed evaluation. (4 rows)
+   ERROR MISSING_VALUE: review_id: missing values block reviewed evaluation. (4 rows)
+   ERROR MISSING_VALUE: geometry_definition_id: missing values block reviewed evaluation. (4 rows)
+   ERROR UNAPPROVED_OUTCOME_TYPE: outcome_type must be one of ['flame_spread_rate']. (4 rows)
+   ERROR UNAPPROVED_OUTCOME_UNIT: outcome_unit must be one of ['cm/s']. (4 rows)
+   ERROR UNAPPROVED_FLOW_DIRECTION: flow_direction must be one of ['concurrent', 'opposed']. (4 rows)
+   ERROR UNAPPROVED_VERIFICATION_STATUS: verification_status must be one of ['verified']. (4 rows)
+   ERROR UNAPPROVED_GROUPING_STATUS: grouping_status must be one of ['verified']. (4 rows)
+   ERROR UNAPPROVED_MEASUREMENT_STATUS: measurement_status must be one of ['verified_numeric', 'reviewed_digitized']. (4 rows)
+   ERROR UNAPPROVED_GEOMETRY_STATUS: geometry_status must be one of ['verified']. (4 rows)
+   ERROR GEOMETRY_DEFINITIONS: Geometry requires one consistent reviewed definition ID per cohort.
+   ERROR SOURCE_MANIFEST: Manifest needs source_id, title, url and verification_status.
+   warn  UNKNOWN_GEOMETRY: sample_thickness_mm unavailable in some rows; excluded unless verified and complete.
+
+== data/current/ignis_bass_saffire_candidate_observations.csv (adapter 'candidate'): 23 rows -> validation INVALID, evaluation VALIDATION_NOT_SUPPORTED
+   ERROR MISSING_VALUE: investigation_id: missing values block reviewed evaluation. (23 rows)
+   ERROR MISSING_VALUE: run_id: missing values block reviewed evaluation. (23 rows)
+   ERROR MISSING_VALUE: dependency_group_id: missing values block reviewed evaluation. (23 rows)
+   ERROR MISSING_VALUE: gravity_regime: missing values block reviewed evaluation. (23 rows)
+   ERROR MISSING_VALUE: combustion_regime: missing values block reviewed evaluation. (23 rows)
+   ERROR MISSING_VALUE: oxygen_percent: missing values block reviewed evaluation. (16 rows)
+   ERROR MISSING_VALUE: pressure_kpa: missing values block reviewed evaluation. (16 rows)
+   ERROR MISSING_VALUE: review_id: missing values block reviewed evaluation. (23 rows)
+   ERROR MISSING_VALUE: geometry_definition_id: missing values block reviewed evaluation. (23 rows)
+   ERROR UNAPPROVED_VERIFICATION_STATUS: verification_status must be one of ['verified']. (23 rows)
+   ERROR UNAPPROVED_GROUPING_STATUS: grouping_status must be one of ['verified']. (23 rows)
+   ERROR UNAPPROVED_MEASUREMENT_STATUS: measurement_status must be one of ['verified_numeric', 'reviewed_digitized']. (23 rows)
+   ERROR UNAPPROVED_GEOMETRY_STATUS: geometry_status must be one of ['verified']. (23 rows)
+   ERROR GEOMETRY_DEFINITIONS: Geometry requires one consistent reviewed definition ID per cohort.
+   ERROR SOURCE_MANIFEST: Manifest needs source_id, title, url and verification_status.
+   warn  UNKNOWN_GEOMETRY: sample_length_cm unavailable in some rows; excluded unless verified and complete.
+   warn  UNKNOWN_GEOMETRY: sample_thickness_mm unavailable in some rows; excluded unless verified and complete.
+
+Reviewed Olson et al. (2023) Table 1 records: 8 | approved_for_ml true: 0 | distinct configurations: 8 | flights: 6 | materials: ['Cotton', 'SIBAL']
+   source manifest columns: ['source_id', 'title', 'url', 'source_type', 'location_or_scope', 'audit_notes', 'access_status', 'retrieved_date']
+
+== data/revision/ignis_table1_rates.csv (known fields only, unknowns left missing): 8 rows -> validation INVALID, evaluation VALIDATION_NOT_SUPPORTED
+   ERROR MISSING_VALUE: investigation_id: missing values block reviewed evaluation. (8 rows)
+   ERROR MISSING_VALUE: dependency_group_id: missing values block reviewed evaluation. (8 rows)
+   ERROR MISSING_VALUE: combustion_regime: missing values block reviewed evaluation. (8 rows)
+   ERROR MISSING_VALUE: verification_status: missing values block reviewed evaluation. (8 rows)
+   ERROR MISSING_VALUE: grouping_status: missing values block reviewed evaluation. (8 rows)
+   ERROR MISSING_VALUE: review_id: missing values block reviewed evaluation. (8 rows)
+   ERROR MISSING_VALUE: geometry_status: missing values block reviewed evaluation. (8 rows)
+   ERROR MISSING_VALUE: geometry_definition_id: missing values block reviewed evaluation. (8 rows)
+   ERROR AUDIT_VETO: approved_for_ml is not explicitly true in supplied audit. (8 rows)
+   ERROR UNAPPROVED_VERIFICATION_STATUS: verification_status must be one of ['verified']. (8 rows)
+   ERROR UNAPPROVED_GROUPING_STATUS: grouping_status must be one of ['verified']. (8 rows)
+   ERROR UNAPPROVED_GEOMETRY_STATUS: geometry_status must be one of ['verified']. (8 rows)
+   ERROR GEOMETRY_DEFINITIONS: Geometry requires one consistent reviewed definition ID per cohort.
+   ERROR SOURCE_MANIFEST: Manifest needs source_id, title, url and verification_status.
+   warn  MATERIAL_COMPARABILITY: Multiple materials require explicit scientific comparability review.
+   warn  UNKNOWN_GEOMETRY: sample_thickness_mm unavailable in some rows; excluded unless verified and complete.
+
+If every review were complete and each burn were its own independent group: 8 single-burn groups, min_groups = 3 -> leave-one-out would run, but every held-out burn is a one-off configuration, with no repeat burns to estimate run-to-run variability.
