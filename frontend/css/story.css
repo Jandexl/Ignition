@@ -647,3 +647,10 @@ table.claims{table-layout:fixed}table.claims td{overflow-wrap:anywhere}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media (max-width:860px){.demo-grid{grid-template-columns:minmax(0,1fr)}.demo-out{position:sticky;top:64px;z-index:2;order:-1}.demo-res{padding:12px 14px;gap:4px;background:#1b1219}.demo-res .tiny{display:none}.demo-num{font-size:32px}}
 @media (prefers-reduced-motion:reduce){.spin{animation:none}}
+
+/* ---- Ask 1gnition: AI mode ---- */
+.ask-kind.ai{color:#ffb27a;border-color:rgba(255,106,31,.55)}
+.msg.a.ai{border-left-color:var(--flame,#ff6a1f)}
+.msg .ai-tag{font-size:11px}
+.ai-warn{color:var(--insuf);margin:0}
+.msg.a.pending{border-left-color:var(--line2)}

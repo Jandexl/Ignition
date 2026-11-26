@@ -10,6 +10,8 @@ Serves the static site and a small JSON API:
   POST /api/scenario               published measurement matches and model status
   POST /api/compare                {"baseline": "I-1", "comparison": "II-5"}
                                    deterministic descriptive comparison of two Olson Table 1 records
+  POST /api/ask                    AI assistant (Google Gemini) grounded in the indexed records; see assistant.py.
+                                   Needs GEMINI_API_KEY on the server; 6 questions/min per visitor, 20/min site-wide.
   POST /api/predict                scenario per ignis-ml/docs/request.schema.json
                                    returns ignis_ml.prediction.predict(..., bundle=None): never a number.
                                    Validated against response.schema.json before it is sent.
@@ -46,6 +48,7 @@ sys.path.insert(0, str(HERE))
 import jsonschema  # noqa: E402
 import evidence  # noqa: E402
 import synthetic_demo  # noqa: E402
+import assistant  # noqa: E402
 from ignis_ml import __version__  # noqa: E402
 from ignis_ml.prediction import predict
 from ignis_ml.contracts import REQUEST_SCHEMA  # noqa: E402
@@ -53,6 +56,8 @@ from ignis_ml.contracts import REQUEST_SCHEMA  # noqa: E402
 RESPONSE_SCHEMA = json.loads((PKG / "docs" / "response.schema.json").read_text())
 MAX_BODY = 16 * 1024
 RATE = 60
+ASK_RATE_IP = 6        # AI questions per minute per visitor
+ASK_RATE_ALL = 20      # AI questions per minute for the whole site (protects the Gemini quota)
 COLLECTION_OK = set("abcdefghijklmnopqrstuvwxyz_")
 
 
@@ -64,9 +69,22 @@ class State:
         self.hits = {}
         self.origins = [o.strip() for o in os.environ.get("IGNITION_CORS_ORIGINS", "*").split(",") if o.strip()]
         self.demo = synthetic_demo.SyntheticDemo()
+        self.ai = assistant.Assistant(self.frontend, demo=self.demo)
+        self.ask_hits = {}
 
     def sci(self):
         return evidence.load_json(self.data / "scientific_comparisons.json")
+
+    def allow_ask(self, ip):
+        now = time.time()
+        with self.lock:
+            mine = [t for t in self.ask_hits.get(ip, []) if now - t < 60]
+            every = [t for t in self.ask_hits.get("*", []) if now - t < 60]
+            if len(mine) >= ASK_RATE_IP or len(every) >= ASK_RATE_ALL:
+                self.ask_hits[ip], self.ask_hits["*"] = mine, every
+                return False
+            self.ask_hits[ip], self.ask_hits["*"] = mine + [now], every + [now]
+            return True
 
     def allow(self, ip):
         now = time.time()
@@ -145,7 +163,8 @@ def make_handler(state):
                 return self._json(200, dict(status="ok", service="1gnition", ignis_ml_version=__version__,
                                             data_build=evidence.load_json(man) if man.exists() else None,
                                             prediction_status=state.sci()["prediction_status"],
-                                            synthetic_demo=state.demo.status()))
+                                            synthetic_demo=state.demo.status(),
+                                            assistant=state.ai.status()))
             if name == "synthetic-demo/domain":
                 if not state.demo.ready:
                     return self._json(503, dict(error="Synthetic demo model unavailable", reason=state.demo.reason))
@@ -157,11 +176,15 @@ def make_handler(state):
                 return self._json(404, dict(error=f"No collection '{name}'"))
             return self._json(200, evidence.load_json(f))
 
+        def _ip(self):
+            fwd = self.headers.get("X-Forwarded-For", "")   # Render's proxy puts the visitor first
+            return fwd.split(",")[0].strip() or self.client_address[0]
+
         def do_POST(self):
             path = urlparse(self.path).path
-            if path not in ("/api/compare", "/api/predict", "/api/scenario", "/api/synthetic-demo"):
+            if path not in ("/api/compare", "/api/predict", "/api/scenario", "/api/synthetic-demo", "/api/ask"):
                 return self._json(404, dict(error="Unknown endpoint"))
-            if not state.allow(self.client_address[0]):
+            if not state.allow(self._ip()):
                 return self._json(429, dict(error="Rate limit: 60 requests per minute"))
             try:
                 body = self._body()
@@ -169,6 +192,17 @@ def make_handler(state):
                 return self._json(413, dict(error=str(e)))
             except (ValueError, UnicodeDecodeError) as e:
                 return self._json(400, dict(status="INPUT_ERROR", error=str(e).split("\n")[0]))
+            if path == "/api/ask":
+                if not state.ai.ready:
+                    return self._json(503, dict(error="AI assistant not configured", reason=state.ai.status()["reason"]))
+                if not state.allow_ask(self._ip()):
+                    return self._json(429, dict(error="Too many questions right now. Wait a minute and ask again."))
+                try:
+                    return self._json(200, state.ai.ask(body))
+                except ValueError as e:
+                    return self._json(400, dict(status="INPUT_ERROR", error=str(e)))
+                except RuntimeError as e:
+                    return self._json(502, dict(error=str(e)))
             if path == "/api/synthetic-demo":
                 if not state.demo.ready:
                     return self._json(503, dict(error="Synthetic demo model unavailable", reason=state.demo.reason))
@@ -229,4 +263,6 @@ if __name__ == "__main__":
     httpd = serve(a.frontend, a.host, a.port)
     print(f"1gnition serving {Path(a.frontend).resolve()} on http://{a.host}:{a.port}  (API under /api/)")
     print("Synthetic demo model:", "ready" if httpd.state.demo.ready else f"DISABLED ({httpd.state.demo.reason})")
+    ai = httpd.state.ai.status()
+    print("AI assistant:", f"ready ({ai['provider']}, {ai['model']})" if ai["ready"] else f"OFF ({ai['reason']}); the site uses its offline helper")
     httpd.serve_forever()

@@ -270,7 +270,7 @@
     rows += `<tr><td>Maximum size</td><td class="n">${pv("runs", A.id, "max_size_cm", (A.max_size_cm ?? "n/a") + " cm")}</td><td class="n">${pv("runs", B.id, "max_size_cm", (B.max_size_cm ?? "n/a") + " cm")}</td><td><span class="st m">context</span></td></tr></tbody>`;
     $("cmpTable").innerHTML = rows;
     const loc = `${D.source(A.provenance.source_id).title}, ${A.provenance.location}`;
-    $("cmpAI").innerHTML = `<div class="ai-h">${plain(C.AI_ENDPOINT ? "AI explanation" : "Explanation written by 1gnition rules (offline)")}<button class="btn btn-quiet btn-sm" type="button" data-ask="Explain the comparison between ${A.id} and ${B.id}">Ask a follow-up</button></div>
+    $("cmpAI").innerHTML = `<div class="ai-h">${plain("Explanation written by 1gnition rules")}<button class="btn btn-quiet btn-sm" type="button" data-ask="Explain the comparison between ${A.id} and ${B.id}">Ask a follow-up</button></div>
       <p>${ch.length === 1 ? `Between ${A.id} and ${B.id} the only listed change is ${names[0]}. The reported steady size ${d === 0 ? "stays at " + A.steady_size_cm + " cm" : "moves from " + A.steady_size_cm + " to " + B.steady_size_cm + " cm"}. 1gnition built this comparison from two published values. The paper reports that steady size was affected by oxygen and flow velocity, but it does not discuss this pair.`
         : ch.length === 0 ? `${A.id} and ${B.id} share every listed condition, so they act as a rough repeat. The difference between them hints at run-to-run spread.`
         : `${A.id} and ${B.id} differ in ${names.length} listed conditions, so the size difference cannot be credited to any one of them. Look for a pair that changes one condition at a time.`}</p>
@@ -1049,25 +1049,77 @@
   function hidePop() { $("pop").classList.add("hide"); }
 
   /* ---------------- ask ---------------- */
-  const SUGGEST = ["What do we know at 30% oxygen and 70 kPa?", "Is there lunar gravity data?", "Which runs can be fairly compared?", "What spread rates are indexed?"];
+  const SUGGEST = ["What do we know at 30% oxygen and 70 kPa?", "Is there lunar gravity data?", "Which runs can be fairly compared?", "Why is there no predicted spread rate?"];
+  const AIQ = { mode: C.AI_ENDPOINT ? "unknown" : "off", history: [], busy: false };   // mode: unknown | ai | off
+  const AI_STATE = { supported: ["Supported by the records", "s-pub"], limited: ["Partly supported", "s-expl"],
+    insufficient: ["Insufficient evidence", "s-insuf"], out_of_scope: ["Outside 1gnition's evidence", "s-plain"] };
+  function askHeader() {
+    const ai = AIQ.mode === "ai";
+    $("askKind").textContent = ai ? "AI · Google Gemini" : "offline · rule-based";
+    $("askKind").classList.toggle("ai", ai);
+    $("askMode").textContent = ai
+      ? "AI-generated answers from Google Gemini, using only 1gnition's indexed records and science notes. It is told never to predict a spread rate. AI can still make mistakes, so check the cited sources."
+      : ((D.brand_copy || {}).assistant_disclosure || "Ask 1gnition is an offline rule-based evidence helper, not a generative AI assistant.") + " Answers are written by fixed rules from the indexed records." + (AIQ.mode === "unknown" ? " Connecting to the AI assistant…" : "");
+  }
+  async function aiProbe() {
+    if (!C.AI_ENDPOINT || AIQ.mode !== "unknown") return;
+    try {
+      const r = await fetch(C.HEALTH_ENDPOINT || C.AI_ENDPOINT.replace(/\/ask$/, "/health"));
+      const j = await r.json();
+      AIQ.mode = j.assistant && j.assistant.ready ? "ai" : "off";
+    } catch (e) { AIQ.mode = "off"; }
+    askHeader();
+  }
   function openAsk(q) {
     $("drawer").classList.add("open"); $("drawer").setAttribute("aria-hidden", "false");
-    $("askMode").textContent = C.AI_ENDPOINT ? "Answers come from the backend configured in js/config.js and must cite indexed records." : ((D.brand_copy || {}).assistant_disclosure || "Ask 1gnition is an offline rule-based evidence helper, not a generative AI assistant.") + " Answers are written by fixed rules from the indexed records.";
+    askHeader(); aiProbe();
     $("askSuggest").innerHTML = SUGGEST.map(s => `<button class="chip" type="button" data-q="${esc(s)}">${esc(s)}</button>`).join("");
     if (q) ask(q); else setTimeout(() => $("askIn").focus(), 50);
   }
   function closeAsk() { $("drawer").classList.remove("open"); $("drawer").setAttribute("aria-hidden", "true"); }
+  function citeHTML(c) {
+    const s = D.source(c.source_id);
+    const name = s ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a>` : esc(c.source_id);
+    return name + (c.location ? `, ${esc(c.location)}` : "");
+  }
   async function ask(q) {
+    if (AIQ.busy) return;
     const log = $("askLog");
     log.insertAdjacentHTML("beforeend", `<div class="msg q">${esc(q)}</div>`);
-    let ans;
-    if (C.AI_ENDPOINT) {
+    log.scrollTop = log.scrollHeight;
+    if (C.AI_ENDPOINT && AIQ.mode !== "off") {
+      AIQ.busy = true;
+      const wait = document.createElement("div");
+      wait.className = "msg a pending"; wait.innerHTML = `<p class="small muted"><span class="spin" aria-hidden="true"></span> Thinking… The first answer can take up to a minute while the free server wakes.</p>`;
+      log.appendChild(wait); log.scrollTop = log.scrollHeight;
       try {
-        const r = await fetch(C.AI_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question: q, scenario: { material: S.mat, outcome: S.out, o2_pct: L.num(S.o2), pressure_kpa: L.num(S.p), gravity: S.g, airflow_cm_s: L.num(S.air) }, context: { runs: D.runs, spread_rates: D.spread_rates, findings: D.findings } }) });
-        const j = await r.json(); ans = { text: j.answer, state: j.state || "insuf", cites: (j.citations || []).map(c => `${(D.source(c.source_id) || {}).title || c.source_id}, ${c.location || ""}`) };
-      } catch (e) { ans = offline(q); ans.text = "The AI backend did not respond, so this is the offline answer. " + ans.text; }
-    } else ans = offline(q);
-    log.insertAdjacentHTML("beforeend", `<div class="msg a fade-in"><div class="row">${st(ans.state)}${C.AI_ENDPOINT ? "" : plain("offline")}</div><p>${esc(ans.text)}</p>${ans.cites.length ? `<span class="cite">Cites: ${ans.cites.map(esc).join("; ")}</span>` : ""}</div>`);
+        const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 90000);
+        const r = await fetch(C.AI_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, signal: ctl.signal,
+          body: JSON.stringify({ question: q, history: AIQ.history.slice(-6),
+            scenario: { material: S.mat, outcome: S.out, o2_pct: L.num(S.o2), pressure_kpa: L.num(S.p), gravity: S.g, airflow_cm_s: L.num(S.air), flow_direction: S.dir || null } }) });
+        clearTimeout(tm);
+        const j = await r.json().catch(() => ({}));
+        wait.remove();
+        if (r.status === 503) { AIQ.mode = "off"; askHeader(); throw new Error("The AI assistant isn't switched on for this server"); }
+        if (!r.ok) throw new Error(j.error || "Request failed (" + r.status + ")");
+        if (j.ai_generated !== true || typeof j.answer !== "string") throw new Error("The backend's answer was not labelled as AI-generated");
+        AIQ.mode = "ai"; askHeader();
+        AIQ.history.push({ role: "user", text: q }, { role: "assistant", text: j.answer });
+        const [lab, cls] = AI_STATE[j.state] || AI_STATE.limited;
+        const warn = (j.unverified_numbers || []).length ? `<p class="small ai-warn">Check: ${j.unverified_numbers.map(esc).join(", ")} ${j.unverified_numbers.length === 1 ? "doesn't" : "don't"} appear in 1gnition's records. Treat ${j.unverified_numbers.length === 1 ? "it" : "them"} as unverified.</p>` : "";
+        log.insertAdjacentHTML("beforeend", `<div class="msg a ai fade-in"><div class="row"><span class="state ${cls}">${lab}</span><span class="state s-plain ai-tag">AI-generated · ${esc(j.model || "Gemini")}</span></div>
+          <p>${esc(j.answer)}</p>${warn}${(j.citations || []).length ? `<span class="cite">Cites: ${j.citations.map(citeHTML).join("; ")}</span>` : `<span class="cite">No indexed source cited.</span>`}</div>`);
+      } catch (e) {
+        wait.remove();
+        const ans = offline(q);
+        const why = (e.name === "AbortError" ? "The AI assistant took too long to answer" : String(e.message || e)).replace(/[.\s]+$/, "");
+        log.insertAdjacentHTML("beforeend", `<div class="msg a fade-in"><div class="row">${st(ans.state)}${plain("offline")}</div><p class="small ai-warn">${esc(why)}. Here is the offline rule-based answer instead.</p><p>${esc(ans.text)}</p>${ans.cites.length ? `<span class="cite">Cites: ${ans.cites.map(esc).join("; ")}</span>` : ""}</div>`);
+      }
+      AIQ.busy = false;
+    } else {
+      const ans = offline(q);
+      log.insertAdjacentHTML("beforeend", `<div class="msg a fade-in"><div class="row">${st(ans.state)}${plain("offline")}</div><p>${esc(ans.text)}</p>${ans.cites.length ? `<span class="cite">Cites: ${ans.cites.map(esc).join("; ")}</span>` : ""}</div>`);
+    }
     log.scrollTop = log.scrollHeight;
   }
   function offline(q) {
@@ -1088,6 +1140,12 @@
       return { state: "expl", text: `Pairs that change one listed condition: ${pairs.join("; ")}. Each is one run per configuration with no stated uncertainty, so treat them as exploratory.`, cites: [T2] };
     }
     if (runId && !pct) { const r = runId; return { state: "pub", text: `${r.id} (${r.flight}) burned ${L.matName(r.material)} at ${r.o2_pct}% oxygen, ${r.pressure_kpa} kPa and ${r.airflow_cm_s} cm/s in a ${r.duct_height_cm} cm duct, sample ${r.sample_width_cm} × ${r.sample_length_cm} cm. Reported steady size ${r.steady_size_cm} cm, maximum ${r.max_size_cm} cm.`, cites: [`${D.source(r.provenance.source_id).title}, ${r.provenance.location}`] }; }
+    if (/predict|forecast|model|machine learning|\bml\b|estimate/.test(s)) {
+      return { state: "insuf", text: "1gnition gives no predicted spread rate. The prediction status is VALIDATION_NOT_SUPPORTED: no NASA spread-rate model has been independently evaluated, so any number would be a guess. The only model numbers on the site come from the synthetic demo, which is trained on invented data and labelled as such.", cites: ["1gnition methodology"] };
+    }
+    if (!pct && !kpa && !/oxygen|o2|pressure|kpa|atmosphere|scenario|habitat|cabin/.test(s)) {
+      return { state: "insuf", text: "The offline helper couldn't match that question. It can answer questions about oxygen and pressure (for example \u201c30% oxygen at 70 kPa\u201d), lunar gravity, published spread rates, fair comparisons, predictions, or a run ID such as II-5.", cites: [] };
+    }
     const o2 = pct ? parseFloat(pct[1]) : L.num(S.o2), p = kpa ? parseFloat(kpa[1]) : L.num(S.p);
     if (o2 === null || p === null) return { state: "insuf", text: "Give an oxygen percentage and a pressure in kPa, or set them in the scenario panel, and 1gnition will check them against the indexed runs.", cites: [] };
     const nr = L.nearest(D.runs, o2, p), inside = L.within(nr.r, o2, p);

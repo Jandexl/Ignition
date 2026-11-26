@@ -112,7 +112,7 @@ async def run(base, out, chrome):
         await pg.goto(U()); await pg.wait_for_timeout(1800)
         H = norm(await pg.inner_text(".hx-copy h1"))
         await pg.screenshot(path=str(out / "QA08_hero.png"))
-        await pg.click("#askBtn"); await pg.wait_for_timeout(400)
+        await pg.click("#askBtn"); await pg.wait_for_timeout(2500)   # lets the panel learn whether the AI backend is on
         A = norm(await pg.inner_text("#drawer"))
         await pg.screenshot(path=str(out / "QA08_ask.png"))
         await pg.keyboard.press("Escape")
@@ -122,7 +122,9 @@ async def run(base, out, chrome):
             views_ok.append(await pg.evaluate(f"!document.getElementById('v-{v}').hidden && getComputedStyle(document.getElementById('v-{v}')).display !== 'none'"))
         origin = await pg.evaluate("IGNIS_DATA.origin")
         rec("QA08", [("hero ZERO GUESSING. / ZERO HIDDEN UNCERTAINTY. / 1gnition", H.startswith("ZERO GUESSING. ZERO HIDDEN UNCERTAINTY. 1gnition") or H.replace("\n", " ").startswith("ZERO GUESSING.ZERO HIDDEN UNCERTAINTY.1gnition") or ("ZERO GUESSING." in H and "ZERO HIDDEN UNCERTAINTY." in H and H.strip().endswith("1gnition"))),
-                     ("Ask says offline rule-based, not generative AI", "offline rule-based evidence helper, not a generative AI assistant" in A),
+                     ("Ask discloses what it is: AI-generated (Gemini, check sources) or offline rule-based",
+                      ("AI · GOOGLE GEMINI" in A.upper() and "AI-generated answers" in A and "check the cited sources" in A)
+                      or ("offline rule-based evidence helper, not a generative AI assistant" in A)),
                      ("all views load after refresh/deep link", all(views_ok)), ("data from static JSON, not an API", origin == "the project data files"),
                      ("no failed requests", not failed_req), ("no console or page errors", not errs)], "QA08_hero.png")
         await b.close()

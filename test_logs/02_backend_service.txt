@@ -1,3 +1,17 @@
+test_context_has_records_sources_and_no_key (test_assistant.ContextUnit.test_context_has_records_sources_and_no_key) ... ok
+test_without_key_ask_is_503_and_health_says_off (test_assistant.NoKey.test_without_key_ask_is_503_and_health_says_off) ... /usr/lib/python3.12/unittest/case.py:589: ResourceWarning: unclosed <socket.socket fd=3, family=2, type=1, proto=0, laddr=('127.0.0.1', 37137)>
+  if method() is not None:
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_answer_is_labelled_and_citations_checked (test_assistant.WithFakeGemini.test_answer_is_labelled_and_citations_checked) ... ok
+test_bad_state_and_non_json_reply_are_handled (test_assistant.WithFakeGemini.test_bad_state_and_non_json_reply_are_handled) ... ok
+test_health_reports_ready_model (test_assistant.WithFakeGemini.test_health_reports_ready_model) ... ok
+test_input_validation (test_assistant.WithFakeGemini.test_input_validation) ... ok
+test_invented_numbers_are_flagged (test_assistant.WithFakeGemini.test_invented_numbers_are_flagged) ... ok
+test_numbers_from_question_are_not_flagged (test_assistant.WithFakeGemini.test_numbers_from_question_are_not_flagged) ... ok
+test_per_visitor_rate_limit (test_assistant.WithFakeGemini.test_per_visitor_rate_limit) ... ok
+test_request_sent_to_gemini_is_grounded (test_assistant.WithFakeGemini.test_request_sent_to_gemini_is_grounded) ... ok
+test_upstream_errors_become_clear_messages (test_assistant.WithFakeGemini.test_upstream_errors_become_clear_messages) ... ok
 test_acceptance_checks_all_pass (test_backend.Adapter.test_acceptance_checks_all_pass) ... ok
 test_adhoc_pair_matches_package_arithmetic (test_backend.Adapter.test_adhoc_pair_matches_package_arithmetic) ... ok
 test_catalog_classes_and_no_double_counting (test_backend.Adapter.test_catalog_classes_and_no_double_counting) ... ok
@@ -33,6 +47,9 @@ test_synthetic_demo_reproduces_saved_reference (test_backend.Api.test_synthetic_
 test_tampered_model_file_is_refused (test_backend.Api.test_tampered_model_file_is_refused) ... ok
 
 ----------------------------------------------------------------------
-Ran 33 tests in 0.939s
+Ran 44 tests in 2.082s
 
 OK
+sys:1: ResourceWarning: unclosed <socket.socket fd=4, family=2, type=1, proto=0, laddr=('127.0.0.1', 37059)>
+sys:1: ResourceWarning: unclosed <socket.socket fd=5, family=2, type=1, proto=0, laddr=('127.0.0.1', 34417)>
+sys:1: ResourceWarning: unclosed <socket.socket fd=3, family=2, type=1, proto=0, laddr=('127.0.0.1', 43475)>

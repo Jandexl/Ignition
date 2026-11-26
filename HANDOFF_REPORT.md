@@ -6,6 +6,18 @@ Public site (static, complete): https://claude.ai/artifact/519TnVzzHEeWpvkrSwT34
 
 ---
 
+## 000. Ask 1gnition becomes an AI assistant (26 November 2026)
+
+- **What changed:** Ask 1gnition now answers with Google Gemini through `POST /api/ask` (`backend/service/assistant.py`). Before, it matched a few fixed question patterns.
+- **Grounding:** Gemini receives only 1gnition's records (Olson Table 1, comparisons, runs, investigations, conflicts, flags, sources, the 2×2 design, the NASA prediction status, the synthetic-model summary) and the science notes. It is told to answer only from them, never to predict a spread rate, and to cite sources. The server drops unknown citations and flags numbers that are not in the records; the panel shows those as "unverified".
+- **Labels:** the panel header reads "AI · Google Gemini"; every answer is tagged "AI-generated · <model>" with its evidence state and sources.
+- **Fallback:** no key, Gemini down or rate-limited → the panel says why and shows the offline rule-based answer. The offline helper no longer answers unrecognised questions with the scenario's oxygen/pressure.
+- **Scientific Lead approval needed:** the closeout kit's QA case 8 expected "Ask clearly says offline rule-based". With a Gemini key set, Ask now discloses that answers are AI-generated instead. `brand_copy.json` is unchanged and still describes the offline fallback. `final_ui_qa.py` accepts either disclosure.
+- **Tests:** 11 new backend tests against a fake Gemini server (44 total); UI 41/41 and QA 8/8 with the AI on and with it off.
+- **Needs a person:** add `GEMINI_API_KEY` in Render → Environment.
+
+---
+
 ## 00. Synthetic model demo and Render connection (16 November 2026)
 
 | Request | Status | Evidence |

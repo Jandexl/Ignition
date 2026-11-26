@@ -7,8 +7,11 @@
  *
  * AI_ENDPOINT
  *   Empty: the Ask panel uses offline, rule-based answers and labels them as such.
- *   Set:   the Ask panel POSTs {question, scenario, context} and expects
- *          {answer, citations:[{source_id, location}], state}. See DATA_CONTRACT.md.
+ *   Set:   the Ask panel POSTs {question, scenario, history} to the backend (backend/service/assistant.py),
+ *          which asks Google Gemini using only 1gnition's indexed records, and expects
+ *          {answer, state, citations:[{source_id, location}], unverified_numbers, model}.
+ *          If the backend is unreachable or has no GEMINI_API_KEY, the panel falls back to the
+ *          offline helper and says so.
  *   Never put an API key in this file. Keys live on the server.
  *
  * BACKEND_URL
@@ -30,7 +33,7 @@ window.IGNIS_CONFIG = {
   DATA_MODE: "files",
   DATA_BASE: "data/",
   API_BASE: "",
-  AI_ENDPOINT: "",
+  AI_ENDPOINT: window.IGNIS_BACKEND.ROOT + "/api/ask",   // Ask 1gnition: Google Gemini on the backend, grounded in the indexed records. "" = offline helper only
   COLLECTIONS: ["meta", "sources", "investigations", "runs", "spread_rates", "findings", "flags", "predictions", "scientific_comparisons", "synthetic_verification_results", "synthetic_model_benchmark", "evidence_catalog", "build_manifest", "source_conflicts", "brand_copy", "science_project_status"],
   OPTIONAL: ["synthetic_verification_results", "synthetic_model_benchmark", "evidence_catalog", "build_manifest", "source_conflicts", "brand_copy", "science_project_status"],   // site still works if these are absent
   BACKEND_URL: window.IGNIS_BACKEND.URL,

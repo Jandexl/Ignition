@@ -10,7 +10,9 @@ A thin layer around the science/ML package in `../ignis-ml` (Python import name 
 | `evidence.py` | Adapter: `compare_records`, `build_catalog`, `acceptance_checks`, `table1_evidence_frame`. Never changes a source value. |
 | `server.py` | Standard-library HTTP server: static site plus `/api/*`. |
 | `synthetic_demo.py` | Loads `ignis-ml/outputs/SYNTHETIC_DEMO_MODEL.joblib` with `ignis_ml.prediction.load` after a SHA-256 check against `MANIFEST.sha256`, self-tests it against the saved reference prediction, and answers with `ignis_ml.prediction.predict`. Any failure disables the demo (503) instead of guessing. |
+| `assistant.py` | Ask 1gnition: sends a question plus 1gnition's indexed records to Google Gemini (`GEMINI_API_KEY`, `GEMINI_MODEL`), keeps only citations to real indexed sources, and flags numbers not found in the records. |
 | `check_deploy.py` | 12 end-to-end checks against a deployed server (default https://onegnition.onrender.com). |
+| `tests/test_assistant.py` | 11 tests for the AI assistant against a fake Gemini server: grounding, citation filtering, unverified numbers, errors, rate limits. |
 | `tests/test_backend.py` | 33 tests: adapter, acceptance checks, manifest hashes, every endpoint, published-measurement lookup, the synthetic demo (reference reproduced, refusals, bad input, tampered file). |
 
 ## Commands (from the repository root)
@@ -40,6 +42,7 @@ The website's published-experiment selector fills the shared scenario and reques
 | POST | `/api/compare` | `{"baseline": "I-1", "comparison": "II-5"}` | descriptive comparison of two Olson Table 1 records. Reviewed cases are returned exactly as the science package wrote them (`reviewed_case: true`); other pairs use the same arithmetic and list every changed variable. |
 | GET | `/api/synthetic-demo/domain` | | the synthetic model's inputs, observed ranges, fixed fields, performance on invented holdouts, limitations and self-test |
 | POST | `/api/synthetic-demo` | `{"flow_velocity_cm_s", "oxygen_percent", "pressure_kpa", "sample_width_cm", "flow_direction"}` | `{label, data_origin: "synthetic", not_nasa_data: true, scenario, result}`, where `result` is `ignis_ml.prediction.predict(scenario, synthetic bundle)` validated against `response.schema.json`. Outside the invented data's range: `UNSUPPORTED` with a null number. Other keys (such as `material`) are rejected with 400. |
+| POST | `/api/ask` | `{"question", "scenario", "history"}` | `{answer, state, citations, unverified_numbers, ai_generated: true, provider, model}`. 503 without `GEMINI_API_KEY`; 429 over 6/min per visitor or 20/min site-wide; 502 with a readable message if Gemini fails. |
 | POST | `/api/predict` | scenario per `ignis-ml/docs/request.schema.json` | `ignis_ml.prediction.predict(scenario, bundle=None, evidence=Table 1 metadata)`, validated against `response.schema.json`. Always `LIMITED_EVIDENCE` or `UNSUPPORTED` with `predicted_flame_spread_rate_cm_s: null`. |
 
 Errors: `400` invalid input (`status: "INPUT_ERROR"`), `404` unknown endpoint, `413` body over 16 KB, `429` more than 60 POSTs per minute per IP, `500` if a response would fail the schema or carry a number.

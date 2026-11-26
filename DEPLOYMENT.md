@@ -29,6 +29,8 @@ The repository has a `render.yaml` Blueprint. If the service was created by hand
 | Env `PYTHON_VERSION` | `3.12.8` |
 | Env `IGNITION_CORS_ORIGINS` | `https://1gnition.netlify.app,https://onegnition.onrender.com,https://knnucs.github.io` |
 | Env `IGNITION_QUIET` | `1` |
+| Env `GEMINI_API_KEY` | Your Google Gemini API key (from https://aistudio.google.com/apikey). Secret: set it only in the Render dashboard. |
+| Env `GEMINI_MODEL` | Optional. Default `gemini-3.5-flash-lite`. Change it here if Google renames or retires the model. |
 
 `requirements.txt` pins the library versions the model was saved with (scikit-learn 1.8.0 and others; see `backend/ignis-ml/outputs/runtime_versions.json`). Don't loosen them.
 
@@ -46,6 +48,8 @@ The repository has a `render.yaml` Blueprint. If the service was created by hand
 
    It should print `12 of 12 deployment checks passed`. The free Render plan sleeps after about 15 minutes idle, so the first request can take up to a minute.
 4. Open https://1gnition.netlify.app → **Scale transfer → B · Synthetic check** and move the sliders. The answer card must say **SYNTHETIC · invented data · not NASA**. The "Moon-base air (outside)" preset must show **REFUSED** with no number.
+
+**Ask 1gnition (AI):** with `GEMINI_API_KEY` set, the Render log shows `AI assistant: ready (Google Gemini, <model>)`. Without it, the log shows `AI assistant: OFF` and the site's Ask panel uses the offline rule-based helper; nothing else changes. The backend allows 6 AI questions per minute per visitor and 20 per minute site-wide, to stay inside the free Gemini quota. If answers say the model was not found, set `GEMINI_MODEL` to a current model ID from https://ai.google.dev/gemini-api/docs/models.
 
 ## 3. Netlify (public site)
 

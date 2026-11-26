@@ -185,7 +185,7 @@
           "passed": true
         },
         {
-          "check": "Ask says offline rule-based, not generative AI",
+          "check": "Ask discloses what it is: AI-generated (Gemini, check sources) or offline rule-based",
           "passed": true
         },
         {
