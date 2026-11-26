@@ -1052,7 +1052,7 @@
   const SUGGEST = ["What do we know at 30% oxygen and 70 kPa?", "Is there lunar gravity data?", "Which runs can be fairly compared?", "Why is there no predicted spread rate?"];
   const AIQ = { mode: C.AI_ENDPOINT ? "unknown" : "off", history: [], busy: false };   // mode: unknown | ai | off
   const AI_STATE = { supported: ["Supported by the records", "s-pub"], limited: ["Partly supported", "s-expl"],
-    insufficient: ["Insufficient evidence", "s-insuf"], out_of_scope: ["Outside 1gnition's evidence", "s-plain"] };
+    insufficient: ["Insufficient evidence", "s-insuf"], general: ["About 1gnition", "s-plain"], out_of_scope: ["Outside 1gnition's evidence", "s-plain"] };
   function askHeader() {
     const ai = AIQ.mode === "ai";
     $("askKind").textContent = ai ? "AI · Google Gemini" : "offline · rule-based";
@@ -1106,9 +1106,10 @@
         AIQ.mode = "ai"; askHeader();
         AIQ.history.push({ role: "user", text: q }, { role: "assistant", text: j.answer });
         const [lab, cls] = AI_STATE[j.state] || AI_STATE.limited;
+        const warn2 = (j.warnings || []).map(w => `<p class="small ai-warn">${esc(w)}</p>`).join("");
         const warn = (j.unverified_numbers || []).length ? `<p class="small ai-warn">Check: ${j.unverified_numbers.map(esc).join(", ")} ${j.unverified_numbers.length === 1 ? "doesn't" : "don't"} appear in 1gnition's records. Treat ${j.unverified_numbers.length === 1 ? "it" : "them"} as unverified.</p>` : "";
         log.insertAdjacentHTML("beforeend", `<div class="msg a ai fade-in"><div class="row"><span class="state ${cls}">${lab}</span><span class="state s-plain ai-tag">AI-generated · ${esc(j.model || "Gemini")}</span></div>
-          <p>${esc(j.answer)}</p>${warn}${(j.citations || []).length ? `<span class="cite">Cites: ${j.citations.map(citeHTML).join("; ")}</span>` : `<span class="cite">No indexed source cited.</span>`}</div>`);
+          <p>${esc(j.answer)}</p>${warn}${warn2}${(j.citations || []).length ? `<span class="cite">Cites: ${j.citations.map(citeHTML).join("; ")}</span>` : (["general", "out_of_scope"].includes(j.state) ? "" : `<span class="cite">No indexed source cited.</span>`)}</div>`);
       } catch (e) {
         wait.remove();
         const ans = offline(q);

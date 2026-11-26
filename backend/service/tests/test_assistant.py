@@ -26,7 +26,7 @@ class FakeGemini:
     """Stands in for generativelanguage.googleapis.com."""
 
     def __init__(self):
-        self.requests, self.reply, self.status = [], None, 200
+        self.requests, self.reply, self.status, self.model_status = [], None, 200, {}
         fake = self
 
         class H(BaseHTTPRequestHandler):
@@ -36,11 +36,13 @@ class FakeGemini:
             def do_POST(self):
                 body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
                 fake.requests.append(dict(path=self.path, key=self.headers.get("x-goog-api-key"), body=body))
-                if fake.status != 200:
-                    out = json.dumps(dict(error=dict(code=fake.status, message="scripted failure"))).encode()
+                model = self.path.split("/models/")[1].split(":")[0]
+                status = fake.model_status.get(model, fake.status)
+                if status != 200:
+                    out = json.dumps(dict(error=dict(code=status, message="scripted failure"))).encode()
                 else:
                     out = json.dumps(dict(candidates=[dict(content=dict(parts=[dict(text=fake.reply)]))])).encode()
-                self.send_response(fake.status)
+                self.send_response(status)
                 self.send_header("Content-Type", "application/json")
                 self.send_header("Content-Length", str(len(out)))
                 self.end_headers()
@@ -51,7 +53,7 @@ class FakeGemini:
         threading.Thread(target=self.httpd.serve_forever, daemon=True).start()
 
     def say(self, answer, state="supported", citations=()):
-        self.status = 200
+        self.status, self.model_status = 200, {}
         self.reply = json.dumps(dict(answer=answer, state=state, citations=list(citations)))
 
 
@@ -100,7 +102,7 @@ class WithFakeGemini(unittest.TestCase):
     def setUpClass(cls):
         cls.g = FakeGemini()
         cls.httpd, cls.base = start({"GEMINI_API_KEY": "test-key-123", "GEMINI_API_BASE": cls.g.base,
-                                     "GEMINI_MODEL": "gemini-test"})
+                                     "GEMINI_MODEL": "gemini-test", "GEMINI_FALLBACK_MODELS": "backup-a,backup-b"})
 
     @classmethod
     def tearDownClass(cls):
@@ -126,10 +128,15 @@ class WithFakeGemini(unittest.TestCase):
         self.assertEqual(sent["path"], "/v1beta/models/gemini-test:generateContent")
         self.assertEqual(sent["key"], "test-key-123")
         system = sent["body"]["system_instruction"]["parts"][0]["text"]
-        self.assertIn("Answer ONLY from CONTEXT", system)
+        self.assertIn("Answer ONLY from QUICK FACTS and CONTEXT", system)
         self.assertIn("VALIDATION_NOT_SUPPORTED", system)
         self.assertIn('"record_id":"I-1"', system)          # Olson Table 1 is in the context
         self.assertIn("REAL_DATA_PIPELINE_STATUS.md", system)
+        self.assertIn("QUICK FACTS", system)
+        self.assertIn("BASS-WIDE (BASS, SIBAL): 0.51 cm/s", system)
+        self.assertIn("Use it ONLY when the question refers to it", system)
+        last = sent["body"]["contents"][-1]["parts"][0]["text"]
+        self.assertTrue(last.startswith("SCENARIO PANEL (background; use only if the question refers to it)"))
         self.assertEqual([c["role"] for c in sent["body"]["contents"]], ["user", "model", "user"])
         self.assertIn("What was I-1's spread rate?", sent["body"]["contents"][-1]["parts"][0]["text"])
         self.assertEqual(sent["body"]["generationConfig"]["responseMimeType"], "application/json")
@@ -173,16 +180,51 @@ class WithFakeGemini(unittest.TestCase):
             self.assertEqual(code, 400, body)
             self.assertEqual(j["status"], "INPUT_ERROR")
 
-    def test_upstream_errors_become_clear_messages(self):
-        self.g.status = 404
+    def test_busy_main_model_falls_back(self):
+        self.g.say("From the backup.", "supported", [])
+        self.g.model_status = {"gemini-test": 503}
+        n = len(self.g.requests)
         code, j = self.ask(dict(question="a?"), "10.0.0.7")
+        self.assertEqual(code, 200, j)
+        self.assertEqual(j["model"], "backup-a")
+        tried = [r["path"].split("/models/")[1].split(":")[0] for r in self.g.requests[n:]]
+        self.assertEqual(tried, ["gemini-test", "gemini-test", "backup-a"])   # retried once, then the backup
+
+    def test_missing_main_model_skips_retry(self):
+        self.g.say("ok", "supported", [])
+        self.g.model_status = {"gemini-test": 404}
+        n = len(self.g.requests)
+        code, j = self.ask(dict(question="b?"), "10.0.0.8")
+        self.assertEqual(j["model"], "backup-a")
+        tried = [r["path"].split("/models/")[1].split(":")[0] for r in self.g.requests[n:]]
+        self.assertEqual(tried, ["gemini-test", "backup-a"])
+
+    def test_all_models_failing_gives_clear_messages(self):
+        self.g.status = 404
+        code, j = self.ask(dict(question="c?"), "10.0.0.9")
         self.assertEqual(code, 502)
         self.assertIn("GEMINI_MODEL", j["error"])
-        self.g.status = 429
-        code, j = self.ask(dict(question="b?"), "10.0.0.7")
+        self.g.status = 503
+        code, j = self.ask(dict(question="d?"), "10.0.0.9")
         self.assertEqual(code, 502)
         self.assertIn("busy", j["error"])
         self.g.status = 200
+
+    def test_wrong_units_are_warned(self):
+        self.g.say("II-5 spread at 0.21 cm/s (or 0.21 m/s depending on units).", "supported", [dict(source_id="OLSON-2023-T1", location="row 2")])
+        _, j = self.ask(dict(question="II-5?"), "10.0.0.10")
+        self.assertTrue(any("m/s" in w for w in j["warnings"]))
+        self.g.say("II-5 spread at 0.21 cm/s; that is 2.1 mm/s.", "supported", [])
+        _, j = self.ask(dict(question="II-5 again?"), "10.0.0.10")
+        self.assertEqual(j["warnings"], [])
+
+    def test_general_state_kept_and_out_of_scope_has_no_citations(self):
+        self.g.say("Hi! I answer questions about 1gnition's evidence.", "general", [])
+        _, j = self.ask(dict(question="hi"), "10.0.0.11")
+        self.assertEqual(j["state"], "general")
+        self.g.say("I can only help with 1gnition's evidence.", "out_of_scope", [dict(source_id="brief", location="x")])
+        _, j = self.ask(dict(question="capital of France?"), "10.0.0.11")
+        self.assertEqual(j["citations"], [])
 
     def test_per_visitor_rate_limit(self):
         self.g.say("ok", "supported", [])
@@ -198,6 +240,14 @@ def assistant_limit():
 
 
 class ContextUnit(unittest.TestCase):
+    def test_scenario_block_lists_closest_runs(self):
+        a = assistant.Assistant(FRONTEND, api_key="x")
+        b = a._scenario_block(dict(o2_pct=30, pressure_kpa=70.3, gravity="lunar"))
+        self.assertIn("V-2 (Saffire-V): 26.2% oxygen, 70.7 kPa", b)
+        self.assertIn("No indexed run matches these settings exactly.", b)
+        self.assertIn("No indexed run was done at this gravity level.", b)
+        self.assertIn("empty", a._scenario_block(dict(o2_pct=None)))
+
     def test_context_has_records_sources_and_no_key(self):
         a = assistant.Assistant(FRONTEND, api_key="secret-should-not-appear")
         self.assertIn("OLSON-2023-T1", a.source_ids)
